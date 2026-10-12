@@ -189,7 +189,7 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-200 pb-4 no-print">
                     <div>
                         <h2 class="text-xl font-bold text-slate-900">Simulator & Kalkulator Instrumen Monev Terpadu</h2>
-                        <p class="text-xs text-slate-500">Kelola indikator, isi catatan observasi, simpan, dan cetak laporan resmi.</p>
+                        <p class="text-xs text-slate-500">Kelola indikator, tautkan dokumen Google Drive, isi catatan observasi, simpan, dan cetak.</p>
                     </div>
                     <div class="flex flex-wrap gap-2">
                         <button type="button" onclick="window.addRow()" class="px-3 py-1.5 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded transition shadow-sm cursor-pointer">➕ Tambah Indikator</button>
@@ -225,6 +225,7 @@
                             <tr class="bg-slate-100 text-slate-700 border-b border-slate-300">
                                 <th class="p-2 border border-slate-300 w-10 text-center">No</th>
                                 <th class="p-2 border border-slate-300 w-1/4">Indikator Kinerja & Bukti Fisik</th>
+                                <th class="p-2 border border-slate-300 w-48">Tautan Google Drive (Prasyarat Dokumen)</th>
                                 <th class="p-2 border border-slate-300 w-1/4">Catatan Observasi Pengawas</th>
                                 <th class="p-2 border border-slate-300 w-24 text-center">Skala (1-4)</th>
                                 <th class="p-2 border border-slate-300 w-1/4">Rekomendasi Tindak Lanjut</th>
@@ -422,6 +423,7 @@
             {
                 title: "Pelaksanaan Supervisi Akademik",
                 desc: "Catatan umpan balik pasca-observasi & rencana tindak lanjut.",
+                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
                 obs: "Observasi kelas terlaksana 80% per Oktober.",
                 score: 3,
                 rec: "Dorong penyelesaian observasi guru sebelum November."
@@ -429,6 +431,7 @@
             {
                 title: "Aktivasi Komunitas Belajar (Kombel)",
                 desc: "Notula rutin Kombel & dokumentasi berbagi praktik baik.",
+                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
                 obs: "Kombel berjalan rutin 2 minggu sekali.",
                 score: 4,
                 rec: "Tingkatkan berbagi praktik baik di tingkat MKKS / PMM."
@@ -436,6 +439,7 @@
             {
                 title: "Perencanaan Berbasis Data (PBD & RKAS)",
                 desc: "Program RKAS menjawab Rapor Pendidikan & pelaporan BOS.",
+                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
                 obs: "Program pembenahan numerasi masuk RKAS dan terealisasi 75%.",
                 score: 3,
                 rec: "Evaluasi penyerapan anggaran Triwulan III bersama bendahara."
@@ -443,6 +447,7 @@
             {
                 title: "Lingkungan Belajar Aman & Inklusif",
                 desc: "SK TPPK aktif & pencegahan kekerasan di sekolah.",
+                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
                 obs: "SK TPPK terdaftar. Belum ada pos pengaduan fisik.",
                 score: 2,
                 rec: "Buat papan pengaduan TPPK ramah anak di area sekolah."
@@ -450,6 +455,7 @@
             {
                 title: "Integrasi e-Kinerja BKN / Ruang GTK",
                 desc: "Progress unggah bukti dukung RHK Periode Juli–Oktober.",
+                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
                 obs: "Dokumen RHK Oktober lengkap dan siap dinilai.",
                 score: 3,
                 rec: "Lanjutkan verifikasi teknis bersama Pengawas."
@@ -524,6 +530,12 @@
                         <textarea oninput="window.updateData(${index}, 'desc', this.value)" class="w-full text-slate-500 bg-transparent text-[11px] resize-none" rows="2">${item.desc}</textarea>
                     </td>
                     <td class="p-2 border border-slate-300 align-top">
+                        <div class="space-y-1">
+                            <input type="text" value="${item.driveLink || ''}" oninput="window.updateData(${index}, 'driveLink', this.value)" placeholder="Tempel tautan Google Drive..." class="w-full p-1.5 border border-slate-300 rounded text-[11px] bg-white">
+                            <a href="${item.driveLink || '#'}" target="_blank" class="text-[10px] text-brand-600 hover:underline font-semibold block">🔗 Buka Tautan Drive</a>
+                        </div>
+                    </td>
+                    <td class="p-2 border border-slate-300 align-top">
                         <textarea oninput="window.updateData(${index}, 'obs', this.value)" class="w-full p-1.5 border border-slate-300 rounded text-xs" rows="2">${item.obs}</textarea>
                     </td>
                     <td class="p-2 border border-slate-300 align-top text-center">
@@ -555,6 +567,7 @@
             monevData.push({
                 title: "Indikator Baru",
                 desc: "Deskripsi bukti fisik verifikasi...",
+                driveLink: "",
                 obs: "Catatan observasi pengawas...",
                 score: 3,
                 rec: "Rekomendasi tindak lanjut..."
@@ -860,7 +873,7 @@
                 if(predikatLabel) predikatLabel.innerText = "Mewujudkan Ekspektasi";
             } else if (avg >= 2.8) {
                 if(scoreStatus) scoreStatus.innerText = "Kategori: Baik (Good)";
-                if(predikatLabel) scoreStatus.innerText = "Sesuai Ekspektasi";
+                if(predikatLabel) predikatLabel.innerText = "Sesuai Ekspektasi";
             } else if (avg >= 2.0) {
                 if(scoreStatus) scoreStatus.innerText = "Kategori: Cukup (Fair)";
                 if(predikatLabel) predikatLabel.innerText = "Butuh Perbaikan";
@@ -934,7 +947,7 @@
                     <h3>Hasil Instrumen Monev:</h3>
                     <table border='1' cellspacing='0' cellpadding='5' style='width:100%; border-collapse: collapse;'>
                         <tr style='background: #f2f2f2;'>
-                            <th>No</th><th>Indikator Kinerja</th><th>Catatan Observasi</th><th>Skala</th><th>Rekomendasi</th>
+                            <th>No</th><th>Indikator Kinerja</th><th>Tautan Drive Prasyarat</th><th>Catatan Observasi</th><th>Skala</th><th>Rekomendasi</th>
                         </tr>
             `;
 
@@ -943,6 +956,7 @@
                     <tr>
                         <td>${idx + 1}</td>
                         <td>${item.title}<br><small>${item.desc}</small></td>
+                        <td>${item.driveLink || 'Belum ada tautan'}</td>
                         <td>${item.obs}</td>
                         <td>${item.score}</td>
                         <td>${item.rec}</td>
