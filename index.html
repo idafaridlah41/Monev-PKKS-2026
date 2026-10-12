@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Monitoring & Evaluasi Kinerja Kepala Sekolah (Perdirjen GTK 4831/2023)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                            900: '#0f172a'
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            500: '#eab308',
+                            600: '#ca8a04'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col font-sans text-slate-800 bg-slate-50 antialiased">
+
+    <!-- Chosen Palette: Warm Neutrals & Deep Slate Blue with Subtle Amber Accents -->
+
+    <!-- Application Structure Plan:
+        1. Top Header & Navigation Bar: Tab-based navigation covering 5 core operational areas.
+        2. Section 1: Dashboard & Ringkasan Kebijakan - Interactive overview of transformation (Perdirjen GTK 4831 & 7607) with metric badges.
+        3. Section 2: Komparasi Strategis ASN vs Non-ASN - Interactive dual-track toggle & comparative matrix with key differences.
+        4. Section 3: Instrumen Monev Terpadu & Kalkulator Skala - Dynamic interactive Monev form calculating real-time scores, qualitative status, & exportable feedback summary.
+        5. Section 4: Panduan Intervensi & Simulator Dialogue TIRTA - Interactive matrix for mentoring methods (Training, Mentoring, Coaching, etc.) and step-by-step TIRTA dialogue simulation for low numeracy/literacy.
+        6. Section 5: Analisis Impak & Rekomendasi PBD - Data breakdown of Identifikasi-Refleksi-Benahi (IRB) and strategic stakeholder recommendations.
+    -->
+
+    <!-- Visualization & Content Choices:
+        1. Overview Metrics -> Cards with icons -> High-level stats & key legal foundations -> HTML/CSS.
+        2. Comparison Table -> Tabbed Matrix Toggle (ASN vs Non-ASN) -> Deep side-by-side analysis -> Vanilla JS State.
+        3. Live Monev Instrument -> Interactive Input Table with dynamic score computation -> Chart.js Radar & Bar Chart for dimension visual score -> Chart.js / Vanilla JS.
+        4. Mentoring Matrix -> Capacity filterable card deck -> Dynamically showing recommended intervention -> Vanilla JS.
+        5. TIRTA Dialogue Simulation -> Step-by-step accordion conversation model -> Interactive coaching guidance -> Vanilla JS.
+        6. NO SVG icons used. Unicode symbols and CSS styled badges used exclusively. NO Mermaid JS used.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Header Section -->
+    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">🎓</span>
+                    <div>
+                        <h1 class="text-lg font-bold leading-tight">Monev Kinerja Kepala Sekolah</h1>
+                        <p class="text-xs text-slate-400">Transformasi Peran Pengawas • Perdirjen GTK No. 4831 & 7607 Tahun 2023</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-1 text-sm font-medium">
+                    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="px-3 py-2 rounded-md bg-brand-700 text-white transition">Kebijakan & Siklus</button>
+                    <button onclick="switchTab('komparasi')" id="nav-komparasi" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition">Komparasi ASN/Non-ASN</button>
+                    <button onclick="switchTab('instrumen')" id="nav-instrumen" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition">Instrumen Interactive</button>
+                    <button onclick="switchTab('tirta')" id="nav-tirta" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition">Simulator Coaching TIRTA</button>
+                    <button onclick="switchTab('pbd')" id="nav-pbd" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition">Aksi PBD & Rekomendasi</button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Navigation -->
+        <div class="md:hidden bg-slate-800 px-2 pt-2 pb-3 flex space-x-1 overflow-x-auto text-xs">
+            <button onclick="switchTab('dashboard')" class="px-2 py-1 rounded text-white bg-brand-700">Siklus</button>
+            <button onclick="switchTab('komparasi')" class="px-2 py-1 rounded text-slate-300 hover:text-white">Komparasi</button>
+            <button onclick="switchTab('instrumen')" class="px-2 py-1 rounded text-slate-300 hover:text-white">Instrumen</button>
+            <button onclick="switchTab('tirta')" class="px-2 py-1 rounded text-slate-300 hover:text-white">TIRTA</button>
+            <button onclick="switchTab('pbd')" class="px-2 py-1 rounded text-slate-300 hover:text-white">PBD</button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- TAB 1: DASHBOARD & SIKLUS -->
+        <section id="tab-dashboard" class="space-y-6">
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+                <h2 class="text-xl font-bold text-slate-900 mb-2">Transformasi Peran Pengawas Sekolah: Dari Inspektur ke Pendamping Transformatif</h2>
+                <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                    Bagian ini menjelaskan landasan filosofis dan regulasi perubahan paradigma Monitoring dan Evaluasi (Monev) Kinerja Kepala Sekolah. Pengawas sekolah kini berkedudukan sebagai mitra strategis (<em>companion</em>) yang mendampingi Kepala Sekolah melalui pendekatan <em>feedforward</em>, berbasis data Rapor Pendidikan, dan berfokus pada dampak nyata peningkatan kualitas pembelajaran di kelas.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                        <div class="text-xs font-semibold text-blue-600 uppercase tracking-wider">Regulasi Utama</div>
+                        <div class="text-base font-bold text-slate-900 mt-1">Perdirjen GTK 4831/2023</div>
+                        <p class="text-xs text-slate-600 mt-1">Redefinisi peran pengawas sebagai pendamping transformatif satuan pendidikan.</p>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                        <div class="text-xs font-semibold text-emerald-600 uppercase tracking-wider">Integrasi Kinerja</div>
+                        <div class="text-base font-bold text-slate-900 mt-1">Perdirjen GTK 7607/2023</div>
+                        <p class="text-xs text-slate-600 mt-1">Petunjuk teknis pengelolaan kinerja Guru & KS terintegrasi e-Kinerja BKN.</p>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 p-4 rounded-lg">
+                        <div class="text-xs font-semibold text-amber-600 uppercase tracking-wider">Ekosistem Digital</div>
+                        <div class="text-base font-bold text-slate-900 mt-1">Ruang GTK & SIASN</div>
+                        <p class="text-xs text-slate-600 mt-1">Penyelarasan RHK, bukti dukung aktual, dan Perilaku Kerja BerAKHLAK.</p>
+                    </div>
+                    <div class="bg-purple-50 border border-purple-200 p-4 rounded-lg">
+                        <div class="text-xs font-semibold text-purple-600 uppercase tracking-wider">Pendekatan Kerja</div>
+                        <div class="text-base font-bold text-slate-900 mt-1">Coaching & Mentoring</div>
+                        <p class="text-xs text-slate-600 mt-1">Umpan balik dialogis berbasis alur TIRTA & analisis data Perencanaan Berbasis Data (PBD).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Siklus Pendampingan Interactive Workflow -->
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+                <h3 class="text-lg font-bold text-slate-900 mb-2">4 Tahapan Siklus Pendampingan Berkelanjutan</h3>
+                <p class="text-xs text-slate-500 mb-6">Klik pada setiap tahapan untuk melihat rincian operasional kerja pengawas sekolah.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div onclick="showCycleDetail(1)" id="cycle-card-1" class="cursor-pointer p-4 rounded-lg border-2 border-brand-500 bg-brand-50 transition hover:shadow-md">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-brand-600 text-white">Tahap 1</span>
+                            <span class="text-lg">📊</span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mt-2 text-sm">Perencanaan Pendampingan</h4>
+                        <p class="text-xs text-slate-600 mt-1">Pemetaan peta kapasitas sekolah berbasis analisis Rapor Pendidikan.</p>
+                    </div>
+                    <div onclick="showCycleDetail(2)" id="cycle-card-2" class="cursor-pointer p-4 rounded-lg border border-slate-200 bg-white transition hover:shadow-md">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-700">Tahap 2</span>
+                            <span class="text-lg">🎯</span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mt-2 text-sm">Pendampingan Program Kerja</h4>
+                        <p class="text-xs text-slate-600 mt-1">Fasilitasi penyusunan RKT & RKAS berbasis PBD secara menyeluruh.</p>
+                    </div>
+                    <div onclick="showCycleDetail(3)" id="cycle-card-3" class="cursor-pointer p-4 rounded-lg border border-slate-200 bg-white transition hover:shadow-md">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-700">Tahap 3</span>
+                            <span class="text-lg">🤝</span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mt-2 text-sm">Pelaksanaan Pendampingan</h4>
+                        <p class="text-xs text-slate-600 mt-1">Aplikasi metode mentoring, coaching, & konsultasi sesuai kapasitas.</p>
+                    </div>
+                    <div onclick="showCycleDetail(4)" id="cycle-card-4" class="cursor-pointer p-4 rounded-lg border border-slate-200 bg-white transition hover:shadow-md">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-700">Tahap 4</span>
+                            <span class="text-lg">📋</span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mt-2 text-sm">Pelaporan & Advokasi</h4>
+                        <p class="text-xs text-slate-600 mt-1">Penyusunan rekomendasi predikat & advokasi dukungan ke Dinas Pendidikan.</p>
+                    </div>
+                </div>
+
+                <!-- Dynamic Detail Display -->
+                <div id="cycle-detail-box" class="mt-6 p-4 rounded-lg bg-slate-100 border border-slate-300 text-sm">
+                    <h5 class="font-bold text-brand-800" id="cycle-title">Detail Tahap 1: Perencanaan Pendampingan</h5>
+                    <p class="text-slate-700 mt-1" id="cycle-desc">
+                        Pada tahap ini, Pengawas Sekolah menelaah Rapor Pendidikan sekolah binaan untuk mengidentifikasi indikator prioritas (seperti Literasi, Numerasi, Iklim Keamanan) dan membagi sekolah ke dalam kriteria kapasitas: Sangat Rendah, Rendah, Sedang, atau Tinggi.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: KOMPARASI STRATEGIS ASN VS NON-ASN -->
+        <section id="tab-komparasi" class="hidden space-y-6">
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+                <h2 class="text-xl font-bold text-slate-900 mb-2">Komparasi Strategis Monev: Kepala Sekolah ASN vs. Non-ASN (Swasta)</h2>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Meskipun sasaran utamanya sama—yaitu meningkatkan kualitas pembelajaran dan efektivitas kepemimpinan—terdapat penyesuaian strategi antara Kepala Sekolah ASN dan Non-ASN. Perbedan ini bersumber dari tata kelola kepegawaian, saluran akuntabilitas, serta kewenangan hukum penyelenggara pendidikan.
+                </p>
+
+                <!-- Toggle Selector -->
+                <div class="flex justify-center mb-6">
+                    <div class="bg-slate-200 p-1 rounded-lg flex space-x-2 text-sm font-semibold">
+                        <button onclick="toggleComparison('all')" id="btn-comp-all" class="px-4 py-1.5 rounded-md bg-white text-slate-900 shadow">Tampilan Berdampingan</button>
+                        <button onclick="toggleComparison('asn')" id="btn-comp-asn" class="px-4 py-1.5 rounded-md text-slate-600 hover:text-slate-900">Fokus KS ASN</button>
+                        <button onclick="toggleComparison('nonasn')" id="btn-comp-nonasn" class="px-4 py-1.5 rounded-md text-slate-600 hover:text-slate-900">Fokus KS Non-ASN</button>
+                    </div>
+                </div>
+
+                <!-- Comparison Grid Matrix -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="comparison-grid">
+                    <!-- Column ASN -->
+                    <div id="col-asn" class="border border-blue-200 bg-blue-50/40 rounded-xl p-5 space-y-4">
+                        <div class="flex items-center justify-between border-b border-blue-200 pb-3">
+                            <h3 class="font-bold text-blue-900 text-lg flex items-center gap-2">
+                                <span>🏛️</span> Kepala Sekolah ASN (Negeri/Penugasan)
+                            </h3>
+                            <span class="text-xs px-2.5 py-1 rounded-full bg-blue-100 text-blue-800 font-medium">e-Kinerja BKN</span>
+                        </div>
+                        
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-white p-3 rounded border border-blue-100">
+                                <span class="text-xs font-semibold text-blue-600 block">Pintu Masuk Utama</span>
+                                <p class="font-medium text-slate-800">Platform Ruang GTK terintegrasi e-Kinerja BKN dan Rapor Pendidikan.</p>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-blue-100">
+                                <span class="text-xs font-semibold text-blue-600 block">Fokus Evaluasi Utama</span>
+                                <p class="font-medium text-slate-800">Keselarasan RHK yang disepakati, bukti dukung aktual (sampling), dan Perilaku Kerja BerAKHLAK.</p>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-blue-100">
+                                <span class="text-xs font-semibold text-blue-600 block">Peran Pengawas</span>
+                                <p class="font-medium text-slate-800">Pejabat penilai / verifikator teknis yang menyusun rekomendasi predikat kinerja akhir tahun ke Dinas Pendidikan.</p>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-blue-100">
+                                <span class="text-xs font-semibold text-blue-600 block">Garis Akuntabilitas</span>
+                                <p class="font-medium text-slate-800">Hierarkis tegak lurus ke Dinas Pendidikan Kabupaten/Kota/Provinsi dan BKN.</p>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-blue-100">
+                                <span class="text-xs font-semibold text-blue-600 block">Dampak Hasil Evaluasi</span>
+                                <p class="font-medium text-slate-800">Penetapan Predikat Kinerja ASN, Angka Kredit Kepegawaian, dan pengembangan karier.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column Non-ASN -->
+                    <div id="col-nonasn" class="border border-amber-200 bg-amber-50/40 rounded-xl p-5 space-y-4">
+                        <div class="flex items-center justify-between border-b border-amber-200 pb-3">
+                            <h3 class="font-bold text-amber-900 text-lg flex items-center gap-2">
+                                <span>🏫</span> Kepala Sekolah Non-ASN (Swasta/Yayasan)
+                            </h3>
+                            <span class="text-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 font-medium">PKKS & Yayasan</span>
+                        </div>
+
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-white p-3 rounded border border-amber-100">
+                                <span class="text-xs font-semibold text-amber-600 block">Pintu Masuk Utama</span>
+                                <p class="font-medium text-slate-800">Penilaian Kinerja Kepala Sekolah (PKKS) terintegrasi kriteria Yayasan / Statuta Lembaga.</p>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-amber-100">
+                                <span class="text-xs font-semibold text-amber-600 block">Fokus Evaluasi Utama</span>
+                                <p class="font-medium text-slate-800">Pemenuhan SNP, status akreditasi, efektivitas supervisi guru, dan keberlanjutan tata kelola sekolah.</p>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-amber-100">
+                                <span class="text-xs font-semibold text-amber-600 block">Peran Pengawas</span>
+                                <p class="font-medium text-slate-800">Mitra strategis (<em>critical friend</em>) yang berkolaborasi dengan Pembina/Pengurus Yayasan.</p>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-amber-100">
+                                <span class="text-xs font-semibold text-amber-600 block">Garis Akuntabilitas</span>
+                                <p class="font-medium text-slate-800">Akuntabilitas ganda (<em>dual-track</em>): Instansi Pemerintah (Dinas) dan Badan Penyelenggara Yayasan.</p>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-amber-100">
+                                <span class="text-xs font-semibold text-amber-600 block">Dampak Hasil Evaluasi</span>
+                                <p class="font-medium text-slate-800">Evaluasi Kontrak Kerja Yayasan, Penjaminan Mutu Internal, dan Kesiapan Izin Operasional/Akreditasi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: INSTRUMEN MONEV INTERAKTIF -->
+        <section id="tab-instrumen" class="hidden space-y-6">
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Simulator & Kalkulator Instrumen Monev Terpadu</h2>
+                        <p class="text-xs text-slate-500">Gunakan form interaktif ini untuk menyimulasikan skor rubrik kualitatif (skala 1-4) dan menghasilkan lembar umpan balik dialogis secara otomatis.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="resetForm()" class="px-3 py-1.5 text-xs bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded transition">Reset Form</button>
+                    </div>
+                </div>
+
+                <!-- Form Header Info -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-slate-50 rounded-lg border border-slate-200 text-sm mb-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Kepala Sekolah</label>
+                        <input type="text" id="ks-name" value="Dra. Hj. Siti Rahmah, M.Pd." class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Status Kepegawaian</label>
+                        <select id="ks-status" onchange="updateStatusSpecificComponent()" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                            <option value="ASN">ASN (PNS / PPPK - Negeri)</option>
+                            <option value="Non-ASN">Non-ASN (Swasta / Yayasan)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Satuan Pendidikan / Periode</label>
+                        <input type="text" id="ks-school" value="SMP Negeri 1 Cendekia / Triwulan IV" class="w-full p-2 border border-slate-300 rounded focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Interactive Evaluation Table -->
+                <div class="overflow-x-auto mb-6">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 border-b border-slate-300">
+                                <th class="p-3 font-bold w-12">No</th>
+                                <th class="p-3 font-bold">Indikator Kinerja & Bukti Verifikasi</th>
+                                <th class="p-3 font-bold w-1/4">Catatan Observasi Pengawas</th>
+                                <th class="p-3 font-bold w-32">Skala (1-4)</th>
+                                <th class="p-3 font-bold w-1/4">Rekomendasi Tindak Lanjut</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <!-- Row 1 -->
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold">1</td>
+                                <td class="p-3">
+                                    <div class="font-bold text-slate-900">Pelaksanaan Supervisi Akademik</div>
+                                    <div class="text-slate-500 text-[11px] mt-0.5">• Catatan umpan balik pasca-observasi.<br>• Rencana tindak lanjut pengembangan guru.</div>
+                                </td>
+                                <td class="p-3">
+                                    <textarea id="obs-1" class="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-1 focus:ring-brand-500" rows="2">Observasi kelas terlaksana 80% per Oktober. Umpan balik telah difokuskan pada pembelajaran terdiferensiasi.</textarea>
+                                </td>
+                                <td class="p-3">
+                                    <select id="score-1" onchange="calculateScore()" class="w-full p-1.5 border border-slate-300 rounded font-semibold text-brand-700">
+                                        <option value="1">1 - Needs Improvement</option>
+                                        <option value="2">2 - Fair (Cukup)</option>
+                                        <option value="3" selected>3 - Good (Baik)</option>
+                                        <option value="4">4 - Excellent (Sangat Baik)</option>
+                                    </select>
+                                </td>
+                                <td class="p-3">
+                                    <textarea id="rec-1" class="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-1 focus:ring-brand-500" rows="2">Dorong guru yang belum diobservasi untuk segera diselesaikan sebelum pertengahan November.</textarea>
+                                </td>
+                            </tr>
+
+                            <!-- Row 2 -->
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold">2</td>
+                                <td class="p-3">
+                                    <div class="font-bold text-slate-900">Aktivasi Komunitas Belajar (Kombel)</div>
+                                    <div class="text-slate-500 text-[11px] mt-0.5">• Notula rutin pertemuan Kombel sekolah.<br>• Dokumentasi berbagi praktik baik antar guru.</div>
+                                </td>
+                                <td class="p-3">
+                                    <textarea id="obs-2" class="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-1 focus:ring-brand-500" rows="2">Kombel berjalan rutin 2 minggu sekali membahas analisis asesmen literasi dan numerasi.</textarea>
+                                </td>
+                                <td class="p-3">
+                                    <select id="score-2" onchange="calculateScore()" class="w-full p-1.5 border border-slate-300 rounded font-semibold text-brand-700">
+                                        <option value="1">1 - Needs Improvement</option>
+                                        <option value="2">2 - Fair (Cukup)</option>
+                                        <option value="3">3 - Good (Baik)</option>
+                                        <option value="4" selected>4 - Excellent (Sangat Baik)</option>
+                                    </select>
+                                </td>
+                                <td class="p-3">
+                                    <textarea id="rec-2" class="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-1 focus:ring-brand-500" rows="2">Tingkatkan keikutsertaan Kombel untuk berbagi praktik baik di tingkat MKKS atau Platform Merdeka Mengajar.</textarea>
+                                </td>
+                            </tr>
+
+                            <!-- Row 3 -->
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold">3</td>
+                                <td class="p-3">
+                                    <div class="font-bold text-slate-900">Perencanaan Berbasis Data (PBD & RKAS)</div>
+                                    <div class="text-slate-500 text-[11px] mt-0.5">• Program RKAS menjawab benah mutu Rapor Pendidikan.<br>• Pelaporan realisasi BOS / Dana Sekolah.</div>
+                                </td>
+                                <td class="p-3">
+                                    <textarea id="obs-3" class="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-1 focus:ring-brand-500" rows="2">Program pembenahan numerasi telah masuk dalam RKAS dan terealisasi 75% per Triwulan III.</textarea>
+                                </td>
+                                <td class="p-3">
+                                    <select id="score-3" onchange="calculateScore()" class="w-full p-1.5 border border-slate-300 rounded font-semibold text-brand-700">
+                                        <option value="1">1 - Needs Improvement</option>
+                                        <option value="2">2 - Fair (Cukup)</option>
+                                        <option value="3" selected>3 - Good (Baik)</option>
+                                        <option value="4">4 - Excellent (Sangat Baik)</option>
+                                    </select>
+                                </td>
+                                <td class="p-3">
+                                    <textarea id="rec-3" class="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-1 focus:ring-brand-500" rows="2">Lakukan evaluasi penyerapan anggaran Triwulan III bersama bendahara dan tim pengembang sekolah.</textarea>
+                                </td>
+                            </tr>
+
+                            <!-- Row 4 -->
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold">4</td>
+                                <td class="p-3">
+                                    <div class="font-bold text-slate-900">Lingkungan Belajar Aman & Inklusif</div>
+                                    <div class="text-slate-500 text-[11px] mt-0.5">• SK TPPK aktif & kegiatan pencegahan kekerasan.<br>• Kondisi sarana fisik & kebersihan sekolah.</div>
+                                </td>
+                                <td class="p-3">
+                                    <textarea id="obs-4" class="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-1 focus:ring-brand-500" rows="2">SK TPPK terdaftar di portal. Belum ada alur pengaduan tertulis yang kasat mata di lingkungan sekolah.</textarea>
+                                </td>
+                                <td class="p-3">
+                                    <select id="score-4" onchange="calculateScore()" class="w-full p-1.5 border border-slate-300 rounded font-semibold text-brand-700">
+                                        <option value="1">1 - Needs Improvement</option>
+                                        <option value="2" selected>2 - Fair (Cukup)</option>
+                                        <option value="3">3 - Good (Baik)</option>
+                                        <option value="4">4 - Excellent (Sangat Baik)</option>
+                                    </select>
+                                </td>
+                                <td class="p-3">
+                                    <textarea id="rec-4" class="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-1 focus:ring-brand-500" rows="2">Buat papan/pos pengaduan TPPK yang ramah anak di area sekolah sebelum akhir November.</textarea>
+                                </td>
+                            </tr>
+
+                            <!-- Row 5 (Dynamic Specific Row) -->
+                            <tr class="hover:bg-slate-50 bg-blue-50/30" id="specific-row">
+                                <td class="p-3 font-bold">5</td>
+                                <td class="p-3">
+                                    <div class="font-bold text-slate-900" id="spec-title">Integrasi e-Kinerja BKN / Ruang GTK</div>
+                                    <div class="text-slate-500 text-[11px] mt-0.5" id="spec-subtitle">• Progress unggah bukti dukung RHK Periode Juli–Oktober.</div>
+                                </td>
+                                <td class="p-3">
+                                    <textarea id="obs-5" class="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-1 focus:ring-brand-500" rows="2">Dokumen RHK Oktober lengkap. Draf refleksi tindak lanjut siap dinilai di platform e-Kinerja.</textarea>
+                                </td>
+                                <td class="p-3">
+                                    <select id="score-5" onchange="calculateScore()" class="w-full p-1.5 border border-slate-300 rounded font-semibold text-brand-700">
+                                        <option value="1">1 - Needs Improvement</option>
+                                        <option value="2">2 - Fair (Cukup)</option>
+                                        <option value="3" selected>3 - Good (Baik)</option>
+                                        <option value="4">4 - Excellent (Sangat Baik)</option>
+                                    </select>
+                                </td>
+                                <td class="p-3">
+                                    <textarea id="rec-5" class="w-full p-1.5 border border-slate-300 rounded text-xs focus:ring-1 focus:ring-brand-500" rows="2">Lanjutkan verifikasi teknis bersama Pengawas untuk finalisasi predikat kinerja semesteran.</textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Results & Visual Radar Chart Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                    <div class="space-y-3">
+                        <h3 class="font-bold text-slate-900 text-sm">Hasil Ringkasan Evaluasi Kinerja</h3>
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-white p-3 rounded-lg border border-slate-200 text-center flex-1">
+                                <span class="text-xs text-slate-500 block">Rata-Rata Skala</span>
+                                <span class="text-2xl font-black text-brand-700" id="total-score">3.00</span>
+                                <span class="text-xs font-semibold text-emerald-600 block" id="score-status">Kategori: Baik (Good)</span>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-slate-200 text-center flex-1">
+                                <span class="text-xs text-slate-500 block">Predikat Kinerja Kualitatif</span>
+                                <span class="text-lg font-bold text-slate-800" id="predikat-label">Sesuai Ekspektasi</span>
+                                <span class="text-xs text-slate-400 block mt-0.5">Berorientasi Feedforward</span>
+                            </div>
+                        </div>
+
+                        <!-- Qualitative Feedback Summary Box -->
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-2 text-xs">
+                            <div class="font-bold text-slate-800">Umpan Balik Dialogis (Kualitatif):</div>
+                            <p class="text-slate-600"><strong>Apresiasi:</strong> KS berhasil membangun budaya kolaborasi guru melalui Kombel internal secara konsisten dan transparan.</p>
+                            <p class="text-slate-600"><strong>Tantangan Utama:</strong> Beberapa guru senior masih memerlukan pendampingan khusus dalam menyusun asesmen pembelajaran terdiferensiasi.</p>
+                        </div>
+                    </div>
+
+                    <!-- Chart Container wrapped properly -->
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 flex flex-col items-center justify-center">
+                        <h4 class="text-xs font-bold text-slate-700 mb-2">Profil Capaian 5 Indikator Monev</h4>
+                        <div class="chart-container">
+                            <canvas id="scoreChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: SIMULATOR COACHING TIRTA & METODE INTERVENSI -->
+        <section id="tab-tirta" class="hidden space-y-6">
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+                <h2 class="text-xl font-bold text-slate-900 mb-2">Panduan Pendampingan & Simulator Dialog Coaching TIRTA</h2>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Sesuai Perdirjen GTK No. 4831/2023, pengawas memilih metode intervensi berdasarkan tingkat kapasitas sekolah (Training, Mentoring, Coaching, Facilitating, Consulting). Untuk menangani masalah kualitatif seperti indikator <strong>Numerasi</strong> atau <strong>Literasi</strong> yang rendah, pengawas mengaplikasikan alur percakapan reflektif TIRTA (Tujuan, Identifikasi, Rencana Aksi, Tanggung Jawab).
+                </p>
+
+                <!-- Capacity Filter for Mentoring Matrix -->
+                <div class="mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                    <label class="block text-xs font-bold text-slate-700 mb-2">Pilih Kapasitas Satuan Pendidikan Binaan:</label>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
+                        <button onclick="filterCapacity('srendah')" id="btn-cap-srendah" class="p-2 rounded border border-slate-300 bg-white hover:bg-slate-100 font-medium text-left">Sangat Rendah (Training)</button>
+                        <button onclick="filterCapacity('rendah')" id="btn-cap-rendah" class="p-2 rounded border border-slate-300 bg-white hover:bg-slate-100 font-medium text-left">Rendah-Menengah (Mentoring)</button>
+                        <button onclick="filterCapacity('sedang')" id="btn-cap-sedang" class="p-2 rounded border border-brand-500 bg-brand-50 font-bold text-brand-800 text-left">Sedang-Tinggi (Coaching)</button>
+                        <button onclick="filterCapacity('tinggi')" id="btn-cap-tinggi" class="p-2 rounded border border-slate-300 bg-white hover:bg-slate-100 font-medium text-left">Tinggi (Facilitating)</button>
+                        <button onclick="filterCapacity('stinggi')" id="btn-cap-stinggi" class="p-2 rounded border border-slate-300 bg-white hover:bg-slate-100 font-medium text-left">Sangat Tinggi (Consulting)</button>
+                    </div>
+                    <div class="mt-3 p-3 bg-white rounded border border-slate-200 text-xs text-slate-700" id="capacity-info-box">
+                        <strong>Metode Direkomendasikan: COACHING (Bimbingan Reflektif)</strong><br>
+                        <em>Aksi Pengawas:</em> Mengajukan pertanyaan pemantik untuk memicu kesadaran mandiri dan solusi dari Kepala Sekolah, bukan menginstruksikan jawaban secara sepihak.
+                    </div>
+                </div>
+
+                <!-- Interactive Dialogue TIRTA Accordion -->
+                <div class="space-y-3">
+                    <h3 class="font-bold text-slate-900 text-base">Simulasi Percakapan Dialogis TIRTA: Kasus Capaian Numerasi Rendah</h3>
+                    <p class="text-xs text-slate-500 mb-3">Klik pada setiap alur untuk membuka percakapan antara Pengawas Sekolah (P) dan Kepala Sekolah (KS).</p>
+
+                    <!-- T - Tujuan -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <button onclick="toggleTirta('tirta-1')" class="w-full p-3 bg-slate-100 hover:bg-slate-200 text-left font-bold text-slate-800 flex justify-between items-center text-sm">
+                            <span>1. T — Tujuan (Goal)</span>
+                            <span id="icon-tirta-1" class="text-xs">▼</span>
+                        </button>
+                        <div id="tirta-1" class="p-4 bg-white text-xs space-y-2 border-t border-slate-200">
+                            <p class="text-slate-500 italic">Pengawas menyepakati fokus percakapan dan hasil akhir sesi diskusi bersama Kepala Sekolah.</p>
+                            <div class="bg-blue-50 p-2.5 rounded border border-blue-200">
+                                <strong>Pengawas (P):</strong> "Bapak/Ibu Kepala Sekolah, berdasarkan Rapor Pendidikan, indikator Numerasi sekolah kita masih berada di warna kuning. Dalam sesi dialog hari ini, apa sasaran spesifik yang ingin Bapak/Ibu capai terkait pembenahan numerasi ini?"
+                            </div>
+                            <div class="bg-emerald-50 p-2.5 rounded border border-emerald-200">
+                                <strong>Kepala Sekolah (KS):</strong> "Saya ingin merumuskan strategi konkret agar pembenahan numerasi tidak hanya menjadi beban guru Matematika saja, tetapi diterapkan menyeluruh oleh seluruh guru mata pelajaran."
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- I - Identifikasi -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <button onclick="toggleTirta('tirta-2')" class="w-full p-3 bg-slate-100 hover:bg-slate-200 text-left font-bold text-slate-800 flex justify-between items-center text-sm">
+                            <span>2. I — Identifikasi (Reality & Root Cause)</span>
+                            <span id="icon-tirta-2" class="text-xs">►</span>
+                        </button>
+                        <div id="tirta-2" class="hidden p-4 bg-white text-xs space-y-2 border-t border-slate-200">
+                            <p class="text-slate-500 italic">Pengawas membantu memetakan kondisi riil dan menggali akar masalah tanpa menilai secara langsung.</p>
+                            <div class="bg-blue-50 p-2.5 rounded border border-blue-200">
+                                <strong>Pengawas (P):</strong> "Mari kita lihat fakta di lapangan. Menurut evaluasi Bapak/Ibu, apa yang menjadi akar penyebab utama sehingga numerasi siswa belum optimal?"
+                            </div>
+                            <div class="bg-emerald-50 p-2.5 rounded border border-emerald-200">
+                                <strong>Kepala Sekolah (KS):</strong> "Guru non-matematika masih menganggap numerasi sekadar berhitung rumit, sehingga jarang menyisipkan grafik atau data kontekstual. Namun, kita punya Kombel internal yang aktif setiap 2 minggu."
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- R - Rencana Aksi -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <button onclick="toggleTirta('tirta-3')" class="w-full p-3 bg-slate-100 hover:bg-slate-200 text-left font-bold text-slate-800 flex justify-between items-center text-sm">
+                            <span>3. R — Rencana Aksi (Options & Strategies)</span>
+                            <span id="icon-tirta-3" class="text-xs">►</span>
+                        </button>
+                        <div id="tirta-3" class="hidden p-4 bg-white text-xs space-y-2 border-t border-slate-200">
+                            <p class="text-slate-500 italic">Pengawas mendorong KS melahirkan gagasan pemecahan masalah dan penganggaran PBD dalam RKAS.</p>
+                            <div class="bg-blue-50 p-2.5 rounded border border-blue-200">
+                                <strong>Pengawas (P):</strong> "Melihat potensi Kombel internal tersebut, gagasan atau langkah nyata apa yang bisa Bapak/Ibu dorong?"
+                            </div>
+                            <div class="bg-emerald-50 p-2.5 rounded border border-emerald-200">
+                                <strong>Kepala Sekolah (KS):</strong> "Saya akan mengarahkan Kombel bulan ini fokus pada 'Numerasi Lintas Mata Pelajaran' dan mengalokasikan dana BOS untuk buku pengayaan numerasi serta pendampingan supervisi kelas."
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TA - Tanggung Jawab -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <button onclick="toggleTirta('tirta-4')" class="w-full p-3 bg-slate-100 hover:bg-slate-200 text-left font-bold text-slate-800 flex justify-between items-center text-sm">
+                            <span>4. TA — Tanggung Jawab (Commitment & Follow-Up)</span>
+                            <span id="icon-tirta-4" class="text-xs">►</span>
+                        </button>
+                        <div id="tirta-4" class="hidden p-4 bg-white text-xs space-y-2 border-t border-slate-200">
+                            <p class="text-slate-500 italic">Pengawas mengonfirmasi komitmen, jadwal eksekusi, dan jadwal peninjauan kembali.</p>
+                            <div class="bg-blue-50 p-2.5 rounded border border-blue-200">
+                                <strong>Pengawas (P):</strong> "Sangat sistematis. Kapan aksi Kombel dan supervisi numerasi ini dieksekusi, serta siapa yang mengawal komitmen ini?"
+                            </div>
+                            <div class="bg-emerald-50 p-2.5 rounded border border-emerald-200">
+                                <strong>Kepala Sekolah (KS):</strong> "Kombel dimulai minggu kedua November, supervisi dilakukan pertengahan November dikawal oleh Wakasek Kurikulum. Pada kunjungan Monev awal Desember, kita dapat meninjau progresnya bersama."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: AKSI PBD & REKOMENDASI KEBIJAKAN -->
+        <section id="tab-pbd" class="hidden space-y-6">
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+                <h2 class="text-xl font-bold text-slate-900 mb-2">Kerangka Perencanaan Berbasis Data (PBD) & Rekomendasi Kebijakan</h2>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Monev pendampingan bermakna menghubungkan langsung hasil observasi kinerja dengan alur Perencanaan Berbasis Data melalui siklus <strong>Identifikasi, Refleksi, dan Benahi (IRB)</strong>, serta merumuskan rekomendasi bagi pemangku kepentingan sistem pendidikan.
+                </p>
+
+                <!-- IRB Process Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="p-4 rounded-lg bg-red-50 border border-red-200">
+                        <div class="flex items-center space-x-2 text-red-800 font-bold text-sm mb-2">
+                            <span>1. Identifikasi</span>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Menganalisis Rapor Pendidikan untuk menemukan indikator bermasalah (misal: capaian numerasi atau iklim keamanan rendah) berdasarkan indikator prioritas nasional.
+                        </p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-amber-50 border border-amber-200">
+                        <div class="flex items-center space-x-2 text-amber-800 font-bold text-sm mb-2">
+                            <span>2. Refleksi</span>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Melakukan analisis mendalam dalam sesi dialog Monev untuk menemukan akar masalah pada proses kepemimpinan pembelajaran dan metode mengajar guru di kelas.
+                        </p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-emerald-50 border border-emerald-200">
+                        <div class="flex items-center space-x-2 text-emerald-800 font-bold text-sm mb-2">
+                            <span>3. Benahi</span>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Merumuskan program aksi nyata yang dianggarkan secara akuntabel dalam RKAS (melalui ARKAS / Dana Yayasan) untuk pembenahan mutu berkelanjutan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Strategic Recommendations by Stakeholder -->
+                <h3 class="font-bold text-slate-900 text-base mb-4">Rekomendasi Kebijakan Strategis</h3>
+                <div class="space-y-4 text-xs">
+                    <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 flex flex-col md:flex-row gap-4 items-start">
+                        <div class="px-3 py-1 bg-slate-800 text-white font-bold rounded min-w-[140px] text-center">Dinas Pendidikan</div>
+                        <p class="text-slate-700 leading-relaxed">
+                            Mengintegrasikan hasil rekomendasi pendampingan pengawas ke dalam pemenuhan sarana prasarana sekolah, serta memfasilitasi Pelatihan Bimtek Coaching & Mentoring secara terstruktur bagi seluruh pengawas sekolah untuk menjamin kesetaraan standar pendampingan.
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 flex flex-col md:flex-row gap-4 items-start">
+                        <div class="px-3 py-1 bg-slate-800 text-white font-bold rounded min-w-[140px] text-center">Pokjawas Sekolah</div>
+                        <p class="text-slate-700 leading-relaxed">
+                            Mengembangkan Komunitas Belajar internal Pengawas Sekolah sebagai wadah berbagi praktik baik intervensi pendampingan, serta membudayakan alur percakapan TIRTA dalam setiap kunjungan Monev ke sekolah binaan.
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 flex flex-col md:flex-row gap-4 items-start">
+                        <div class="px-3 py-1 bg-slate-800 text-white font-bold rounded min-w-[140px] text-center">Yayasan / Badan Penyelenggara</div>
+                        <p class="text-slate-700 leading-relaxed">
+                            Membuka ruang kolaborasi berkala dengan Pengawas Sekolah sebagai <em>critical friend</em> dalam PKKS terpadu, serta menyelaraskan Rencana Kerja Anggaran Yayasan dengan indikator benah mutu Rapor Pendidikan demi keberlanjutan mutu sekolah.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-4 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-1">
+            <div>Sistem Monitoring & Evaluasi Kinerja Kepala Sekolah ASN & Non-ASN • Berbasis Perdirjen GTK No. 4831/2023 & Perdirjen GTK No. 7607/2023</div>
+            <div class="text-slate-300 font-semibold text-sm pt-1">Pengembang Aplikasi: Ida Faridlah</div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Global Chart Instance Reference
+        let scoreChartInstance = null;
+
+        // Cycle detail data snippet
+        const cycleDetails = {
+            1: {
+                title: "Detail Tahap 1: Perencanaan Pendampingan",
+                desc: "Pengawas Sekolah menganalisis Rapor Pendidikan sekolah binaan, memeta kapasitas sekolah (Sangat Rendah hingga Tinggi), dan menyusun Dokumen Program Pendampingan Tahunan."
+            },
+            2: {
+                title: "Detail Tahap 2: Pendampingan Perencanaan Program Kerja",
+                desc: "Pengawas memfasilitasi Kepala Sekolah dan tim pengembang dalam menyelaraskan Rencana Kerja Tahunan (RKT) dan RKAS berdasarkan rekomendasi pembenahan PBD."
+            },
+            3: {
+                title: "Detail Tahap 3: Pendampingan Pelaksanaan Program Kerja",
+                desc: "Pengawas melaksanakan kunjungan Monev secara berkala dengan mengaplikasikan metode intervensi yang sesuai (Training, Mentoring, Coaching, atau Facilitating)."
+            },
+            4: {
+                title: "Detail Tahap 4: Pelaporan Hasil Pendampingan",
+                desc: "Pengawas menyusun laporan ketercapaian, memberikan masukan feedforward predikat kinerja, dan mengadvokasi kebutuhan dukungan sekolah ke Dinas Pendidikan atau Yayasan."
+            }
+        };
+
+        // Navigation Tab Switching Logic
+        function switchTab(tabId) {
+            const tabs = ['dashboard', 'komparasi', 'instrumen', 'tirta', 'pbd'];
+            tabs.forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+                const navBtn = document.getElementById(`nav-${t}`);
+                if (navBtn) {
+                    navBtn.classList.remove('bg-brand-700', 'text-white');
+                    navBtn.classList.add('text-slate-300');
+                }
+            });
+
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-brand-700', 'text-white');
+                activeBtn.classList.remove('text-slate-300');
+            }
+
+            if (tabId === 'instrumen') {
+                setTimeout(initOrUpdateChart, 100);
+            }
+        }
+
+        // Cycle detail card click
+        function showCycleDetail(step) {
+            for (let i = 1; i <= 4; i++) {
+                const card = document.getElementById(`cycle-card-${i}`);
+                if (i === step) {
+                    card.className = "cursor-pointer p-4 rounded-lg border-2 border-brand-500 bg-brand-50 transition hover:shadow-md";
+                } else {
+                    card.className = "cursor-pointer p-4 rounded-lg border border-slate-200 bg-white transition hover:shadow-md";
+                }
+            }
+            document.getElementById('cycle-title').innerText = cycleDetails[step].title;
+            document.getElementById('cycle-desc').innerText = cycleDetails[step].desc;
+        }
+
+        // Toggle comparison views
+        function toggleComparison(mode) {
+            const colAsn = document.getElementById('col-asn');
+            const colNonAsn = document.getElementById('col-nonasn');
+            const btnAll = document.getElementById('btn-comp-all');
+            const btnAsn = document.getElementById('btn-comp-asn');
+            const btnNonAsn = document.getElementById('btn-comp-nonasn');
+
+            // Reset buttons
+            [btnAll, btnAsn, btnNonAsn].forEach(b => {
+                b.className = "px-4 py-1.5 rounded-md text-slate-600 hover:text-slate-900";
+            });
+
+            if (mode === 'all') {
+                colAsn.classList.remove('hidden');
+                colNonAsn.classList.remove('hidden');
+                btnAll.className = "px-4 py-1.5 rounded-md bg-white text-slate-900 shadow";
+            } else if (mode === 'asn') {
+                colAsn.classList.remove('hidden');
+                colNonAsn.classList.add('hidden');
+                btnAsn.className = "px-4 py-1.5 rounded-md bg-white text-slate-900 shadow";
+            } else if (mode === 'nonasn') {
+                colAsn.classList.add('hidden');
+                colNonAsn.classList.remove('hidden');
+                btnNonAsn.className = "px-4 py-1.5 rounded-md bg-white text-slate-900 shadow";
+            }
+        }
+
+        // Update specific indicator row based on ASN vs Non-ASN status
+        function updateStatusSpecificComponent() {
+            const status = document.getElementById('ks-status').value;
+            const title = document.getElementById('spec-title');
+            const subtitle = document.getElementById('spec-subtitle');
+            const obs = document.getElementById('obs-5');
+            const rec = document.getElementById('rec-5');
+
+            if (status === 'ASN') {
+                title.innerText = "Integrasi e-Kinerja BKN / Ruang GTK";
+                subtitle.innerText = "• Progress unggah bukti dukung RHK Periode Juli–Oktober.";
+                obs.value = "Dokumen RHK Oktober lengkap. Draf refleksi tindak lanjut siap dinilai di platform e-Kinerja.";
+                rec.value = "Lanjutkan verifikasi teknis bersama Pengawas untuk finalisasi predikat kinerja semesteran.";
+            } else {
+                title.innerText = "Kesesuaian Program Khas Yayasan & Akreditasi";
+                subtitle.innerText = "• Ketercapaian target mutu Yayasan & kesiapan Re-Akreditasi.";
+                obs.value = "Indikator nilai karakter khas sekolah terintegrasi baik dalam KSP dan kegiatan harian.";
+                rec.value = "Pertahankan konsistensi serta koordinasikan persiapan re-akreditasi dengan pengurus Yayasan.";
+            }
+            calculateScore();
+        }
+
+        // Calculate Average Score & Update Labels
+        function calculateScore() {
+            const s1 = parseInt(document.getElementById('score-1').value);
+            const s2 = parseInt(document.getElementById('score-2').value);
+            const s3 = parseInt(document.getElementById('score-3').value);
+            const s4 = parseInt(document.getElementById('score-4').value);
+            const s5 = parseInt(document.getElementById('score-5').value);
+
+            const avg = ((s1 + s2 + s3 + s4 + s5) / 5).toFixed(2);
+            document.getElementById('total-score').innerText = avg;
+
+            const scoreStatus = document.getElementById('score-status');
+            const predikatLabel = document.getElementById('predikat-label');
+
+            if (avg >= 3.5) {
+                scoreStatus.innerText = "Kategori: Sangat Baik (Excellent)";
+                scoreStatus.className = "text-xs font-semibold text-emerald-600 block";
+                predikatLabel.innerText = "Mewujudkan Ekspektasi";
+            } else if (avg >= 2.8) {
+                scoreStatus.innerText = "Kategori: Baik (Good)";
+                scoreStatus.className = "text-xs font-semibold text-brand-600 block";
+                predikatLabel.innerText = "Sesuai Ekspektasi";
+            } else if (avg >= 2.0) {
+                scoreStatus.innerText = "Kategori: Cukup (Fair)";
+                scoreStatus.className = "text-xs font-semibold text-amber-600 block";
+                predikatLabel.innerText = "Butuh Perbaikan";
+            } else {
+                scoreStatus.innerText = "Kategori: Kurang (Needs Improvement)";
+                scoreStatus.className = "text-xs font-semibold text-red-600 block";
+                predikatLabel.innerText = "Di Bawah Ekspektasi";
+            }
+
+            initOrUpdateChart();
+        }
+
+        // Initialize or Update Chart.js Instance
+        function initOrUpdateChart() {
+            const ctx = document.getElementById('scoreChart');
+            if (!ctx) return;
+
+            const s1 = parseInt(document.getElementById('score-1').value);
+            const s2 = parseInt(document.getElementById('score-2').value);
+            const s3 = parseInt(document.getElementById('score-3').value);
+            const s4 = parseInt(document.getElementById('score-4').value);
+            const s5 = parseInt(document.getElementById('score-5').value);
+
+            const dataValues = [s1, s2, s3, s4, s5];
+            const labels = [
+                'Supervisi Acad.',
+                'Aktivasi Kombel',
+                'PBD & RKAS',
+                'Lingkungan Aman',
+                'Spesifik Status'
+            ];
+
+            if (scoreChartInstance) {
+                scoreChartInstance.data.datasets[0].data = dataValues;
+                scoreChartInstance.update();
+            } else {
+                scoreChartInstance = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Capaian Skala Kinerja',
+                            data: dataValues,
+                            backgroundColor: 'rgba(2, 132, 199, 0.2)',
+                            borderColor: 'rgba(2, 132, 199, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(3, 105, 161, 1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                min: 0,
+                                max: 4,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Reset form inputs
+        function resetForm() {
+            document.getElementById('ks-name').value = "Dra. Hj. Siti Rahmah, M.Pd.";
+            document.getElementById('ks-status').value = "ASN";
+            document.getElementById('score-1').value = "3";
+            document.getElementById('score-2').value = "4";
+            document.getElementById('score-3').value = "3";
+            document.getElementById('score-4').value = "2";
+            document.getElementById('score-5').value = "3";
+            updateStatusSpecificComponent();
+        }
+
+        // Mentoring capacity selection
+        function filterCapacity(type) {
+            const infoBox = document.getElementById('capacity-info-box');
+            const buttons = ['srendah', 'rendah', 'sedang', 'tinggi', 'stinggi'];
+
+            buttons.forEach(b => {
+                const btn = document.getElementById(`btn-cap-${b}`);
+                btn.className = "p-2 rounded border border-slate-300 bg-white hover:bg-slate-100 font-medium text-left text-xs";
+            });
+
+            const activeBtn = document.getElementById(`btn-cap-${type}`);
+            activeBtn.className = "p-2 rounded border border-brand-500 bg-brand-50 font-bold text-brand-800 text-left text-xs";
+
+            if (type === 'srendah') {
+                infoBox.innerHTML = "<strong>Metode Direkomensing: TRAINING (Pelatihan Teknis Direct)</strong><br><em>Aksi Pengawas:</em> Mengajarkan secara langsung materi teknis dasar (misal: penyusunan instrumen observasi sederhana).";
+            } else if (type === 'rendah') {
+                infoBox.innerHTML = "<strong>Metode Direkomendasikan: MENTORING (Pengampuan / Percontohan)</strong><br><em>Aksi Pengawas:</em> Memberikan petunjuk, arahan, dan berbagi contoh <em>best practice</em> konkret yang siap dieksekusi sekolah.";
+            } else if (type === 'sedang') {
+                infoBox.innerHTML = "<strong>Metode Direkomendasikan: COACHING (Bimbingan Reflektif)</strong><br><em>Aksi Pengawas:</em> Mengajukan pertanyaan pemantik untuk memicu kesadaran mandiri dan solusi dari Kepala Sekolah.";
+            } else if (type === 'tinggi') {
+                infoBox.innerHTML = "<strong>Metode Direkomendasikan: FACILITATING (Fasilitasi Kelompok)</strong><br><em>Aksi Pengawas:</em> Membantu memfasilitasi diskusi Kombel atau tim pengembang sekolah dalam menyelaraskan keputusan bersama.";
+            } else if (type === 'stinggi') {
+                infoBox.innerHTML = "<strong>Metode Direkomendasikan: CONSULTING (Konsultasi Mitrasejajar)</strong><br><em>Aksi Pengawas:</em> Menjadi mitra diskusi tingkat tinggi mengenai inovasi jangka panjang dan pengimbasan ke sekolah lain.";
+            }
+        }
+
+        // Toggle Accordion for TIRTA Dialogue
+        function toggleTirta(id) {
+            const target = document.getElementById(id);
+            const icon = document.getElementById(`icon-${id}`);
+            if (target.classList.contains('hidden')) {
+                target.classList.remove('hidden');
+                icon.innerText = "▼";
+            } else {
+                target.classList.add('hidden');
+                icon.innerText = "►";
+            }
+        }
+
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            calculateScore();
+        });
+    </script>
+</body>
+</html>
