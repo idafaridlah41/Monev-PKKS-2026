@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Monitoring & Evaluasi Berbasis 6M (Regulasi Terbaru 2025-2026)</title>
+    <title>Sistem Monitoring & Evaluasi Berbasis 6M & PKKS (Regulasi Terbaru 2025-2026)</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -38,14 +38,12 @@
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 550px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 350px;
+            max-width: 500px;
+            margin: 0 auto;
+            height: 280px;
         }
         @media print {
-            body { background: white !important; font-size: 11pt !important; }
+            body { background: white !important; font-size: 10pt !important; }
             header, footer, .no-print { display: none !important; }
             .print-container { box-shadow: none !important; border: none !important; padding: 0 !important; width: 100% !important; }
         }
@@ -60,15 +58,15 @@
                 <div class="flex items-center space-x-3">
                     <span class="text-2xl">🎯</span>
                     <div>
-                        <h1 class="text-lg font-bold leading-tight">Monev Pendampingan Mutu (Metodologi 6M)</h1>
+                        <h1 class="text-lg font-bold leading-tight">Monev Pendampingan Mutu & PKKS (Metodologi 6M)</h1>
                         <p class="text-xs text-slate-400">Kepmendikdasmen 271/2025 • PermenPANRB 7/2026 • Permendikdasmen 6/2026</p>
                     </div>
                 </div>
-                <!-- Desktop Navigation -->
+                <!-- Navigation -->
                 <div class="hidden md:flex space-x-1 text-sm font-medium">
                     <button type="button" onclick="window.switchTab('dashboard')" id="nav-dashboard" class="px-3 py-2 rounded-md bg-brand-700 text-white transition cursor-pointer">Konsep 6M & Siklus</button>
                     <button type="button" onclick="window.switchTab('komparasi')" id="nav-komparasi" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition cursor-pointer">Komparasi ASN/Non-ASN</button>
-                    <button type="button" onclick="window.switchTab('instrumen')" id="nav-instrumen" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition cursor-pointer">Instrumen 6M Interactive</button>
+                    <button type="button" onclick="window.switchTab('instrumen')" id="nav-instrumen" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition cursor-pointer">Instrumen 6M & PKKS</button>
                     <button type="button" onclick="window.switchTab('tirta')" id="nav-tirta" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition cursor-pointer">Coaching TIRTA (6M)</button>
                     <button type="button" onclick="window.switchTab('pbd')" id="nav-pbd" class="px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition cursor-pointer">Aksi PBD & 6M</button>
                 </div>
@@ -92,7 +90,7 @@
             <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
                 <h2 class="text-xl font-bold text-slate-900 mb-2">Kerangka Kerja Pendampingan Profesional Berbasis 6M</h2>
                 <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                    Sesuai dengan <strong>PermenPANRB No. 7 Tahun 2026</strong> serta <strong>Kepmendikdasmen No. 271/2025</strong> dan <strong>Permendikdasmen No. 6/2026</strong>, pengawas melaksanakan tugas pendampingan transformatif melalui siklus 6M yang terintegrasi penuh dalam pengelolaan kinerja satuan pendidikan.
+                    Sesuai dengan <strong>PermenPANRB No. 7 Tahun 2026</strong> serta <strong>Kepmendikdasmen No. 271/2025</strong> dan <strong>Permendikdasmen No. 6/2026</strong>, pengawas melaksanakan tugas pendampingan transformatif secara bertahap (Triwulanan) melalui siklus 6M.
                 </p>
                 <div class="grid grid-cols-2 md:grid-cols-6 gap-3 mt-4">
                     <div class="bg-blue-50 border border-blue-200 p-3 rounded-lg text-center">
@@ -131,12 +129,12 @@
             <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
                 <h3 class="text-lg font-bold text-slate-900 mb-2">Eksplorasi Tahapan 6M Pendampingan Pengawas</h3>
                 <div class="grid grid-cols-2 md:grid-cols-6 gap-2 mt-4">
-                    <button type="button" onclick="window.showCycleDetail(1)" id="cycle-btn-1" class="p-3 rounded-lg border-2 border-brand-500 bg-brand-50 text-left font-bold text-xs cursor-pointer">1. Memetakan</button>
-                    <button type="button" onclick="window.showCycleDetail(2)" id="cycle-btn-2" class="p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer">2. Merencanakan</button>
-                    <button type="button" onclick="window.showCycleDetail(3)" id="cycle-btn-3" class="p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer">3. Melaksanakan</button>
-                    <button type="button" onclick="window.showCycleDetail(4)" id="cycle-btn-4" class="p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer">4. Mengevaluasi</button>
-                    <button type="button" onclick="window.showCycleDetail(5)" id="cycle-btn-5" class="p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer">5. Mengendalikan</button>
-                    <button type="button" onclick="window.showCycleDetail(6)" id="cycle-btn-6" class="p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer">6. Meningkatkan</button>
+                    <button type="button" onclick="window.showCycleDetail(1)" id="cycle-btn-1" class="p-3 rounded-lg border-2 border-brand-500 bg-brand-50 text-left font-bold text-xs cursor-pointer text-brand-900">1. Memetakan</button>
+                    <button type="button" onclick="window.showCycleDetail(2)" id="cycle-btn-2" class="p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer text-slate-700">2. Merencanakan</button>
+                    <button type="button" onclick="window.showCycleDetail(3)" id="cycle-btn-3" class="p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer text-slate-700">3. Melaksanakan</button>
+                    <button type="button" onclick="window.showCycleDetail(4)" id="cycle-btn-4" class="p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer text-slate-700">4. Mengevaluasi</button>
+                    <button type="button" onclick="window.showCycleDetail(5)" id="cycle-btn-5" class="p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer text-slate-700">5. Mengendalikan</button>
+                    <button type="button" onclick="window.showCycleDetail(6)" id="cycle-btn-6" class="p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer text-slate-700">6. Meningkatkan</button>
                 </div>
                 <div id="cycle-detail-box" class="mt-4 p-4 rounded-lg bg-slate-100 border border-slate-300 text-sm text-slate-700">
                     <strong>Tahap 1: Memetakan</strong><br>
@@ -173,48 +171,61 @@
             </div>
         </section>
 
-        <!-- TAB 3: INSTRUMEN MONEV INTERAKTIF BERBASIS 6M -->
+        <!-- TAB 3: INSTRUMEN MONEV & PKKS BERTAHAP -->
         <section id="tab-instrumen" class="hidden space-y-6">
             <div id="printable-area-instrumen" class="print-container bg-white rounded-xl shadow-sm p-6 border border-slate-200 space-y-6">
                 
                 <div class="text-center border-b border-slate-300 pb-4 hidden print:block">
-                    <h2 class="text-lg font-bold">LAPORAN MONITORING & EVALUASI KINERJA KEPALA SEKOLAH (METODOLOGI 6M)</h2>
+                    <h2 class="text-lg font-bold">LAPORAN MONITORING, EVALUASI & PENILAIAN KINERJA KEPALA SEKOLAH (PKKS)</h2>
                     <p class="text-xs text-slate-600">Berdasarkan Kepmendikdasmen No. 271/2025, PermenPANRB No. 7/2026, & Permendikdasmen No. 6/2026</p>
                 </div>
 
+                <!-- Action Bar -->
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-200 pb-4 no-print">
                     <div>
-                        <h2 class="text-xl font-bold text-slate-900">Instrumen Monev Terpadu Berbasis Siklus 6M</h2>
-                        <p class="text-xs text-slate-500">Kelola indikator 6M, tautkan dokumen Google Drive prasyarat Kepala Sekolah, simpan, dan cetak.</p>
+                        <h2 class="text-xl font-bold text-slate-900">Instrumen Monev 6M & PKKS Bertahap</h2>
+                        <p class="text-xs text-slate-500">Pilih periode penilaian untuk mengelola data kinerja yang tematik & terstruktur.</p>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <button type="button" onclick="window.addRow()" class="px-3 py-1.5 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded transition shadow-sm cursor-pointer">➕ Tambah Indikator</button>
-                        <button type="button" onclick="window.saveData()" class="px-3 py-1.5 text-xs bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded transition shadow-sm cursor-pointer">💾 Simpan</button>
-                        <button type="button" onclick="window.print()" class="px-3 py-1.5 text-xs bg-slate-700 hover:bg-slate-800 text-white font-semibold rounded transition shadow-sm cursor-pointer">🖨️ Cetak / Preview</button>
-                        <button type="button" onclick="window.exportToPDF()" class="px-3 py-1.5 text-xs bg-red-600 hover:bg-red-700 text-white font-semibold rounded transition shadow-sm cursor-pointer">📄 PDF</button>
-                        <button type="button" onclick="window.exportToWord()" class="px-3 py-1.5 text-xs bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded transition shadow-sm cursor-pointer">📝 Word</button>
-                        <button type="button" onclick="window.resetForm()" class="px-3 py-1.5 text-xs bg-slate-200 text-slate-700 font-semibold rounded shadow-sm cursor-pointer">Reset</button>
+                        <button type="button" onclick="window.loadQuarterPreset()" class="px-3 py-1.5 text-xs bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded shadow-sm transition cursor-pointer" title="Muat Ulang Indikator Standar Triwulan Ini">📋 Muat Preset Triwulan</button>
+                        <button type="button" onclick="window.copyFromPreviousQuarter()" class="px-3 py-1.5 text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded shadow-sm transition cursor-pointer">🔄 Import T-Sebelumnya</button>
+                        <button type="button" onclick="window.addRow()" class="px-3 py-1.5 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded shadow-sm transition cursor-pointer">➕ Tambah Indikator</button>
+                        <button type="button" onclick="window.saveCurrentQuarterData()" class="px-3 py-1.5 text-xs bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded shadow-sm transition cursor-pointer">💾 Simpan Periode Ini</button>
+                        <button type="button" onclick="window.print()" class="px-3 py-1.5 text-xs bg-slate-700 hover:bg-slate-800 text-white font-semibold rounded shadow-sm cursor-pointer">🖨️ Cetak</button>
+                        <button type="button" onclick="window.exportToPDF()" class="px-3 py-1.5 text-xs bg-red-600 hover:bg-red-700 text-white font-semibold rounded shadow-sm cursor-pointer">📄 PDF</button>
+                        <button type="button" onclick="window.exportToWord()" class="px-3 py-1.5 text-xs bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded shadow-sm cursor-pointer">📝 Word</button>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-slate-50 rounded-lg border border-slate-200 text-sm">
+                <!-- Header Informasi Profil & Periode Penilaian -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-slate-50 rounded-lg border border-slate-200 text-sm">
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Kepala Sekolah</label>
-                        <input type="text" id="ks-name" value="Dra. Hj. Siti Rahmah, M.Pd." class="w-full p-2 border border-slate-300 rounded text-xs bg-white">
+                        <input type="text" id="ks-name" value="Dra. Hj. Siti Rahmah, M.Pd." onchange="window.saveProfileInfo()" class="w-full p-2 border border-slate-300 rounded text-xs bg-white">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 mb-1">Status Kepegawaian</label>
-                        <select id="ks-status" class="w-full p-2 border border-slate-300 rounded text-xs bg-white">
+                        <select id="ks-status" onchange="window.saveProfileInfo()" class="w-full p-2 border border-slate-300 rounded text-xs bg-white">
                             <option value="ASN">ASN (PNS / PPPK - Negeri)</option>
                             <option value="Non-ASN">Non-ASN (Swasta / Yayasan)</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">Satuan Pendidikan / Periode</label>
-                        <input type="text" id="ks-school" value="SMP Negeri 1 Cendekia / Triwulan IV" class="w-full p-2 border border-slate-300 rounded text-xs bg-white">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Satuan Pendidikan</label>
+                        <input type="text" id="ks-school" value="SMP Negeri 1 Cendekia" onchange="window.saveProfileInfo()" class="w-full p-2 border border-slate-300 rounded text-xs bg-white">
+                    </div>
+                    <div class="bg-brand-50 p-2 rounded border border-brand-200">
+                        <label class="block text-xs font-bold text-brand-900 mb-1">Periode Penilaian (Triwulanan)</label>
+                        <select id="period-select" onchange="window.changeQuarter(this.value)" class="w-full p-1.5 border border-brand-300 rounded text-xs font-bold text-brand-800 bg-white">
+                            <option value="T1">Triwulan I (Jan-Mar: Pemetaan & Perencanaan)</option>
+                            <option value="T2">Triwulan II (Apr-Jun: Pelaksanaan & Supervisi)</option>
+                            <option value="T3">Triwulan III (Jul-Sep: Pengawasan & Iklim)</option>
+                            <option value="T4">Triwulan IV (Okt-Des: Diseminasi & PKKS Final)</option>
+                        </select>
                     </div>
                 </div>
 
+                <!-- Tabel Utama Indikator 6M -->
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs border-collapse border border-slate-300" id="monev-table">
                         <thead>
@@ -232,33 +243,69 @@
                     </table>
                 </div>
 
+                <!-- Ringkasan Periode & Grafik Tren -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-slate-50 rounded-xl border border-slate-200">
                     <div class="space-y-3">
-                        <h3 class="font-bold text-slate-900 text-sm">Hasil Ringkasan Evaluasi Kinerja (6M)</h3>
+                        <h3 class="font-bold text-slate-900 text-sm">Ringkasan Kinerja Periode Ini (<span id="current-q-label">Triwulan I</span>)</h3>
                         <div class="flex items-center space-x-4">
                             <div class="bg-white p-3 rounded-lg border border-slate-200 text-center flex-1">
-                                <span class="text-xs text-slate-500 block">Rata-Rata Skala</span>
-                                <span class="text-2xl font-black text-brand-700" id="total-score">3.00</span>
-                                <span class="text-xs font-semibold text-emerald-600 block" id="score-status">Kategori: Baik</span>
+                                <span class="text-xs text-slate-500 block">Rata-Rata Skala 6M</span>
+                                <span class="text-2xl font-black text-brand-700" id="total-score">0.00</span>
+                                <span class="text-xs font-semibold text-emerald-600 block" id="score-status">Kategori: -</span>
                             </div>
                             <div class="bg-white p-3 rounded-lg border border-slate-200 text-center flex-1">
-                                <span class="text-xs text-slate-500 block">Predikat Kinerja Kualitatif</span>
-                                <span class="text-sm font-bold text-slate-800" id="predikat-label">Sesuai Ekspektasi</span>
+                                <span class="text-xs text-slate-500 block">Rating Praktik Kinerja</span>
+                                <span class="text-sm font-bold text-slate-800" id="predikat-label">-</span>
                             </div>
                         </div>
                         <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-1 text-xs">
-                            <div class="font-bold text-slate-800">Umpan Balik Dialogis Kualitatif:</div>
-                            <textarea id="feedback-qualitative" class="w-full p-2 border border-slate-300 rounded text-xs" rows="2">Kepala sekolah mengimplementasikan siklus 6M dengan baik dalam penguatan Kombel dan Rapor Pendidikan.</textarea>
+                            <div class="font-bold text-slate-800">Catatan Umpan Balik Dialogis Pengawas:</div>
+                            <textarea id="feedback-qualitative" onchange="window.saveFeedback(this.value)" class="w-full p-2 border border-slate-300 rounded text-xs" rows="2" placeholder="Masukkan catatan umpan balik..."></textarea>
                         </div>
                     </div>
+
                     <div class="bg-white p-3 rounded-lg border border-slate-200 flex flex-col items-center justify-center">
-                        <h4 class="text-xs font-bold text-slate-700 mb-2">Profil Capaian Indikator 6M</h4>
+                        <h4 class="text-xs font-bold text-slate-700 mb-1">Tren Capaian Kinerja (Triwulan I - IV)</h4>
                         <div class="chart-container">
-                            <canvas id="scoreChart"></canvas>
+                            <canvas id="trendChart"></canvas>
                         </div>
                     </div>
                 </div>
 
+                <!-- Modul Evaluasi Akhir Tahun (Hanya Tampil di Triwulan IV) -->
+                <div id="pkks-final-section" class="hidden border-2 border-brand-500 bg-brand-50/30 rounded-xl p-5 space-y-6">
+                    <div class="border-b border-brand-200 pb-3">
+                        <h3 class="text-lg font-black text-brand-900 flex items-center gap-2">
+                            <span>🏆</span> EVALUASI AKHIR TAHUN (PENILAIAN KINERJA KEPALA SEKOLAH - PKKS)
+                        </h3>
+                        <p class="text-xs text-slate-600">Integrasi Rating Praktik Kinerja (Siklus 6M T1–T4) dan Rating Perilaku Kerja (BerAKHLAK) sesuai regulasi pengelolaan kinerja.</p>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm">1. Penilaian Perilaku Kerja (BerAKHLAK)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs" id="berakhlak-container"></div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm">2. Matriks Penetapan Predikat Kinerja Akhir Tahun</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                                <span class="text-xs text-slate-500 block">Rating Praktik Kinerja (6M T1-T4)</span>
+                                <span class="text-base font-bold text-brand-800" id="final-praktik-rating">Sesuai Ekspektasi</span>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                                <span class="text-xs text-slate-500 block">Rating Perilaku Kerja (BerAKHLAK)</span>
+                                <span class="text-base font-bold text-brand-800" id="final-perilaku-rating">Sesuai Ekspektasi</span>
+                            </div>
+                            <div class="p-3 bg-emerald-50 border border-emerald-300 rounded-lg">
+                                <span class="text-xs text-emerald-700 font-semibold block">PREDIKAT KINERJA FINAL</span>
+                                <span class="text-lg font-black text-emerald-800" id="final-predikat">BAIK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tanda Tangan Cetak -->
                 <div class="hidden print:flex justify-between pt-12 text-xs">
                     <div class="text-center">
                         <p>Mengetahui,</p>
@@ -277,7 +324,7 @@
             </div>
         </section>
 
-        <!-- TAB 4: SIMULATOR COACHING TIRTA (DINAMIS SESUAI KAPASITAS 6M) -->
+        <!-- TAB 4: SIMULATOR COACHING TIRTA -->
         <section id="tab-tirta" class="hidden space-y-6">
             <div id="printable-area-tirta" class="print-container bg-white rounded-xl shadow-sm p-6 border border-slate-200 space-y-6">
                 
@@ -300,7 +347,6 @@
                     </div>
                 </div>
 
-                <!-- Pilihan Kapasitas Sekolah Dinamis -->
                 <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-3 no-print">
                     <label class="block text-xs font-bold text-slate-700">Pilih Tingkat Kapasitas Satuan Pendidikan Binaan (Mengubah Dialog Otomatis):</label>
                     <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
@@ -316,10 +362,7 @@
                     </div>
                 </div>
 
-                <!-- Kontainer Daftar Dialog Alur TIRTA -->
-                <div class="space-y-4" id="tirta-container">
-                    <!-- Render via JavaScript -->
-                </div>
+                <div class="space-y-4" id="tirta-container"></div>
 
                 <div class="hidden print:flex justify-between pt-12 text-xs">
                     <div class="text-center">
@@ -362,7 +405,6 @@
                     </div>
                 </div>
 
-                <!-- Penjelasan Hubungan 6M & PBD -->
                 <div class="grid grid-cols-2 md:grid-cols-6 gap-2 no-print text-[11px]">
                     <div class="p-3 bg-blue-50 border border-blue-200 rounded"><strong>1. Memetakan:</strong> Identifikasi Rapor Pendidikan.</div>
                     <div class="p-3 bg-emerald-50 border border-emerald-200 rounded"><strong>2. Merencanakan:</strong> Rumuskan program benah mutu RKT.</div>
@@ -372,10 +414,7 @@
                     <div class="p-3 bg-indigo-50 border border-indigo-200 rounded"><strong>6. Meningkatkan:</strong> Perbaikan berkelanjutan.</div>
                 </div>
 
-                <!-- Kontainer Daftar Aksi PBD & Rekomendasi -->
-                <div class="space-y-4" id="pbd-container">
-                    <!-- Render via JavaScript -->
-                </div>
+                <div class="space-y-4" id="pbd-container"></div>
 
                 <div class="hidden print:flex justify-between pt-12 text-xs">
                     <div class="text-center">
@@ -400,570 +439,137 @@
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 text-xs py-4 border-t border-slate-800 no-print">
         <div class="max-w-7xl mx-auto px-4 text-center space-y-1">
-            <div>Sistem Monitoring & Evaluasi Kinerja Kepala Sekolah (Metodologi 6M) • Berdasarkan Kepmendikdasmen 271/2025, PermenPANRB 7/2026, & Permendikdasmen 6/2026</div>
+            <div>Sistem Monitoring & Evaluasi Kinerja Kepala Sekolah (Metodologi 6M & PKKS Bertahap) • Berdasarkan Kepmendikdasmen 271/2025, PermenPANRB 7/2026, & Permendikdasmen 6/2026</div>
             <div class="text-slate-300 font-semibold text-sm pt-1">Pengembang Aplikasi: Ida Faridlah</div>
         </div>
     </footer>
 
-    <!-- JavaScript Application Logic -->
+    <!-- JavaScript Logic -->
     <script>
-        let scoreChartInstance = null;
-
+        let trendChartInstance = null;
         const dim6MList = ["Memetakan", "Merencanakan", "Melaksanakan", "Mengevaluasi", "Mengendalikan", "Meningkatkan"];
 
-        let monevData = [
-            {
-                dim: "Memetakan",
-                title: "Pemetaan Awal Rapor Pendidikan",
-                desc: "Analisis akar masalah dan kapasitas satuan pendidikan.",
-                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
-                obs: "Pemetaan indikator numerasi dan iklim keamanan tuntas.",
-                score: 3,
-                rec: "Lanjutkan sinkronisasi dengan data Dapodik."
-            },
-            {
-                dim: "Merencanakan",
-                title: "Penyusunan RKT & RKAS Berbasis PBD",
-                desc: "Penyusunan program benah mutu dalam dokumen perencanaan.",
-                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
-                obs: "Program numerasi masuk dalam dokumen RKT dan RKAS.",
-                score: 3,
-                rec: "Pastikan kesesuaian anggaran ARKAS dengan prioritas."
-            },
-            {
-                dim: "Melaksanakan",
-                title: "Implementasi Supervisi & Kombel",
-                desc: "Pelaksanaan observasi kelas dan aktivitas Komunitas Belajar.",
-                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
-                obs: "Kombel internal aktif dua minggu sekali.",
-                score: 4,
-                rec: "Tingkatkan kolaborasi antar guru mapel."
-            },
-            {
-                dim: "Mengevaluasi",
-                title: "Evaluasi Kinerja & Bukti Fisik",
-                desc: "Penilaian berkala dan verifikasi tautan bukti dukung Drive.",
-                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
-                obs: "Dokumen bukti fisik lengkap di folder Drive.",
-                score: 3,
-                rec: "Perkuat dokumentasi kegiatan pasca-observasi."
-            },
-            {
-                dim: "Mengendalikan",
-                title: "Pengendalian Mutu & Kepatuhan",
-                desc: "Umpan balik dialogis dan pengawasan TPPK/Keteraturan.",
-                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
-                obs: "SK TPPK aktif dan pos pengaduan mulai terbentuk.",
-                score: 3,
-                rec: "Lakukan sosialisasi anti-perundungan secara berkala."
-            },
-            {
-                dim: "Meningkatkan",
-                title: "Peningkatan Mutu Berkelanjutan",
-                desc: "Tindak lanjut rekomendasi dan diseminasi praktik baik.",
-                driveLink: "https://drive.google.com/drive/folders/contoh-arsip",
-                obs: "Praktik baik dibagikan di tingkat MKKS.",
-                score: 4,
-                rec: "Perluas jejaring inovasi pembelajaran digital."
-            }
+        let profileInfo = {
+            ksName: "Dra. Hj. Siti Rahmah, M.Pd.",
+            ksStatus: "ASN",
+            ksSchool: "SMP Negeri 1 Cendekia"
+        };
+
+        let currentQuarter = "T1";
+
+        // Bank Preset Indikator Standar Tematik per Triwulan
+        const quarterPresets = {
+            T1: [
+                { dim: "Memetakan", title: "Pemetaan Awal Rapor Pendidikan", desc: "Analisis identifikasi & refleksi indikator prioritas Rapor Pendidikan.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Pemetaan indikator numerasi & iklim sekolah tuntas.", score: 3 },
+                { dim: "Merencanakan", title: "Penyusunan RKT & RKAS Berbasis PBD", desc: "Perumusan program benah mutu ke dalam dokumen RKT dan RKAS/ARKAS.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Program numerasi terakomodasi dalam RKT dan RKAS.", score: 3 },
+                { dim: "Merencanakan", title: "Penetapan Sasaran Kinerja (RHK) KS", desc: "Penyelarasan RHK Kepala Sekolah dengan SKP Pengawas dan Dinas.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "RHK e-Kinerja BKN / SKP telah disetujui.", score: 4 },
+                { dim: "Mengendalikan", title: "Kesiapan Prasyarat Dokumen Operasional", desc: "Verifikasi kelengkapan dokumen manajerial awal tahun.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "SK Pembagian Tugas & Dokumen KOSP lengkap.", score: 3 }
+            ],
+            T2: [
+                { dim: "Melaksanakan", title: "Observasi Kinerja & Supervisi Guru", desc: "Pelaksanaan observasi kelas dan bimbingan teknis pedagogik guru.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Supervisi akademik Semester I terlaksana 100%.", score: 3 },
+                { dim: "Melaksanakan", title: "Penguatan Komunitas Belajar (Kombel)", desc: "Aktivasi jadwal rutin Kombel internal sekolah untuk refleksi pembelajaran.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Kombel aktif berkumpul 2 minggu sekali.", score: 4 },
+                { dim: "Mengevaluasi", title: "Evaluasi Progres Capaian Program S1", desc: "Penilaian ketercapaian target RKT pertengahan tahun ajaran.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Target program Semester I tercapai 85%.", score: 3 },
+                { dim: "Mengendalikan", title: "Pengawasan Penyerapan Dana ARKAS T1", desc: "Pengendalian penggunaan anggaran BOS sesuai dengan perencanaan.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "LPJ BOS Tahap I selesai tepat waktu.", score: 3 }
+            ],
+            T3: [
+                { dim: "Mengendalikan", title: "Pengawasan TPPK & Iklim Aman/Inklusif", desc: "Pengawasan pos pengaduan perundungan, kekerasan, & keteraturan.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Posko TPPK aktif dan sosialisasi terlaksana.", score: 3 },
+                { dim: "Melaksanakan", title: "Pendampingan Kebinekaan & Karakter", desc: "Implementasi kegiatan kokurikuler P5 & penguatan karakter siswa.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Gelar karya P5 berjalan lancar.", score: 4 },
+                { dim: "Mengevaluasi", title: "Refleksi Dialogis Hasil Pemantauan", desc: "Umpan balik dialogis pengawas atas bukti fisik Drive triwulanan.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Catatan perbaikan pengawas telah ditindaklanjuti.", score: 3 },
+                { dim: "Meningkatkan", title: "Penyesuaian Strategi Benah Mutu", desc: "Revisi kecil/penyesuaian program berdasarkan kendala lapangan.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Strategi pendampingan guru disesuaikan.", score: 3 }
+            ],
+            T4: [
+                { dim: "Meningkatkan", title: "Diseminasi & Pengimbasan Praktik Baik", desc: "Berbagi praktik baik kepemimpinan pembelajaran di MKKS/Kombel.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Praktik baik dipresentasikan di forum MKKS.", score: 4 },
+                { dim: "Meningkatkan", title: "Laporan Perbaikan Mutu Berkelanjutan", desc: "Penyusunan dokumen rekapitulasi evaluasi & rekomendasi tahun depan.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Laporan tindak lanjut mutu tuntas disusun.", score: 4 },
+                { dim: "Mengevaluasi", title: "Verifikasi Komprehensif Bukti Fisik", desc: "Pemeriksaan akhir kelengkapan portofolio Drive 6M T1–T4.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Folder Drive terverifikasi lengkap.", score: 3 },
+                { dim: "Mengevaluasi", title: "Penetapan Predikat PKKS Akhir Tahun", desc: "Integrasi Praktik Kinerja 6M dan Perilaku Kerja BerAKHLAK.", driveLink: "https://drive.google.com/drive/folders/contoh-arsip", obs: "Predikat Kinerja Kepala Sekolah ditetapkan Baik.", score: 4 }
+            ]
+        };
+
+        let quarterData = {
+            T1: { items: JSON.parse(JSON.stringify(quarterPresets.T1)), feedback: "Pemetaan dan perencanaan Triwulan I berjalan lancar." },
+            T2: { items: JSON.parse(JSON.stringify(quarterPresets.T2)), feedback: "Supervisi akademik dan Kombel Triwulan II terlaksana baik." },
+            T3: { items: JSON.parse(JSON.stringify(quarterPresets.T3)), feedback: "Pengawasan TPPK dan iklim sekolah Triwulan III konsisten." },
+            T4: { items: JSON.parse(JSON.stringify(quarterPresets.T4)), feedback: "Pengimbasan dan penilaian PKKS Triwulan IV memenuhi target." }
+        };
+
+        const berakhlakItems = [
+            { key: "pelayanan", label: "Berorientasi Pelayanan", desc: "Memahami dan memenuhi kebutuhan warga sekolah" },
+            { key: "akuntabel", label: "Akuntabel", desc: "Melaksanakan tugas dengan jujur, bertanggung jawab, dan disiplin" },
+            { key: "kompeten", label: "Kompeten", desc: "Meningkatkan kompetensi diri dan membantu orang lain belajar" },
+            { key: "harmonis", label: "Harmonis", desc: "Saling peduli dan menghargai setiap perbedaan warga sekolah" },
+            { key: "loyal", label: "Loyal", desc: "Memegang teguh Pancasila, UUD 1945, dan menjaga nama baik" },
+            { key: "adaptif", label: "Adaptif", desc: "Cepat menyesuaikan diri dan berinovasi menghadapi perubahan" },
+            { key: "kolaboratif", label: "Kolaboratif", desc: "Membangun kerja sama yang sinergis dengan berbagai pihak" }
         ];
+
+        let berakhlakRatings = {};
+        berakhlakItems.forEach(i => berakhlakRatings[i.key] = "Sesuai Ekspektasi");
 
         let currentCapacity = 'sedang';
 
-        // Bank Bank Dialog TIRTA Dinamis Berdasarkan 5 Level Kapasitas
         const tirtaPresets = {
             srendah: [
-                {
-                    step: "T — Tujuan (Memetakan Dasar)",
-                    desc: "Pelatihan langsung dan pengenalan format dasar perencanaan.",
-                    pengawas: "Berdasarkan Rapor Pendidikan, sekolah kita masih memerlukan bimbingan dasar. Hari ini kita latih cara membaca indikator dan mengisi format dasar ya Pak/Bu.",
-                    ks: "Baik Bapak/Ibu Pengawas, kami siap diberikan bimbingan teknis tahap demi tahap."
-                },
-                {
-                    step: "I — Identifikasi (Kendala Teknis)",
-                    desc: "Menemukan hambatan operasional di satuan pendidikan.",
-                    pengawas: "Apa hambatan utama staf atau guru dalam menyusun dokumen administrasi?",
-                    ks: "Kami masih bingung cara mengunduh dan membaca data rapor pendidikan serta memindahkannya ke format RKT."
-                },
-                {
-                    step: "R — Rencana Aksi (Pelatihan Langsung)",
-                    desc: "Pengawas memberikan contoh riil dan melatih langsung.",
-                    pengawas: "Mari kita buka bersama laptopnya, saya contohkan cara pengisian langkah demi langkah.",
-                    ks: "Sangat jelas, kami langsung catat dan praktikkan bersama tim sekolah."
-                },
-                {
-                    step: "TA — Tanggung Jawab (Pendampingan Intensif)",
-                    desc: "Menetapkan jadwal bimbingan rutin lanjutan.",
-                    pengawas: "Minggu depan kita cek kembali progress pengisian dokumen dasarnya.",
-                    ks: "Siap, kami akan selesaikan dengan pendampingan lanjutan."
-                }
+                { step: "T — Tujuan (Memetakan Dasar)", desc: "Pelatihan langsung dan pengenalan format dasar perencanaan.", pengawas: "Berdasarkan Rapor Pendidikan, sekolah kita masih memerlukan bimbingan dasar. Hari ini kita latih cara membaca indikator dan mengisi format dasar ya Pak/Bu.", ks: "Baik Bapak/Ibu Pengawas, kami siap diberikan bimbingan teknis tahap demi tahap." },
+                { step: "I — Identifikasi (Kendala Teknis)", desc: "Menemukan hambatan operasional di satuan pendidikan.", pengawas: "Apa hambatan utama staf atau guru dalam menyusun dokumen administrasi?", ks: "Kami masih bingung cara mengunduh dan membaca data rapor pendidikan serta memindahkannya ke format RKT." },
+                { step: "R — Rencana Aksi (Pelatihan Langsung)", desc: "Pengawas memberikan contoh riil dan melatih langsung.", pengawas: "Mari kita buka bersama laptopnya, saya contohkan cara pengisian langkah demi langkah.", ks: "Sangat jelas, kami langsung catat dan praktikkan bersama tim sekolah." },
+                { step: "TA — Tanggung Jawab (Pendampingan Intensif)", desc: "Menetapkan jadwal bimbingan rutin lanjutan.", pengawas: "Minggu depan kita cek kembali progress pengisian dokumen dasarnya.", ks: "Siap, kami akan selesaikan dengan pendampingan lanjutan." }
             ],
             rendah: [
-                {
-                    step: "T — Tujuan (Mentoring & Pengampuan)",
-                    desc: "Menyepakati target perbaikan dokumen administrasi dan program.",
-                    pengawas: "Hari ini kita fokus menyelaraskan program sekolah dengan contoh best practice yang sudah disediakan.",
-                    ks: "Baik, kami butuh arahan dan contoh konkrit agar program sekolah lebih terarah."
-                },
-                {
-                    step: "I — Identifikasi (Analisis Hambatan)",
-                    desc: "Mengkaji kesenjangan pelaksanaan program.",
-                    pengawas: "Bagaimana pelaksanaan supervisi guru sejauh ini di sekolah Bapak/Ibu?",
-                    ks: "Supervisi baru berjalan separuh karena kepala sekolah merangkap tugas administrasi lain."
-                },
-                {
-                    step: "R — Rencana Aksi (Pemberian Template)",
-                    desc: "Menyediakan instrumen siap pakai dan jadwal mentoring.",
-                    pengawas: "Saya berikan template instrumen supervisi siap pakai. Silakan sesuaikan dengan jadwal guru.",
-                    ks: "Terima kasih, template ini sangat memudahkan kami."
-                },
-                {
-                    step: "TA — Tanggung Jawab (Kontrol Berkala)",
-                    desc: "Memastikan komitmen penyelesaian tugas.",
-                    pengawas: "Siapa yang akan memegang kendali operasional pelaksanaan supervisi ini?",
-                    ks: "Wakasek Kurikulum akan membantu saya mengawal pelaksanaannya."
-                }
+                { step: "T — Tujuan (Mentoring & Pengampuan)", desc: "Menyepakati target perbaikan dokumen administrasi dan program.", pengawas: "Hari ini kita fokus menyelaraskan program sekolah dengan contoh best practice yang sudah disediakan.", ks: "Baik, kami butuh arahan dan contoh konkrit agar program sekolah lebih terarah." },
+                { step: "I — Identifikasi (Analisis Hambatan)", desc: "Mengkaji kesenjangan pelaksanaan program.", pengawas: "Bagaimana pelaksanaan supervisi guru sejauh ini di sekolah Bapak/Ibu?", ks: "Supervisi baru berjalan separuh karena kepala sekolah merangkap tugas administrasi lain." },
+                { step: "R — Rencana Aksi (Pemberian Template)", desc: "Menyediakan instrumen siap pakai dan jadwal mentoring.", pengawas: "Saya berikan template instrumen supervisi siap pakai. Silakan sesuaikan dengan jadwal guru.", ks: "Terima kasih, template ini sangat memudahkan kami." },
+                { step: "TA — Tanggung Jawab (Kontrol Berkala)", desc: "Memastikan komitmen penyelesaian tugas.", pengawas: "Siapa yang akan memegang kendali operasional pelaksanaan supervisi ini?", ks: "Wakasek Kurikulum akan membantu saya mengawal pelaksanaannya." }
             ],
             sedang: [
-                {
-                    step: "T — Tujuan (Coaching Reflektif)",
-                    desc: "Menyepakati sasaran spesifik sesi diskusi bersama Kepala Sekolah.",
-                    pengawas: "Berdasarkan pemetaan Rapor Pendidikan, apa sasaran spesifik yang ingin dicapai dalam siklus pendampingan ini?",
-                    ks: "Saya ingin merumuskan strategi pembenahan numerasi yang terencana dan masuk ke dalam RKAS."
-                },
-                {
-                    step: "I — Identifikasi (Akar Masalah)",
-                    desc: "Memetakan kondisi riil dan akar masalah di lapangan.",
-                    pengawas: "Bagaimana pelaksanaan pembelajaran numerasi saat ini dan apa kendala evaluasinya?",
-                    ks: "Guru masih kesulitan mengaitkan materi dengan konteks nyata kehidupan sehari-hari siswa."
-                },
-                {
-                    step: "R — Rencana Aksi (Solusi Kombel)",
-                    desc: "Menyusun solusi kreatif melalui Komunitas Belajar.",
-                    pengawas: "Langkah pengendalian dan aksi nyata apa yang akan didorong melalui Kombel?",
-                    ks: "Fokus Kombel pada 'Numerasi Lintas Mapel' dengan pengawalan dari Wakasek Kurikulum."
-                },
-                {
-                    step: "TA — Tanggung Jawab (Komitmen Mutu)",
-                    desc: "Menentukan linimasa eksekusi dan peningkatan mutu berkelanjutan.",
-                    pengawas: "Kapan aksi ini dieksekusi dan bagaimana komitmen peningkatan mutunya?",
-                    ks: "Dimulai minggu depan dan dievaluasi secara berkala setiap bulan bersama pengawas."
-                }
+                { step: "T — Tujuan (Coaching Reflektif)", desc: "Menyepakati sasaran spesifik sesi diskusi bersama Kepala Sekolah.", pengawas: "Berdasarkan pemetaan Rapor Pendidikan, apa sasaran spesifik yang ingin dicapai dalam siklus pendampingan ini?", ks: "Saya ingin merumuskan strategi pembenahan numerasi yang terencana dan masuk ke dalam RKAS." },
+                { step: "I — Identifikasi (Akar Masalah)", desc: "Memetakan kondisi riil dan akar masalah di lapangan.", pengawas: "Bagaimana pelaksanaan pembelajaran numerasi saat ini dan apa kendala evaluasinya?", ks: "Guru masih kesulitan mengaitkan materi dengan konteks nyata kehidupan sehari-hari siswa." },
+                { step: "R — Rencana Aksi (Solusi Kombel)", desc: "Menyusun solusi kreatif melalui Komunitas Belajar.", pengawas: "Langkah pengendalian dan aksi nyata apa yang akan didorong melalui Kombel?", ks: "Fokus Kombel pada 'Numerasi Lintas Mapel' dengan pengawalan dari Wakasek Kurikulum." },
+                { step: "TA — Tanggung Jawab (Komitmen Mutu)", desc: "Menentukan linimasa eksekusi dan peningkatan mutu berkelanjutan.", pengawas: "Kapan aksi ini dieksekusi dan bagaimana komitmen peningkatan mutunya?", ks: "Dimulai minggu depan dan dievaluasi secara berkala setiap bulan bersama pengawas." }
             ],
             tinggi: [
-                {
-                    step: "T — Tujuan (Fasilitasi Kolaborasi)",
-                    desc: "Mengembangkan inovasi dan penguatan tim pengembang sekolah.",
-                    pengawas: "Sekolah Bapak/Ibu sudah mandiri. Apa inovasi strategis berikutnya yang ingin dikembangkan tim Kombel?",
-                    ks: "Kami ingin merancang proyek pembelajaran berbasis digital dan penguatan karakter berbasis kearifan lokal."
-                },
-                {
-                    step: "I — Identifikasi (Eksplorasi Potensi)",
-                    desc: "Mengeksplorasi sumber daya internal dan jejaring kolaborasi.",
-                    pengawas: "Sumber daya apa saja di sekolah yang dapat dimaksimalkan untuk mendukung inovasi tersebut?",
-                    ks: "Guru-guru muda kami sangat antusias, tinggal difasilitasi wadah berbagi praktik baik."
-                },
-                {
-                    step: "R — Rencana Aksi (Fasilitasi Jejaring)",
-                    desc: "Merancang forum diseminasi dan penguatan jejaring antar sekolah.",
-                    pengawas: "Bagaimana jika kita agendakan sesi lokakarya mini antar sekolah binaan?",
-                    ks: "Ide yang luar biasa, ini akan memotivasi guru untuk tampil berbagi."
-                },
-                {
-                    step: "TA — Tanggung Jawab (Kemandirian Program)",
-                    desc: "Menyerahkan kepemimpinan program penuh kepada tim sekolah.",
-                    pengawas: "Saya akan bertindak sebagai fasilitator pendukung pelaksanaan lokakarya tersebut.",
-                    ks: "Siap, kami susun proposal kegiatan dan laporkan progresnya segera."
-                }
+                { step: "T — Tujuan (Fasilitasi Kolaborasi)", desc: "Mengembangkan inovasi dan penguatan tim pengembang sekolah.", pengawas: "Sekolah Bapak/Ibu sudah mandiri. Apa inovasi strategis berikutnya yang ingin dikembangkan tim Kombel?", ks: "Kami ingin merancang proyek pembelajaran berbasis digital dan penguatan karakter berbasis kearifan lokal." },
+                { step: "I — Identifikasi (Eksplorasi Potensi)", desc: "Mengeksplorasi sumber daya internal dan jejaring kolaborasi.", pengawas: "Sumber daya apa saja di sekolah yang dapat dimaksimalkan untuk mendukung inovasi tersebut?", ks: "Guru-guru muda kami sangat antusias, tinggal difasilitasi wadah berbagi praktik baik." },
+                { step: "R — Rencana Aksi (Fasilitasi Jejaring)", desc: "Merancang forum diseminasi dan penguatan jejaring antar sekolah.", pengawas: "Bagaimana jika kita agendakan sesi lokakarya mini antar sekolah binaan?", ks: "Ide yang luar biasa, ini akan memotivasi guru untuk tampil berbagi." },
+                { step: "TA — Tanggung Jawab (Kemandirian Program)", desc: "Menyerahkan kepemimpinan program penuh kepada tim sekolah.", pengawas: "Saya akan bertindak sebagai fasilitator pendukung pelaksanaan lokakarya tersebut.", ks: "Siap, kami susun proposal kegiatan dan laporkan progresnya segera." }
             ],
             stinggi: [
-                {
-                    step: "T — Tujuan (Konsultasi Sejajar / Best Practice)",
-                    desc: "Mengukuhkan sekolah sebagai pusat keunggulan dan rujukan.",
-                    pengawas: "Mengingat capaian kinerja sudah sangat tinggi, bagaimana strategi diseminasi praktik baik sekolah ini ke tingkat kabupaten?",
-                    ks: "Kami merencanakan penerbitan artikel/modul digital dan membuka pintu studi tiru bagi sekolah lain."
-                },
-                {
-                    step: "I — Identifikasi (Pengembangan Berkelanjutan)",
-                    desc: "Merefleksikan dampak jangka panjang terhadap ekosistem pendidikan.",
-                    pengawas: "Apa dampak terukur dari inovasi kepemimpinan pembelajaran yang telah diterapkan?",
-                    ks: "Kemandirian siswa meningkat dan budaya refleksi guru sudah membudaya di Kombel sekolah."
-                },
-                {
-                    step: "R — Rencana Aksi (Kemitraan Strategis)",
-                    desc: "Menyusun peta jalan kemutakhiran kepemimpinan jangka panjang.",
-                    pengawas: "Mari kita rumuskan roadmap pengembangan sekolah rujukan untuk tahun ajaran berikutnya.",
-                    ks: "Kami akan susun dokumen tersebut sebagai bagian dari portofolio pengimbasan."
-                },
-                {
-                    step: "TA — Tanggung Jawab (Kepemimpinan Transformatif)",
-                    desc: "Memastikan keberlanjutan budaya mutu mandiri.",
-                    pengawas: "Terus pertahankan kepemimpinan transformatif ini. Saya siap membersamai sebagai mitra diskusi strategis.",
-                    ks: "Terima kasih atas pendampingan dan arahan transformatifnya selama ini."
-                }
+                { step: "T — Tujuan (Konsultasi Sejajar / Best Practice)", desc: "Mengukuhkan sekolah sebagai pusat keunggulan dan rujukan.", pengawas: "Mengingat capaian kinerja sudah sangat tinggi, bagaimana strategi diseminasi praktik baik sekolah ini ke tingkat kabupaten?", ks: "Kami merencanakan penerbitan artikel/modul digital dan membuka pintu studi tiru bagi sekolah lain." },
+                { step: "I — Identifikasi (Pengembangan Berkelanjutan)", desc: "Merefleksikan dampak jangka panjang terhadap ekosistem pendidikan.", pengawas: "Apa dampak terukur dari inovasi kepemimpinan pembelajaran yang telah diterapkan?", ks: "Kemandirian siswa meningkat dan budaya refleksi guru sudah membudaya di Kombel sekolah." },
+                { step: "R — Rencana Aksi (Kemitraan Strategis)", desc: "Menyusun peta jalan kemutakhiran kepemimpinan jangka panjang.", pengawas: "Mari kita rumuskan roadmap pengembangan sekolah rujukan untuk tahun ajaran berikutnya.", ks: "Kami akan susun dokumen tersebut sebagai bagian dari portofolio pengimbasan." },
+                { step: "TA — Tanggung Jawab (Kepemimpinan Transformatif)", desc: "Memastikan keberlanjutan budaya mutu mandiri.", pengawas: "Terus pertahankan kepemimpinan transformatif ini. Saya siap membersamai sebagai mitra diskusi strategis.", ks: "Terima kasih atas pendampingan dan arahan transformatifnya selama ini." }
             ]
         };
 
         let tirtaData = JSON.parse(JSON.stringify(tirtaPresets.sedang));
 
         let pbdData = [
-            {
-                aspek: "Kemampuan Numerasi",
-                dim6m: "Memetakan & Merencanakan",
-                identifikasi: "Skor Rapor Pendidikan pada aspek kompetensi numerasi masih memerlukan peningkatan.",
-                refleksi: "Pembelajaran matematika cenderung abstrak dan kurang kontekstual dengan kehidupan sehari-hari siswa.",
-                benahi: "Pelatihan internal guru melalui Kombel tentang metode Gasing / Numerasi Lintas Mapel serta pengadaan buku pengayaan literasi-numerasi.",
-                anggaran: "Sumber Dana BOS Reguler (Komponen Pengembangan Perpustakaan & Kegiatan Pembelajaran)."
-            },
-            {
-                aspek: "Iklim Keamanan Satuan Pendidikan",
-                dim6m: "Mengendalikan & Meningkatkan",
-                identifikasi: "Perlu penguatan pencegahan perundungan (bullying) dan kekerasan di lingkungan satuan pendidikan.",
-                refleksi: "Kurikulum pengawasan anti-kekerasan belum disosialisasikan secara masif kepada seluruh orang tua dan siswa.",
-                benahi: "Pembentukan posko pengaduan TPPK yang ramah anak, sosialisasi anti-perundungan, dan penguatan modul Projek Penguatan Profil Pelajar Pancasila (P5).",
-                anggaran: "Sumber Dana BOS Reguler / Anggaran Kegiatan Kesiswaan."
-            }
+            { aspek: "Kemampuan Numerasi", dim6m: "Memetakan", identifikasi: "Skor Rapor Pendidikan pada aspek kompetensi numerasi masih memerlukan peningkatan.", refleksi: "Pembelajaran matematika cenderung abstrak dan kurang kontekstual dengan kehidupan sehari-hari siswa.", benahi: "Pelatihan internal guru melalui Kombel tentang metode Gasing / Numerasi Lintas Mapel serta pengadaan buku pengayaan literasi-numerasi.", anggaran: "Sumber Dana BOS Reguler (Komponen Pengembangan Perpustakaan & Kegiatan Pembelajaran)." },
+            { aspek: "Iklim Keamanan Satuan Pendidikan", dim6m: "Mengendalikan", identifikasi: "Perlu penguatan pencegahan perundungan (bullying) dan kekerasan di lingkungan satuan pendidikan.", refleksi: "Kurikulum pengawasan anti-kekerasan belum disosialisasikan secara masif kepada seluruh orang tua dan siswa.", benahi: "Pembentukan posko pengaduan TPPK yang ramah anak, sosialisasi anti-perundungan, dan penguatan modul P5.", anggaran: "Sumber Dana BOS Reguler / Anggaran Kegiatan Kesiswaan." }
         ];
 
-        const raporOptions = [
-            "Kemampuan Numerasi",
-            "Karakter",
-            "Kemampuan Literasi",
-            "Kualitas Pembelajaran",
-            "Iklim Kebinekaan",
-            "Iklim Keamanan Satuan Pendidikan"
-        ];
-
-        function renderTable() {
-            const tbody = document.getElementById('table-body');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            monevData.forEach((item, index) => {
-                let dimOptions = '';
-                dim6MList.forEach(d => {
-                    dimOptions += `<option value="${d}" ${item.dim === d ? 'selected' : ''}>${d}</option>`;
-                });
-
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50";
-                tr.innerHTML = `
-                    <td class="p-2 border border-slate-300 font-bold text-center align-top">${index + 1}</td>
-                    <td class="p-2 border border-slate-300 align-top">
-                        <select onchange="window.updateData(${index}, 'dim', this.value)" class="w-full p-1 border border-slate-300 rounded font-bold text-brand-800 text-[11px] bg-white cursor-pointer">
-                            ${dimOptions}
-                        </select>
-                    </td>
-                    <td class="p-2 border border-slate-300 align-top">
-                        <input type="text" value="${item.title}" oninput="window.updateData(${index}, 'title', this.value)" class="w-full font-bold text-slate-900 bg-transparent border-b border-dashed border-slate-300 text-xs mb-1">
-                        <textarea oninput="window.updateData(${index}, 'desc', this.value)" class="w-full text-slate-500 bg-transparent text-[11px] resize-none" rows="2">${item.desc}</textarea>
-                    </td>
-                    <td class="p-2 border border-slate-300 align-top">
-                        <div class="space-y-1">
-                            <input type="text" value="${item.driveLink || ''}" oninput="window.updateData(${index}, 'driveLink', this.value)" placeholder="Tempel tautan Google Drive..." class="w-full p-1.5 border border-slate-300 rounded text-[11px] bg-white">
-                            <a href="${item.driveLink || '#'}" target="_blank" class="text-[10px] text-brand-600 hover:underline font-semibold block">🔗 Buka Tautan Drive</a>
-                        </div>
-                    </td>
-                    <td class="p-2 border border-slate-300 align-top">
-                        <textarea oninput="window.updateData(${index}, 'obs', this.value)" class="w-full p-1.5 border border-slate-300 rounded text-xs" rows="2">${item.obs}</textarea>
-                    </td>
-                    <td class="p-2 border border-slate-300 align-top text-center">
-                        <select onchange="window.updateData(${index}, 'score', parseInt(this.value));" class="w-full p-1 border border-slate-300 rounded font-semibold text-brand-700 text-xs">
-                            <option value="1" ${item.score === 1 ? 'selected' : ''}>1 - Needs</option>
-                            <option value="2" ${item.score === 2 ? 'selected' : ''}>2 - Fair</option>
-                            <option value="3" ${item.score === 3 ? 'selected' : ''}>3 - Good</option>
-                            <option value="4" ${item.score === 4 ? 'selected' : ''}>4 - Excellent</option>
-                        </select>
-                    </td>
-                    <td class="p-2 border border-slate-300 align-top text-center no-print">
-                        <button type="button" onclick="window.deleteRow(${index})" class="text-red-500 hover:text-red-700 font-bold p-1 cursor-pointer" title="Hapus Baris">🗑️</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-            calculateScore();
-        }
-
-        function updateData(index, field, value) {
-            monevData[index][field] = value;
-            if(field === 'score') calculateScore();
-        }
-
-        function addRow() {
-            monevData.push({
-                dim: "Melaksanakan",
-                title: "Indikator Baru 6M",
-                desc: "Deskripsi bukti fisik verifikasi...",
-                driveLink: "",
-                obs: "Catatan observasi pengawas...",
-                score: 3,
-                rec: "Rekomendasi tindak lanjut..."
-            });
-            renderTable();
-        }
-
-        function deleteRow(index) {
-            if(monevData.length <= 1) {
-                alert("Minimal harus ada 1 indikator evaluasi.");
-                return;
-            }
-            monevData.splice(index, 1);
-            renderTable();
-        }
-
-        function renderTirta() {
-            const container = document.getElementById('tirta-container');
-            if(!container) return;
-            container.innerHTML = '';
-            tirtaData.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm";
-                card.innerHTML = `
-                    <div class="p-3 bg-slate-100 flex justify-between items-center font-bold text-slate-800 text-sm">
-                        <div class="flex items-center gap-2">
-                            <span class="text-brand-700 font-bold">Edit Tahap ${index + 1}:</span>
-                            <input type="text" value="${item.step}" oninput="window.updateTirta(${index}, 'step', this.value)" class="bg-white border border-slate-300 rounded font-bold text-xs px-2 py-1 w-80 focus:ring-1 focus:ring-brand-500 focus:outline-none" placeholder="Nama Tahap & 6M">
-                        </div>
-                        <div class="flex items-center gap-2 no-print">
-                            <button type="button" onclick="window.saveTirtaData()" class="text-brand-700 hover:text-brand-900 text-xs px-2.5 py-1 bg-white rounded border border-brand-200 shadow-sm transition font-semibold cursor-pointer" title="Simpan Logsheet">💾 Simpan</button>
-                            <button type="button" onclick="window.deleteTirtaRow(${index})" class="text-red-600 hover:text-red-800 text-xs px-2.5 py-1 bg-white rounded border border-red-200 shadow-sm transition font-semibold cursor-pointer" title="Hapus Tahap">🗑️ Hapus</button>
-                        </div>
-                    </div>
-                    <div class="p-4 space-y-3 text-xs">
-                        <div>
-                            <span class="font-semibold text-slate-600 block mb-1">Edit Fokus / Integrasi 6M:</span>
-                            <input type="text" value="${item.desc}" oninput="window.updateTirta(${index}, 'desc', this.value)" class="w-full p-2 border border-slate-300 rounded bg-white text-xs focus:ring-1 focus:ring-brand-500 focus:outline-none">
-                        </div>
-                        <div class="bg-blue-50 p-3 rounded border border-blue-200 space-y-1">
-                            <strong class="text-blue-900 block">Edit Pertanyaan Pengawas (P):</strong>
-                            <textarea oninput="window.updateTirta(${index}, 'pengawas', this.value)" class="w-full p-2 border border-blue-300 rounded bg-white text-xs focus:ring-1 focus:ring-blue-500 focus:outline-none" rows="2">${item.pengawas}</textarea>
-                        </div>
-                        <div class="bg-emerald-50 p-3 rounded border border-emerald-200 space-y-1">
-                            <strong class="text-emerald-900 block">Edit Respon / Komitmen Kepala Sekolah (KS):</strong>
-                            <textarea oninput="window.updateTirta(${index}, 'ks', this.value)" class="w-full p-2 border border-emerald-300 rounded bg-white text-xs focus:ring-1 focus:ring-emerald-500 focus:outline-none" rows="2">${item.ks}</textarea>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function updateTirta(index, field, value) {
-            tirtaData[index][field] = value;
-        }
-
-        function addTirtaRow() {
-            tirtaData.push({
-                step: "Tahap Lanjutan (6M)",
-                desc: "Fokus diskusi 6M lanjutan...",
-                pengawas: "Pertanyaan pemantik pengawas...",
-                ks: "Respon atau komitmen kepala sekolah..."
-            });
-            renderTirta();
-        }
-
-        function deleteTirtaRow(index) {
-            if(tirtaData.length <= 1) {
-                alert("Minimal harus ada 1 tahapan dialog TIRTA.");
-                return;
-            }
-            tirtaData.splice(index, 1);
-            renderTirta();
-        }
-
-        function saveTirtaData() {
-            localStorage.setItem('monev_tirta_data', JSON.stringify(tirtaData));
-            alert("Logsheet percakapan TIRTA & 6M berhasil disimpan ke penyimpanan lokal browser!");
-        }
-
-        function renderPbd() {
-            const container = document.getElementById('pbd-container');
-            if(!container) return;
-            container.innerHTML = '';
-            pbdData.forEach((item, index) => {
-                let optionsHtml = '';
-                raporOptions.forEach(opt => {
-                    const selected = item.aspek === opt ? 'selected' : '';
-                    optionsHtml += `<option value="${opt}" ${selected}>${opt}</option>`;
-                });
-
-                let dimOptions = '';
-                dim6MList.forEach(d => {
-                    dimOptions += `<option value="${d}" ${item.dim6m === d ? 'selected' : ''}>${d}</option>`;
-                });
-
-                const card = document.createElement('div');
-                card.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm";
-                card.innerHTML = `
-                    <div class="p-3 bg-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 font-bold text-slate-800 text-sm">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="text-brand-700 font-bold">Aksi PBD ${index + 1}:</span>
-                            <select onchange="window.updatePbd(${index}, 'aspek', this.value)" class="bg-white border border-slate-300 rounded font-bold text-xs px-2 py-1.5 w-60 text-brand-800 cursor-pointer">
-                                ${optionsHtml}
-                            </select>
-                            <select onchange="window.updatePbd(${index}, 'dim6m', this.value)" class="bg-white border border-slate-300 rounded font-bold text-xs px-2 py-1.5 w-40 text-brand-700 cursor-pointer">
-                                ${dimOptions}
-                            </select>
-                        </div>
-                        <div class="flex items-center gap-2 no-print">
-                            <button type="button" onclick="window.savePbdData()" class="text-brand-700 hover:text-brand-900 text-xs px-2.5 py-1 bg-white rounded border border-brand-200 shadow-sm transition font-semibold cursor-pointer" title="Simpan Aksi Ini">💾 Simpan</button>
-                            <button type="button" onclick="window.deletePbdRow(${index})" class="text-red-600 hover:text-red-800 text-xs px-2.5 py-1 bg-white rounded border border-red-200 shadow-sm transition font-semibold cursor-pointer" title="Hapus Aksi">🗑️ Hapus</button>
-                        </div>
-                    </div>
-                    <div class="p-4 space-y-3 text-xs">
-                        <div class="bg-red-50 p-3 rounded border border-red-200 space-y-1">
-                            <strong class="text-red-900 block">1. Memetakan / Identifikasi (Akar Masalah Rapor Pendidikan):</strong>
-                            <textarea oninput="window.updatePbd(${index}, 'identifikasi', this.value)" class="w-full p-2 border border-red-300 rounded bg-white text-xs focus:ring-1 focus:ring-red-500 focus:outline-none" rows="2">${item.identifikasi}</textarea>
-                        </div>
-                        <div class="bg-amber-50 p-3 rounded border border-amber-200 space-y-1">
-                            <strong class="text-amber-900 block">2. Merencanakan & Mengevaluasi (Hasil Diskusi Pengawas Bersama KS):</strong>
-                            <textarea oninput="window.updatePbd(${index}, 'refleksi', this.value)" class="w-full p-2 border border-amber-300 rounded bg-white text-xs focus:ring-1 focus:ring-amber-500 focus:outline-none" rows="2">${item.refleksi}</textarea>
-                        </div>
-                        <div class="bg-emerald-50 p-3 rounded border border-emerald-200 space-y-1">
-                            <strong class="text-emerald-900 block">3. Melaksanakan & Meningkatkan (Program Benah Mutu RKT):</strong>
-                            <textarea oninput="window.updatePbd(${index}, 'benahi', this.value)" class="w-full p-2 border border-emerald-300 rounded bg-white text-xs focus:ring-1 focus:ring-emerald-500 focus:outline-none" rows="2">${item.benahi}</textarea>
-                        </div>
-                        <div class="bg-blue-50 p-3 rounded border border-blue-200 space-y-1">
-                            <strong class="text-blue-900 block">4. Mengendalikan (Sumber Pendanaan / Rencana Anggaran ARKAS):</strong>
-                            <input type="text" value="${item.anggaran}" oninput="window.updatePbd(${index}, 'anggaran', this.value)" class="w-full p-2 border border-blue-300 rounded bg-white text-xs focus:ring-1 focus:ring-blue-500 focus:outline-none">
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function updatePbd(index, field, value) {
-            pbdData[index][field] = value;
-        }
-
-        function addPbdRow() {
-            pbdData.push({
-                aspek: "Kemampuan Literasi",
-                dim6m: "Merencanakan",
-                identifikasi: "Deskripsi temuan akar masalah Rapor Pendidikan...",
-                refleksi: "Hasil refleksi bersama kepala sekolah...",
-                benahi: "Rencana program benah mutu untuk RKT...",
-                anggaran: "Sumber dana atau estimasi anggaran ARKAS..."
-            });
-            renderPbd();
-        }
-
-        function deletePbdRow(index) {
-            if(pbdData.length <= 1) {
-                alert("Minimal harus ada 1 rekapitulasi aksi PBD.");
-                return;
-            }
-            pbdData.splice(index, 1);
-            renderPbd();
-        }
-
-        function savePbdData() {
-            localStorage.setItem('monev_pbd_data', JSON.stringify(pbdData));
-            alert("Rekapitulasi Aksi PBD & 6M berhasil disimpan ke penyimpanan lokal browser!");
-        }
-
-        function exportPbdPDF() {
-            const element = document.getElementById('printable-area-pbd');
-            const opt = {
-                margin: 0.5,
-                filename: 'Rekapitulasi_Aksi_PBD_6M.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().from(element).set(opt).save();
-        }
-
-        function exportPbdWord() {
-            let htmlContent = `
-                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-                <head><meta charset='utf-8'><title>Rekap Aksi PBD 6M</title></head>
-                <body style='font-family: Arial, sans-serif;'>
-                    <h2 style='text-align: center;'>REKAPITULASI AKSI PBD BERBASIS 6M & RKAS</h2>
-                    <p><strong>Satuan Pendidikan:</strong> SMP Negeri 1 Cendekia</p>
-                    <hr>
-            `;
-
-            pbdData.forEach((item, idx) => {
-                htmlContent += `
-                    <h3>${idx + 1}. Indikator: ${item.aspek} (Dimensi 6M: ${item.dim6m})</h3>
-                    <p><strong>1. Memetakan / Identifikasi:</strong><br>${item.identifikasi}</p>
-                    <p><strong>2. Merencanakan & Mengevaluasi:</strong><br>${item.refleksi}</p>
-                    <p><strong>3. Melaksanakan & Meningkatkan:</strong><br>${item.benahi}</p>
-                    <p><strong>4. Mengendalikan (ARKAS):</strong><br>${item.anggaran}</p>
-                    <hr>
-                `;
-            });
-
-            htmlContent += `
-                    <br><br>
-                    <table style='width:100%; text-align:center;'>
-                        <tr>
-                            <td>Mengetahui,<br>Kepala Sekolah Binaan<br><br><br><strong>Dra. Hj. Siti Rahmah, M.Pd.</strong></td>
-                            <td>Garut, 2026<br>Pengawas Mutu Pendidikan,<br><br><br><strong>Ida Faridlah</strong></td>
-                        </tr>
-                    </table>
-                </body>
-                </html>
-            `;
-
-            const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Rekapitulasi_Aksi_PBD_6M.doc';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-
-        function saveData() {
-            localStorage.setItem('monev_ks_data_6m', JSON.stringify(monevData));
-            alert("Data instrumen Monev 6M berhasil disimpan ke penyimpanan lokal browser!");
-        }
-
-        function loadSavedData() {
-            const savedMonev = localStorage.getItem('monev_ks_data_6m');
-            if(savedMonev) { try { monevData = JSON.parse(savedMonev); } catch(e) {} }
-            const savedTirta = localStorage.getItem('monev_tirta_data');
-            if(savedTirta) { try { tirtaData = JSON.parse(savedTirta); } catch(e) {} }
-            const savedPbd = localStorage.getItem('monev_pbd_data');
-            if(savedPbd) { try { pbdData = JSON.parse(savedPbd); } catch(e) {} }
-        }
+        const raporOptions = ["Kemampuan Numerasi", "Karakter", "Kemampuan Literasi", "Kualitas Pembelajaran", "Iklim Kebinekaan", "Iklim Keamanan Satuan Pendidikan"];
 
         function switchTab(tabId) {
             const tabs = ['dashboard', 'komparasi', 'instrumen', 'tirta', 'pbd'];
             tabs.forEach(t => {
-                const contentEl = document.getElementById(`tab-${t}`);
-                if(contentEl) contentEl.classList.add('hidden');
-
-                const navBtn = document.getElementById(`nav-${t}`);
-                if (navBtn) {
-                    navBtn.className = "px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition cursor-pointer";
-                }
-
-                const mobBtn = document.getElementById(`mob-${t}`);
-                if (mobBtn) {
-                    mobBtn.className = "px-2.5 py-1.5 rounded text-slate-300 hover:text-white font-medium";
-                }
+                const el = document.getElementById(`tab-${t}`);
+                if (el) el.classList.add('hidden');
+                const btn = document.getElementById(`nav-${t}`);
+                if (btn) btn.className = "px-3 py-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition cursor-pointer";
+                const mob = document.getElementById(`mob-${t}`);
+                if (mob) mob.className = "px-2.5 py-1.5 rounded text-slate-300 hover:text-white font-medium";
             });
 
             const activeContent = document.getElementById(`tab-${tabId}`);
-            if(activeContent) activeContent.classList.remove('hidden');
+            if (activeContent) activeContent.classList.remove('hidden');
 
             const activeNav = document.getElementById(`nav-${tabId}`);
-            if (activeNav) {
-                activeNav.className = "px-3 py-2 rounded-md bg-brand-700 text-white transition cursor-pointer";
-            }
+            if (activeNav) activeNav.className = "px-3 py-2 rounded-md bg-brand-700 text-white transition cursor-pointer";
 
             const activeMob = document.getElementById(`mob-${tabId}`);
-            if (activeMob) {
-                activeMob.className = "px-2.5 py-1.5 rounded text-white bg-brand-700 font-medium";
-            }
+            if (activeMob) activeMob.className = "px-2.5 py-1.5 rounded text-white bg-brand-700 font-medium";
 
-            if (tabId === 'instrumen') {
-                setTimeout(initOrUpdateChart, 100);
-            }
+            if (tabId === 'instrumen') setTimeout(updateTrendChart, 100);
         }
 
         function showCycleDetail(step) {
@@ -977,276 +583,548 @@
             };
             for (let i = 1; i <= 6; i++) {
                 const btn = document.getElementById(`cycle-btn-${i}`);
-                if(btn) {
+                if (btn) {
                     btn.className = i === step ? "p-3 rounded-lg border-2 border-brand-500 bg-brand-50 text-left font-bold text-xs cursor-pointer text-brand-900" : "p-3 rounded-lg border border-slate-200 bg-white text-left font-medium text-xs cursor-pointer text-slate-700";
                 }
             }
             const detailBox = document.getElementById('cycle-detail-box');
-            if(detailBox) detailBox.innerHTML = cycleDetails[step];
+            if (detailBox) detailBox.innerHTML = cycleDetails[step];
         }
 
         function toggleComparison(mode) {
             const colAsn = document.getElementById('col-asn');
             const colNonAsn = document.getElementById('col-nonasn');
-            if(!colAsn || !colNonAsn) return;
+            if (!colAsn || !colNonAsn) return;
             if (mode === 'all') { colAsn.classList.remove('hidden'); colNonAsn.classList.remove('hidden'); }
             else if (mode === 'asn') { colAsn.classList.remove('hidden'); colNonAsn.classList.add('hidden'); }
             else if (mode === 'nonasn') { colAsn.classList.add('hidden'); colNonAsn.classList.remove('hidden'); }
         }
 
-        function calculateScore() {
-            if(monevData.length === 0) return;
-            const sum = monevData.reduce((acc, curr) => acc + curr.score, 0);
-            const avg = (sum / monevData.length).toFixed(2);
+        function changeQuarter(newQ) {
+            currentQuarter = newQ;
+            const labels = { 
+                T1: "Triwulan I (Pemetaan & Perencanaan)", 
+                T2: "Triwulan II (Pelaksanaan & Supervisi)", 
+                T3: "Triwulan III (Pengawasan & Iklim)", 
+                T4: "Triwulan IV (Diseminasi & PKKS Final)" 
+            };
+            document.getElementById('current-q-label').innerText = labels[newQ];
             
-            const totalScoreEl = document.getElementById('total-score');
-            if(totalScoreEl) totalScoreEl.innerText = avg;
+            const pkksSec = document.getElementById('pkks-final-section');
+            if (newQ === 'T4') {
+                pkksSec.classList.remove('hidden');
+                calculateFinalPKKS();
+            } else {
+                pkksSec.classList.add('hidden');
+            }
 
+            document.getElementById('feedback-qualitative').value = quarterData[currentQuarter].feedback || '';
+            renderTable();
+        }
+
+        function loadQuarterPreset() {
+            if (confirm(`Muat ulang susunan indikator standar khas untuk ${currentQuarter}? (Perubahan manual pada periode ini akan diperbarui)`)) {
+                if (quarterPresets[currentQuarter]) {
+                    quarterData[currentQuarter].items = JSON.parse(JSON.stringify(quarterPresets[currentQuarter]));
+                    renderTable();
+                    alert(`Preset indikator ${currentQuarter} berhasil dimuat!`);
+                }
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const currentItems = quarterData[currentQuarter].items;
+
+            currentItems.forEach((item, index) => {
+                let dimOptions = '';
+                dim6MList.forEach(d => {
+                    dimOptions += `<option value="${d}" ${item.dim === d ? 'selected' : ''}>${d}</option>`;
+                });
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50";
+                tr.innerHTML = `
+                    <td class="p-2 border border-slate-300 font-bold text-center align-top">${index + 1}</td>
+                    <td class="p-2 border border-slate-300 align-top">
+                        <select onchange="window.updateRowData(${index}, 'dim', this.value)" class="w-full p-1 border border-slate-300 rounded font-bold text-brand-800 text-[11px] bg-white cursor-pointer">
+                            ${dimOptions}
+                        </select>
+                    </td>
+                    <td class="p-2 border border-slate-300 align-top">
+                        <input type="text" value="${item.title}" oninput="window.updateRowData(${index}, 'title', this.value)" class="w-full font-bold text-slate-900 bg-transparent border-b border-dashed border-slate-300 text-xs mb-1">
+                        <textarea oninput="window.updateRowData(${index}, 'desc', this.value)" class="w-full text-slate-500 bg-transparent text-[11px] resize-none" rows="2">${item.desc}</textarea>
+                    </td>
+                    <td class="p-2 border border-slate-300 align-top">
+                        <div class="space-y-1">
+                            <input type="text" value="${item.driveLink || ''}" oninput="window.updateRowData(${index}, 'driveLink', this.value)" placeholder="Tempel tautan Drive..." class="w-full p-1.5 border border-slate-300 rounded text-[11px] bg-white">
+                            <a href="${item.driveLink || '#'}" target="_blank" class="text-[10px] text-brand-600 hover:underline font-semibold block">🔗 Buka Tautan Drive</a>
+                        </div>
+                    </td>
+                    <td class="p-2 border border-slate-300 align-top">
+                        <textarea oninput="window.updateRowData(${index}, 'obs', this.value)" class="w-full p-1.5 border border-slate-300 rounded text-xs" rows="2">${item.obs}</textarea>
+                    </td>
+                    <td class="p-2 border border-slate-300 align-top text-center">
+                        <select onchange="window.updateRowData(${index}, 'score', parseInt(this.value))" class="w-full p-1 border border-slate-300 rounded font-semibold text-brand-700 text-xs">
+                            <option value="1" ${item.score === 1 ? 'selected' : ''}>1 - Needs</option>
+                            <option value="2" ${item.score === 2 ? 'selected' : ''}>2 - Fair</option>
+                            <option value="3" ${item.score === 3 ? 'selected' : ''}>3 - Good</option>
+                            <option value="4" ${item.score === 4 ? 'selected' : ''}>4 - Excellent</option>
+                        </select>
+                    </td>
+                    <td class="p-2 border border-slate-300 align-top text-center no-print">
+                        <button type="button" onclick="window.deleteRow(${index})" class="text-red-500 hover:text-red-700 font-bold p-1 cursor-pointer">🗑️</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            calculateQuarterScore();
+        }
+
+        function updateRowData(index, field, value) {
+            quarterData[currentQuarter].items[index][field] = value;
+            if (field === 'score') calculateQuarterScore();
+        }
+
+        function addRow() {
+            quarterData[currentQuarter].items.push({
+                dim: "Melaksanakan",
+                title: "Indikator Kinerja Baru",
+                desc: "Deskripsi indikator dan bukti fisik...",
+                driveLink: "",
+                obs: "Catatan hasil observasi...",
+                score: 3
+            });
+            renderTable();
+        }
+
+        function deleteRow(index) {
+            if (quarterData[currentQuarter].items.length <= 1) {
+                alert("Minimal harus ada 1 indikator.");
+                return;
+            }
+            quarterData[currentQuarter].items.splice(index, 1);
+            renderTable();
+        }
+
+        function copyFromPreviousQuarter() {
+            const prevMap = { T2: "T1", T3: "T2", T4: "T3" };
+            const prevKey = prevMap[currentQuarter];
+            if (!prevKey) {
+                alert("Triwulan I adalah periode awal.");
+                return;
+            }
+            if (confirm(`Salin indikator dari ${prevKey} ke ${currentQuarter}?`)) {
+                quarterData[currentQuarter].items = JSON.parse(JSON.stringify(quarterData[prevKey].items));
+                renderTable();
+                alert(`Data berhasil disalin dari ${prevKey}!`);
+            }
+        }
+
+        function calculateQuarterScore() {
+            const items = quarterData[currentQuarter].items;
+            if (items.length === 0) return;
+            const sum = items.reduce((acc, curr) => acc + curr.score, 0);
+            const avg = (sum / items.length).toFixed(2);
+
+            document.getElementById('total-score').innerText = avg;
             const scoreStatus = document.getElementById('score-status');
             const predikatLabel = document.getElementById('predikat-label');
 
+            let ratingText = "Sesuai Ekspektasi";
             if (avg >= 3.5) {
-                if(scoreStatus) scoreStatus.innerText = "Kategori: Sangat Baik (Excellent)";
-                if(predikatLabel) predikatLabel.innerText = "Mewujudkan Ekspektasi";
+                scoreStatus.innerText = "Kategori: Sangat Baik";
+                ratingText = "Di Atas Ekspektasi";
             } else if (avg >= 2.8) {
-                if(scoreStatus) scoreStatus.innerText = "Kategori: Baik (Good)";
-                if(predikatLabel) predikatLabel.innerText = "Sesuai Ekspektasi";
+                scoreStatus.innerText = "Kategori: Baik";
+                ratingText = "Sesuai Ekspektasi";
             } else if (avg >= 2.0) {
-                if(scoreStatus) scoreStatus.innerText = "Kategori: Cukup (Fair)";
-                if(predikatLabel) predikatLabel.innerText = "Butuh Perbaikan";
+                scoreStatus.innerText = "Kategori: Cukup";
+                ratingText = "Butuh Perbaikan";
             } else {
-                if(scoreStatus) scoreStatus.innerText = "Kategori: Kurang (Needs Improvement)";
-                if(predikatLabel) predikatLabel.innerText = "Di Bawah Ekspektasi";
+                scoreStatus.innerText = "Kategori: Kurang";
+                ratingText = "Di Bawah Ekspektasi";
             }
-            initOrUpdateChart();
+            predikatLabel.innerText = ratingText;
+
+            updateTrendChart();
+            if (currentQuarter === 'T4') calculateFinalPKKS();
         }
 
-        function initOrUpdateChart() {
-            const ctx = document.getElementById('scoreChart');
-            if (!ctx) return;
-            const dataValues = monevData.map(item => item.score);
-            const labels = monevData.map((item) => `${item.dim}`);
+        function updateTrendChart() {
+            const getAvg = (qKey) => {
+                const arr = quarterData[qKey].items;
+                if (!arr || arr.length === 0) return 0;
+                return (arr.reduce((a, b) => a + b.score, 0) / arr.length).toFixed(2);
+            };
 
-            if (scoreChartInstance) {
-                scoreChartInstance.data.labels = labels;
-                scoreChartInstance.data.datasets[0].data = dataValues;
-                scoreChartInstance.update();
+            const dataScores = [getAvg('T1'), getAvg('T2'), getAvg('T3'), getAvg('T4')];
+            const ctx = document.getElementById('trendChart');
+            if (!ctx) return;
+
+            if (trendChartInstance) {
+                trendChartInstance.data.datasets[0].data = dataScores;
+                trendChartInstance.update();
             } else {
-                scoreChartInstance = new Chart(ctx, {
-                    type: 'radar',
+                trendChartInstance = new Chart(ctx, {
+                    type: 'line',
                     data: {
-                        labels: labels,
+                        labels: ['Triwulan I', 'Triwulan II', 'Triwulan III', 'Triwulan IV'],
                         datasets: [{
-                            label: 'Skala Kinerja 6M',
-                            data: dataValues,
-                            backgroundColor: 'rgba(2, 132, 199, 0.2)',
-                            borderColor: 'rgba(2, 132, 199, 1)',
-                            borderWidth: 2
+                            label: 'Tren Skala 6M',
+                            data: dataScores,
+                            borderColor: '#0284c7',
+                            backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                            fill: true,
+                            tension: 0.3,
+                            borderWidth: 2,
+                            pointRadius: 4
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        scales: { r: { min: 0, max: 4, ticks: { stepSize: 1 } } },
+                        scales: { y: { min: 1, max: 4, ticks: { stepSize: 1 } } },
                         plugins: { legend: { display: false } }
                     }
                 });
             }
         }
 
-        function exportToPDF() {
-            const element = document.getElementById('printable-area-instrumen');
-            const opt = {
-                margin: 0.5,
-                filename: 'Laporan_Monev_Kinerja_6M.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().from(element).set(opt).save();
-        }
+        function renderBerakhlakUI() {
+            const container = document.getElementById('berakhlak-container');
+            if (!container) return;
+            container.innerHTML = '';
 
-        function exportToWord() {
-            const ksName = document.getElementById('ks-name').value;
-            const ksSchool = document.getElementById('ks-school').value;
-            const totalScore = document.getElementById('total-score').innerText;
-            const predikat = document.getElementById('predikat-label').innerText;
-            const qualitative = document.getElementById('feedback-qualitative').value;
-
-            let htmlContent = `
-                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-                <head><meta charset='utf-8'><title>Laporan Monev 6M</title></head>
-                <body style='font-family: Arial, sans-serif;'>
-                    <h2 style='text-align: center;'>LAPORAN MONEV KINERJA KEPALA SEKOLAH (METODOLOGI 6M)</h2>
-                    <p><strong>Nama Kepala Sekolah:</strong> ${ksName}</p>
-                    <p><strong>Satuan Pendidikan / Periode:</strong> ${ksSchool}</p>
-                    <p><strong>Rata-Rata Skala Kinerja:</strong> ${totalScore} (${predikat})</p>
-                    <h3>Hasil Instrumen Monev 6M:</h3>
-                    <table border='1' cellspacing='0' cellpadding='5' style='width:100%; border-collapse: collapse;'>
-                        <tr style='background: #f2f2f2;'>
-                            <th>No</th><th>Dimensi 6M</th><th>Indikator Kinerja</th><th>Tautan Drive Prasyarat</th><th>Catatan Observasi</th><th>Skala</th>
-                        </tr>
-            `;
-
-            monevData.forEach((item, idx) => {
-                htmlContent += `
-                    <tr>
-                        <td>${idx + 1}</td>
-                        <td><strong>${item.dim}</strong></td>
-                        <td>${item.title}<br><small>${item.desc}</small></td>
-                        <td>${item.driveLink || 'Belum ada tautan'}</td>
-                        <td>${item.obs}</td>
-                        <td>${item.score}</td>
-                    </tr>
+            berakhlakItems.forEach(item => {
+                const val = berakhlakRatings[item.key] || "Sesuai Ekspektasi";
+                const div = document.createElement('div');
+                div.className = "p-2.5 border border-slate-200 rounded-md bg-slate-50 flex flex-col justify-between";
+                div.innerHTML = `
+                    <div>
+                        <strong class="text-slate-800 block text-xs">${item.label}</strong>
+                        <span class="text-[11px] text-slate-500">${item.desc}</span>
+                    </div>
+                    <select onchange="window.updateBerakhlak('${item.key}', this.value)" class="mt-2 p-1 border border-slate-300 rounded text-xs bg-white font-semibold">
+                        <option value="Di Atas Ekspektasi" ${val === 'Di Atas Ekspektasi' ? 'selected' : ''}>Di Atas Ekspektasi</option>
+                        <option value="Sesuai Ekspektasi" ${val === 'Sesuai Ekspektasi' ? 'selected' : ''}>Sesuai Ekspektasi</option>
+                        <option value="Di Bawah Ekspektasi" ${val === 'Di Bawah Ekspektasi' ? 'selected' : ''}>Di Bawah Ekspektasi</option>
+                    </select>
                 `;
+                container.appendChild(div);
             });
-
-            htmlContent += `
-                    </table>
-                    <h3>Umpan Balik Dialogis Kualitatif:</h3>
-                    <p>${qualitative}</p>
-                    <br><br>
-                    <table style='width:100%; text-align:center;'>
-                        <tr>
-                            <td>Mengetahui,<br>Kepala Sekolah Binaan<br><br><br><strong>${ksName}</strong></td>
-                            <td>Garut, 2026<br>Pengawas Mutu Pendidikan,<br><br><br><strong>Ida Faridlah</strong></td>
-                        </tr>
-                    </table>
-                </body>
-                </html>
-            `;
-
-            const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Laporan_Monev_Kinerja_6M.doc';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
         }
 
-        function exportTirtaPDF() {
-            const element = document.getElementById('printable-area-tirta');
-            const opt = {
-                margin: 0.5,
-                filename: 'Logsheet_Coaching_TIRTA_6M.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().from(element).set(opt).save();
+        function updateBerakhlak(key, value) {
+            berakhlakRatings[key] = value;
+            calculateFinalPKKS();
         }
 
-        function exportTirtaWord() {
-            let htmlContent = `
-                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-                <head><meta charset='utf-8'><title>Logsheet TIRTA 6M</title></head>
-                <body style='font-family: Arial, sans-serif;'>
-                    <h2 style='text-align: center;'>TRANSKRIP & LOGSHEET COACHING TIRTA & 6M</h2>
-                    <p><strong>Metode Pendampingan:</strong> Kapasitas ${currentCapacity.toUpperCase()}</p>
-                    <hr>
-            `;
+        function calculateFinalPKKS() {
+            const getAvg = (q) => quarterData[q].items.reduce((a, b) => a + b.score, 0) / (quarterData[q].items.length || 1);
+            const overallAvg = (getAvg('T1') + getAvg('T2') + getAvg('T3') + getAvg('T4')) / 4;
 
-            tirtaData.forEach((item, idx) => {
-                htmlContent += `
-                    <h3>${idx + 1}. ${item.step}</h3>
-                    <p><em>Fokus: ${item.desc}</em></p>
-                    <p><strong>Pertanyaan Pengawas (P):</strong><br>${item.pengawas}</p>
-                    <p><strong>Respon Kepala Sekolah (KS):</strong><br>${item.ks}</p>
-                    <hr>
+            let ratingPraktik = "Sesuai Ekspektasi";
+            if (overallAvg >= 3.5) ratingPraktik = "Di Atas Ekspektasi";
+            else if (overallAvg < 2.5) ratingPraktik = "Di Bawah Ekspektasi";
+
+            const ratingsArr = Object.values(berakhlakRatings);
+            const countAbove = ratingsArr.filter(r => r === "Di Atas Ekspektasi").length;
+            const countBelow = ratingsArr.filter(r => r === "Di Bawah Ekspektasi").length;
+
+            let ratingPerilaku = "Sesuai Ekspektasi";
+            if (countAbove >= 4) ratingPerilaku = "Di Atas Ekspektasi";
+            if (countBelow >= 3) ratingPerilaku = "Di Bawah Ekspektasi";
+
+            let predikatFinal = "BAIK";
+            if (ratingPraktik === "Di Atas Ekspektasi" && ratingPerilaku === "Di Atas Ekspektasi") predikatFinal = "SANGAT BAIK";
+            else if (ratingPraktik === "Di Bawah Ekspektasi" && ratingPerilaku === "Di Bawah Ekspektasi") predikatFinal = "SANGAT KURANG";
+            else if (ratingPraktik === "Di Bawah Ekspektasi" || ratingPerilaku === "Di Bawah Ekspektasi") predikatFinal = "BUTUH PERBAIKAN";
+
+            document.getElementById('final-praktik-rating').innerText = ratingPraktik;
+            document.getElementById('final-perilaku-rating').innerText = ratingPerilaku;
+            document.getElementById('final-predikat').innerText = predikatFinal;
+        }
+
+        // TIRTA Methods
+        function renderTirta() {
+            const container = document.getElementById('tirta-container');
+            if (!container) return;
+            container.innerHTML = '';
+            tirtaData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm";
+                card.innerHTML = `
+                    <div class="p-3 bg-slate-100 flex justify-between items-center font-bold text-slate-800 text-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="text-brand-700 font-bold">Edit Tahap ${index + 1}:</span>
+                            <input type="text" value="${item.step}" oninput="window.updateTirta(${index}, 'step', this.value)" class="bg-white border border-slate-300 rounded font-bold text-xs px-2 py-1 w-80 focus:ring-1 focus:ring-brand-500 focus:outline-none">
+                        </div>
+                        <div class="flex items-center gap-2 no-print">
+                            <button type="button" onclick="window.saveTirtaData()" class="text-brand-700 hover:text-brand-900 text-xs px-2.5 py-1 bg-white rounded border border-brand-200 shadow-sm transition font-semibold cursor-pointer">💾 Simpan</button>
+                            <button type="button" onclick="window.deleteTirtaRow(${index})" class="text-red-600 hover:text-red-800 text-xs px-2.5 py-1 bg-white rounded border border-red-200 shadow-sm transition font-semibold cursor-pointer">🗑️ Hapus</button>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-3 text-xs">
+                        <div>
+                            <span class="font-semibold text-slate-600 block mb-1">Edit Fokus / Integrasi 6M:</span>
+                            <input type="text" value="${item.desc}" oninput="window.updateTirta(${index}, 'desc', this.value)" class="w-full p-2 border border-slate-300 rounded bg-white text-xs">
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded border border-blue-200 space-y-1">
+                            <strong class="text-blue-900 block">Edit Pertanyaan Pengawas (P):</strong>
+                            <textarea oninput="window.updateTirta(${index}, 'pengawas', this.value)" class="w-full p-2 border border-blue-300 rounded bg-white text-xs" rows="2">${item.pengawas}</textarea>
+                        </div>
+                        <div class="bg-emerald-50 p-3 rounded border border-emerald-200 space-y-1">
+                            <strong class="text-emerald-900 block">Edit Respon / Komitmen Kepala Sekolah (KS):</strong>
+                            <textarea oninput="window.updateTirta(${index}, 'ks', this.value)" class="w-full p-2 border border-emerald-300 rounded bg-white text-xs" rows="2">${item.ks}</textarea>
+                        </div>
+                    </div>
                 `;
+                container.appendChild(card);
             });
-
-            htmlContent += `
-                    <br><br>
-                    <table style='width:100%; text-align:center;'>
-                        <tr>
-                            <td>Mengetahui,<br>Kepala Sekolah Binaan<br><br><br><strong>Dra. Hj. Siti Rahmah, M.Pd.</strong></td>
-                            <td>Garut, 2026<br>Pengawas Mutu Pendidikan,<br><br><br><strong>Ida Faridlah</strong></td>
-                        </tr>
-                    </table>
-                </body>
-                </html>
-            `;
-
-            const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Logsheet_Coaching_TIRTA_6M.doc';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
         }
 
-        function resetForm() {
-            if(confirm("Reset seluruh data instrumen 6M ke awal?")) {
-                localStorage.removeItem('monev_ks_data_6m');
-                location.reload();
-            }
+        function updateTirta(index, field, value) { tirtaData[index][field] = value; }
+        function addTirtaRow() {
+            tirtaData.push({ step: "Tahap Lanjutan (6M)", desc: "Fokus diskusi 6M...", pengawas: "Pertanyaan pemantik...", ks: "Respon kepala sekolah..." });
+            renderTirta();
         }
-
+        function deleteTirtaRow(index) {
+            if (tirtaData.length <= 1) return alert("Minimal harus ada 1 tahapan TIRTA.");
+            tirtaData.splice(index, 1);
+            renderTirta();
+        }
+        function saveTirtaData() {
+            localStorage.setItem('monev_tirta_data', JSON.stringify(tirtaData));
+            alert("Logsheet percakapan TIRTA & 6M berhasil disimpan!");
+        }
         function setCapacityLevel(type) {
             currentCapacity = type;
-            const buttons = ['srendah', 'rendah', 'sedang', 'tinggi', 'stinggi'];
-            buttons.forEach(b => {
+            ['srendah', 'rendah', 'sedang', 'tinggi', 'stinggi'].forEach(b => {
                 const btn = document.getElementById(`btn-cap-${b}`);
-                if(btn) {
-                    btn.className = b === type ? "p-2.5 rounded border border-brand-500 bg-brand-50 font-bold text-brand-800 text-left transition cursor-pointer" : "p-2.5 rounded border border-slate-300 bg-white text-left font-medium transition cursor-pointer";
-                }
+                if (btn) btn.className = b === type ? "p-2.5 rounded border border-brand-500 bg-brand-50 font-bold text-brand-800 text-left transition cursor-pointer" : "p-2.5 rounded border border-slate-300 bg-white text-left font-medium transition cursor-pointer";
             });
-
             const infoBox = document.getElementById('capacity-info-box');
-            if(infoBox) {
+            if (infoBox) {
                 if (type === 'srendah') infoBox.innerHTML = "<strong>Metode Dipilih: TRAINING (Pelatihan Langsung)</strong><br>Pengawas mengajarkan materi teknis dasar perihal siklus 6M kepada kepala sekolah.";
                 else if (type === 'rendah') infoBox.innerHTML = "<strong>Metode Dipilih: MENTORING (Pengampuan)</strong><br>Memberikan petunjuk operasional dalam penerapan tahapan 6M.";
                 else if (type === 'sedang') infoBox.innerHTML = "<strong>Metode Dipilih: COACHING (Bimbingan Reflektif)</strong><br>Memicu kesadaran mandiri dan solusi internal kepala sekolah melalui kerangka 6M.";
                 else if (type === 'tinggi') infoBox.innerHTML = "<strong>Metode Dipilih: FACILITATING (Fasilitasi Kelompok)</strong><br>Memfasilitasi diskusi tim pengembang sekolah dalam siklus 6M.";
                 else if (type === 'stinggi') infoBox.innerHTML = "<strong>Metode Dipilih: CONSULTING (Konsultasi Sejajar)</strong><br>Mitra diskusi tingkat lanjut mengenai inovasi dan keberlanjutan mutu 6M.";
             }
-
-            // PERUBAHAN OTOMATIS KONTEN DIALOG TIRTA BERDASARKAN LEVEL
             if (tirtaPresets[type]) {
                 tirtaData = JSON.parse(JSON.stringify(tirtaPresets[type]));
                 renderTirta();
             }
         }
 
-        // Binding Global Functions explicitly
-        window.renderTable = renderTable;
-        window.updateData = updateData;
-        window.addRow = addRow;
-        window.deleteRow = deleteRow;
-        window.saveData = saveData;
+        // PBD Methods
+        function renderPbd() {
+            const container = document.getElementById('pbd-container');
+            if (!container) return;
+            container.innerHTML = '';
+            pbdData.forEach((item, index) => {
+                let optionsHtml = '';
+                raporOptions.forEach(opt => {
+                    optionsHtml += `<option value="${opt}" ${item.aspek === opt ? 'selected' : ''}>${opt}</option>`;
+                });
+                let dimOptions = '';
+                dim6MList.forEach(d => {
+                    dimOptions += `<option value="${d}" ${item.dim6m === d ? 'selected' : ''}>${d}</option>`;
+                });
+
+                const card = document.createElement('div');
+                card.className = "border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm";
+                card.innerHTML = `
+                    <div class="p-3 bg-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 font-bold text-slate-800 text-sm">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="text-brand-700 font-bold">Aksi PBD ${index + 1}:</span>
+                            <select onchange="window.updatePbd(${index}, 'aspek', this.value)" class="bg-white border border-slate-300 rounded font-bold text-xs px-2 py-1.5 w-60 text-brand-800 cursor-pointer">${optionsHtml}</select>
+                            <select onchange="window.updatePbd(${index}, 'dim6m', this.value)" class="bg-white border border-slate-300 rounded font-bold text-xs px-2 py-1.5 w-40 text-brand-700 cursor-pointer">${dimOptions}</select>
+                        </div>
+                        <div class="flex items-center gap-2 no-print">
+                            <button type="button" onclick="window.savePbdData()" class="text-brand-700 hover:text-brand-900 text-xs px-2.5 py-1 bg-white rounded border border-brand-200 shadow-sm transition font-semibold cursor-pointer">💾 Simpan</button>
+                            <button type="button" onclick="window.deletePbdRow(${index})" class="text-red-600 hover:text-red-800 text-xs px-2.5 py-1 bg-white rounded border border-red-200 shadow-sm transition font-semibold cursor-pointer">🗑️ Hapus</button>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-3 text-xs">
+                        <div class="bg-red-50 p-3 rounded border border-red-200 space-y-1">
+                            <strong class="text-red-900 block">1. Memetakan / Identifikasi (Akar Masalah Rapor Pendidikan):</strong>
+                            <textarea oninput="window.updatePbd(${index}, 'identifikasi', this.value)" class="w-full p-2 border border-red-300 rounded bg-white text-xs" rows="2">${item.identifikasi}</textarea>
+                        </div>
+                        <div class="bg-amber-50 p-3 rounded border border-amber-200 space-y-1">
+                            <strong class="text-amber-900 block">2. Merencanakan & Mengevaluasi (Hasil Diskusi Pengawas Bersama KS):</strong>
+                            <textarea oninput="window.updatePbd(${index}, 'refleksi', this.value)" class="w-full p-2 border border-amber-300 rounded bg-white text-xs" rows="2">${item.refleksi}</textarea>
+                        </div>
+                        <div class="bg-emerald-50 p-3 rounded border border-emerald-200 space-y-1">
+                            <strong class="text-emerald-900 block">3. Melaksanakan & Meningkatkan (Program Benah Mutu RKT):</strong>
+                            <textarea oninput="window.updatePbd(${index}, 'benahi', this.value)" class="w-full p-2 border border-emerald-300 rounded bg-white text-xs" rows="2">${item.benahi}</textarea>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded border border-blue-200 space-y-1">
+                            <strong class="text-blue-900 block">4. Mengendalikan (Sumber Pendanaan / Rencana Anggaran ARKAS):</strong>
+                            <input type="text" value="${item.anggaran}" oninput="window.updatePbd(${index}, 'anggaran', this.value)" class="w-full p-2 border border-blue-300 rounded bg-white text-xs">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function updatePbd(index, field, value) { pbdData[index][field] = value; }
+        function addPbdRow() {
+            pbdData.push({ aspek: "Kemampuan Literasi", dim6m: "Merencanakan", identifikasi: "Akar masalah...", refleksi: "Hasil refleksi...", benahi: "Rencana benahi...", anggaran: "Sumber dana..." });
+            renderPbd();
+        }
+        function deletePbdRow(index) {
+            if (pbdData.length <= 1) return alert("Minimal harus ada 1 aksi PBD.");
+            pbdData.splice(index, 1);
+            renderPbd();
+        }
+        function savePbdData() {
+            localStorage.setItem('monev_pbd_data', JSON.stringify(pbdData));
+            alert("Rekapitulasi Aksi PBD & 6M berhasil disimpan!");
+        }
+
+        // Storage & Helpers
+        function saveCurrentQuarterData() { saveAllData(); alert(`Data ${currentQuarter} berhasil disimpan!`); }
+        function saveProfileInfo() {
+            profileInfo.ksName = document.getElementById('ks-name').value;
+            profileInfo.ksStatus = document.getElementById('ks-status').value;
+            profileInfo.ksSchool = document.getElementById('ks-school').value;
+            saveAllData();
+        }
+        function saveFeedback(val) { quarterData[currentQuarter].feedback = val; saveAllData(); }
+        function saveAllData() {
+            localStorage.setItem('monev_profile_info', JSON.stringify(profileInfo));
+            localStorage.setItem('monev_quarter_data', JSON.stringify(quarterData));
+            localStorage.setItem('monev_berakhlak_ratings', JSON.stringify(berakhlakRatings));
+        }
+        function loadAllData() {
+            const savedProf = localStorage.getItem('monev_profile_info');
+            if (savedProf) {
+                profileInfo = JSON.parse(savedProf);
+                document.getElementById('ks-name').value = profileInfo.ksName;
+                document.getElementById('ks-status').value = profileInfo.ksStatus;
+                document.getElementById('ks-school').value = profileInfo.ksSchool;
+            }
+            const savedQ = localStorage.getItem('monev_quarter_data');
+            if (savedQ) quarterData = JSON.parse(savedQ);
+            const savedB = localStorage.getItem('monev_berakhlak_ratings');
+            if (savedB) berakhlakRatings = JSON.parse(savedB);
+            const savedTirta = localStorage.getItem('monev_tirta_data');
+            if (savedTirta) tirtaData = JSON.parse(savedTirta);
+            const savedPbd = localStorage.getItem('monev_pbd_data');
+            if (savedPbd) pbdData = JSON.parse(savedPbd);
+        }
+
+        // Export Methods
+        function exportToPDF() {
+            const element = document.getElementById('printable-area-instrumen');
+            html2pdf().from(element).set({
+                margin: 0.5,
+                filename: `Laporan_Monev_${currentQuarter}_6M.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            }).save();
+        }
+        function exportToWord() {
+            let htmlContent = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+                <head><meta charset='utf-8'><title>Laporan Monev 6M</title></head>
+                <body style='font-family: Arial, sans-serif;'>
+                    <h2 style='text-align: center;'>LAPORAN MONEV KINERJA KEPALA SEKOLAH (METODOLOGI 6M)</h2>
+                    <p><strong>Nama Kepala Sekolah:</strong> ${profileInfo.ksName}</p>
+                    <p><strong>Satuan Pendidikan:</strong> ${profileInfo.ksSchool}</p>
+                    <p><strong>Periode:</strong> ${currentQuarter}</p>
+                    <hr>
+            `;
+            quarterData[currentQuarter].items.forEach((item, idx) => {
+                htmlContent += `<p><strong>${idx + 1}. [${item.dim}] ${item.title}</strong><br>Status: ${item.obs} (Skala: ${item.score})</p>`;
+            });
+            htmlContent += `</body></html>`;
+            const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Laporan_Monev_${currentQuarter}_6M.doc`;
+            a.click();
+        }
+        function exportTirtaPDF() {
+            html2pdf().from(document.getElementById('printable-area-tirta')).set({ margin: 0.5, filename: 'Logsheet_Coaching_TIRTA_6M.pdf', html2canvas: { scale: 2 } }).save();
+        }
+        function exportTirtaWord() {
+            let htmlContent = `<html><body><h2>Logsheet TIRTA 6M</h2>`;
+            tirtaData.forEach((item, idx) => {
+                htmlContent += `<p><strong>${idx + 1}. ${item.step}</strong><br>P: ${item.pengawas}<br>KS: ${item.ks}</p>`;
+            });
+            htmlContent += `</body></html>`;
+            const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Logsheet_Coaching_TIRTA_6M.doc';
+            a.click();
+        }
+        function exportPbdPDF() {
+            html2pdf().from(document.getElementById('printable-area-pbd')).set({ margin: 0.5, filename: 'Rekapitulasi_Aksi_PBD_6M.pdf', html2canvas: { scale: 2 } }).save();
+        }
+        function exportPbdWord() {
+            let htmlContent = `<html><body><h2>Rekapitulasi Aksi PBD 6M</h2>`;
+            pbdData.forEach((item, idx) => {
+                htmlContent += `<p><strong>${idx + 1}. Indikator: ${item.aspek}</strong><br>Identifikasi: ${item.identifikasi}<br>Benahi: ${item.benahi}</p>`;
+            });
+            htmlContent += `</body></html>`;
+            const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Rekapitulasi_Aksi_PBD_6M.doc';
+            a.click();
+        }
+
+        // Binding Functions
         window.switchTab = switchTab;
         window.showCycleDetail = showCycleDetail;
         window.toggleComparison = toggleComparison;
-        window.calculateScore = calculateScore;
-        window.exportToPDF = exportToPDF;
-        window.exportToWord = exportToWord;
-        window.exportTirtaPDF = exportTirtaPDF;
-        window.exportTirtaWord = exportTirtaWord;
-        window.resetForm = resetForm;
-        window.setCapacityLevel = setCapacityLevel;
+        window.changeQuarter = changeQuarter;
+        window.loadQuarterPreset = loadQuarterPreset;
+        window.renderTable = renderTable;
+        window.updateRowData = updateRowData;
+        window.addRow = addRow;
+        window.deleteRow = deleteRow;
+        window.copyFromPreviousQuarter = copyFromPreviousQuarter;
+        window.saveCurrentQuarterData = saveCurrentQuarterData;
+        window.saveProfileInfo = saveProfileInfo;
+        window.saveFeedback = saveFeedback;
+        window.updateBerakhlak = updateBerakhlak;
         window.renderTirta = renderTirta;
         window.updateTirta = updateTirta;
         window.addTirtaRow = addTirtaRow;
         window.deleteTirtaRow = deleteTirtaRow;
         window.saveTirtaData = saveTirtaData;
-
-        // PBD Bindings
+        window.setCapacityLevel = setCapacityLevel;
         window.renderPbd = renderPbd;
         window.updatePbd = updatePbd;
         window.addPbdRow = addPbdRow;
         window.deletePbdRow = deletePbdRow;
         window.savePbdData = savePbdData;
+        window.exportToPDF = exportToPDF;
+        window.exportToWord = exportToWord;
+        window.exportTirtaPDF = exportTirtaPDF;
+        window.exportTirtaWord = exportTirtaWord;
         window.exportPbdPDF = exportPbdPDF;
         window.exportPbdWord = exportPbdWord;
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadSavedData();
+            loadAllData();
             renderTable();
+            renderBerakhlakUI();
+            updateTrendChart();
             renderTirta();
             renderPbd();
         });
