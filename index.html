@@ -289,7 +289,7 @@
                         <div class="space-y-1 text-xs">
                             <div class="font-bold text-purple-800 uppercase text-[10px]">Butir Target BAN-PDM:</div>
                             <ul class="list-disc list-inside text-slate-700 space-y-1 bg-white p-2 rounded border border-indigo-100">
-                                <li><strong>14 Butir Lengkap (45 Sub-Indikator):</strong> Verifikasi Rekapitulasi Digital Sispena & Penetapan Predikat PKKS.</li>
+                                <li><strong>14 Butir Lengkap (45 Sub-Indikator):</strong> Akumulasi Otomatis T1, T2, T3 & Penetapan Predikat PKKS.</li>
                             </ul>
                         </div>
                     </div>
@@ -488,7 +488,7 @@
                         <div class="grid grid-cols-2 gap-3">
                             <div class="bg-white p-3.5 rounded-lg border border-slate-200 text-center">
                                 <span class="text-[10px] text-slate-500 block uppercase font-bold">Rata-Rata Skala 45 Sub-Butir</span>
-                                <span class="text-3xl font-black text-indigo-700" id="total-score">0.00</span>
+                                <span class="text-3xl font-black text-indigo-700" id="total-score">-</span>
                                 <span class="text-[10px] font-semibold text-emerald-600 block mt-1" id="score-status">Kategori: -</span>
                             </div>
                             <div class="bg-white p-3.5 rounded-lg border border-slate-200 text-center flex flex-col justify-center">
@@ -522,7 +522,7 @@
                         <h3 class="text-base font-black text-indigo-950 flex items-center gap-2">
                             <span>🏆</span> INTEGRASI EVALUASI FINAL PKKS AKHIR TAHUN (PERMENPANRB 7/2026)
                         </h3>
-                        <p class="text-xs text-slate-600">Penggabungan Rating Praktik Kinerja (45 Sub-Indikator) dengan Rating Perilaku Kerja BerAKHLAK.</p>
+                        <p class="text-xs text-slate-600">Penggabungan Rating Praktik Kinerja (Akumulasi 45 Sub-Indikator T1-T4) dengan Rating Perilaku Kerja BerAKHLAK.</p>
                     </div>
 
                     <div class="bg-white p-4 rounded-lg border border-slate-200 space-y-3">
@@ -535,7 +535,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
                             <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
                                 <span class="text-[10px] text-slate-500 block uppercase font-semibold">Rating Praktik Kinerja</span>
-                                <span class="text-sm font-bold text-indigo-900" id="final-praktik-rating">Sesuai Ekspektasi</span>
+                                <span class="text-sm font-bold text-indigo-900" id="final-praktik-rating">Belum Lengkap</span>
                             </div>
                             <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
                                 <span class="text-[10px] text-slate-500 block uppercase font-semibold">Rating Perilaku BerAKHLAK</span>
@@ -702,7 +702,7 @@
         let currentQuarter = "T1";
         let selectedSchoolId = 1;
 
-        const STORAGE_KEY = "MONEV_SPMI_PKKS_2026_DATA";
+        const STORAGE_KEY = "MONEV_SPMI_PKKS_2026_DATA_V2";
 
         // GENERATE INITIAL 20 SCHOOLS DATA STRUCTURE
         const initialSchoolNames = [
@@ -768,6 +768,16 @@
             { code: "14.3", butirId: 14, comp: "3. Iklim Belajar", parentTitle: "Butir 14: PHBS & Kesehatan Mental", title: "Edukasi tentang pencegahan adiksi dan kesehatan reproduksi" }
         ];
 
+        // DEFAULT INSTRUMENT STRUCTURE (DEFAULT SKOR ADALAH "-")
+        function generateDefaultItems() {
+            return master45Items.map(item => ({
+                ...item,
+                driveLink: "",
+                obs: "",
+                score: "-" // Default strip
+            }));
+        }
+
         function createSchoolDataStore(id, schoolName, ksName, status) {
             return {
                 id: id,
@@ -777,10 +787,10 @@
                     ksSchool: schoolName
                 },
                 quarters: {
-                    T1: { items: generatePresetData('T1'), feedback: `Pemetaan Rapor Pendidikan & PBD T1 pada ${schoolName} terlaksana baik.` },
-                    T2: { items: generatePresetData('T2'), feedback: `Supervisi akademik T2 pada ${schoolName} berjalan sesuai target.` },
-                    T3: { items: generatePresetData('T3'), feedback: `Monev TPPK & PHBS T3 pada ${schoolName} kondusif.` },
-                    T4: { items: generatePresetData('T4'), feedback: `Seluruh 45 Sub-Indikator BAN-PDM T4 pada ${schoolName} tuntas.` }
+                    T1: { items: generateDefaultItems(), feedback: "" },
+                    T2: { items: generateDefaultItems(), feedback: "" },
+                    T3: { items: generateDefaultItems(), feedback: "" },
+                    T4: { items: generateDefaultItems(), feedback: "" }
                 }
             };
         }
@@ -865,10 +875,10 @@
 
         // JSON EXPORT & IMPORT IMPLEMENTATION
         function exportDataJSON() {
-            saveToLocalStorage(); // Ensure current UI state saved first
+            saveToLocalStorage();
             const fullData = {
                 app: "Monev SPMI & PKKS 2026",
-                version: "1.0",
+                version: "2.0",
                 timestamp: new Date().toISOString(),
                 schoolsDatabase: schoolsDatabase,
                 tirtaData: tirtaData,
@@ -919,7 +929,7 @@
                 }
             };
             reader.readAsText(file);
-            event.target.value = ''; // Reset file input
+            event.target.value = '';
         }
 
         function renderAllActiveViews() {
@@ -977,12 +987,12 @@
                 ],
                 raporPbd: "Seluruh Dimensi A, B, C, D, E (Rekap Capaian & Refleksi Akhir Tahun).",
                 targetButirIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-                targetButirText: "14 Butir Lengkap (45 Sub-Indikator BAN-PDM Sispena)",
+                targetButirText: "14 Butir Lengkap (Akumulasi Otomatis Data T1, T2, dan T3)",
                 themeBg: "bg-purple-50/70 border-purple-200 text-purple-950"
             }
         };
 
-        // PRESET GENERATOR FOR T1 - T4 (Link drive di-set kosong "" secara default)
+        // PRESET GENERATOR FOR T1 - T4 (Preset opsional dengan nilai terisi)
         function generatePresetData(qKey) {
             return master45Items.map((item) => {
                 let defaultScore = 3;
@@ -1004,11 +1014,68 @@
 
                 return {
                     ...item,
-                    driveLink: "", // Dikosongkan dulu sesuai permintaan
+                    driveLink: "",
                     obs: obsText,
                     score: defaultScore
                 };
             });
+        }
+
+        /**
+         * LOGIKA AKUMULASI OTOMATIS T1, T2, T3 KE DALAM T4
+         * Menggabungkan/mengambil data dari T1->T2->T3 ke T4 jika T4 masih kosong / "-"
+         */
+        function accumulateDataForT4(school) {
+            if (!school || !school.quarters) return;
+
+            const t1Items = school.quarters['T1'].items || [];
+            const t2Items = school.quarters['T2'].items || [];
+            const t3Items = school.quarters['T3'].items || [];
+
+            let t4Items = school.quarters['T4'].items || [];
+
+            // Jika T4 belum ada atau kurang dari 45 item, reset sesuai master
+            if (t4Items.length < 45) {
+                t4Items = generateDefaultItems();
+            }
+
+            // Lakukan sinkronisasi/akumulasi per kode sub-indikator
+            master45Items.forEach((mItem, idx) => {
+                const code = mItem.code;
+
+                const i1 = t1Items.find(x => x.code === code);
+                const i2 = t2Items.find(x => x.code === code);
+                const i3 = t3Items.find(x => x.code === code);
+                let i4 = t4Items.find(x => x.code === code);
+
+                if (!i4) {
+                    i4 = { ...mItem, driveLink: "", obs: "", score: "-" };
+                    t4Items[idx] = i4;
+                }
+
+                // Akumulasi Skor: Ambil skor yang valid dari T3, jika tidak ada dari T2, lalu T1 (kecuali T4 sudah di-edit manual)
+                if (i4.score === "-" || i4.score === undefined || i4.score === null) {
+                    if (i3 && i3.score !== "-") i4.score = i3.score;
+                    else if (i2 && i2.score !== "-") i4.score = i2.score;
+                    else if (i1 && i1.score !== "-") i4.score = i1.score;
+                }
+
+                // Akumulasi Link Drive
+                if (!i4.driveLink || i4.driveLink.trim() === "") {
+                    if (i3 && i3.driveLink && i3.driveLink.trim() !== "") i4.driveLink = i3.driveLink;
+                    else if (i2 && i2.driveLink && i2.driveLink.trim() !== "") i4.driveLink = i2.driveLink;
+                    else if (i1 && i1.driveLink && i1.driveLink.trim() !== "") i4.driveLink = i1.driveLink;
+                }
+
+                // Akumulasi Catatan Observasi
+                if (!i4.obs || i4.obs.trim() === "") {
+                    if (i3 && i3.obs && i3.obs.trim() !== "") i4.obs = i3.obs;
+                    else if (i2 && i2.obs && i2.obs.trim() !== "") i4.obs = i2.obs;
+                    else if (i1 && i1.obs && i1.obs.trim() !== "") i4.obs = i1.obs;
+                }
+            });
+
+            school.quarters['T4'].items = t4Items;
         }
 
         function initSchoolSelector() {
@@ -1028,7 +1095,13 @@
         function switchSchool(schoolId) {
             selectedSchoolId = parseInt(schoolId);
             loadSchoolProfileUI();
-            const currentFeedback = schoolsDatabase[selectedSchoolId].quarters[currentQuarter].feedback || '';
+            
+            const school = schoolsDatabase[selectedSchoolId];
+            if (currentQuarter === 'T4') {
+                accumulateDataForT4(school);
+            }
+
+            const currentFeedback = school.quarters[currentQuarter].feedback || '';
             document.getElementById('feedback-qualitative').value = currentFeedback;
             renderQuarterBanner();
             renderTable();
@@ -1073,6 +1146,9 @@
             }
 
             if (tabId === 'instrumen') {
+                if (currentQuarter === 'T4') {
+                    accumulateDataForT4(schoolsDatabase[selectedSchoolId]);
+                }
                 renderTable();
             } else if (tabId === 'tirta') {
                 renderTirta();
@@ -1084,6 +1160,13 @@
         function changeQuarter(qKey) {
             currentQuarter = qKey;
             const school = schoolsDatabase[selectedSchoolId];
+
+            // Pemicu Akumulasi Otomatis jika T4 dipilih
+            if (qKey === 'T4' && school) {
+                accumulateDataForT4(school);
+                showToast("⚡ Data T1, T2, & T3 berhasil diakumulasi ke Triwulan 4!");
+            }
+
             if (school && school.quarters[qKey]) {
                 document.getElementById('feedback-qualitative').value = school.quarters[qKey].feedback || '';
             }
@@ -1197,7 +1280,7 @@
                 title: title,
                 driveLink: "",
                 obs: "Sub-indikator kustom baru.",
-                score: 3
+                score: "-" // Default strip
             };
 
             school.quarters[currentQuarter].items.push(newItem);
@@ -1206,7 +1289,6 @@
             saveToLocalStorage();
             showToast("➕ Sub-indikator baru berhasil ditambahkan!");
 
-            // Clear form
             document.getElementById('new-ind-code').value = '';
             document.getElementById('new-ind-title').value = '';
         }
@@ -1218,7 +1300,7 @@
             const item = items.find(i => i.code === code);
             if (item) {
                 if (field === 'score') {
-                    item.score = parseInt(value) || 1;
+                    item.score = value === "-" ? "-" : parseInt(value);
                 } else {
                     item[field] = value;
                 }
@@ -1235,7 +1317,7 @@
             if (item) {
                 item.driveLink = value.trim();
                 saveToLocalStorage();
-                renderTable(); // Re-render agar tombol buka drive aktif/non-aktif sesuai isi
+                renderTable();
             }
         }
 
@@ -1262,6 +1344,11 @@
 
             const school = schoolsDatabase[selectedSchoolId];
             if (!school) return;
+
+            // Jika T4 active, pastikan data terakumulasi
+            if (currentQuarter === 'T4') {
+                accumulateDataForT4(school);
+            }
 
             const currentItems = school.quarters[currentQuarter].items || [];
             const targetButirIds = roadmapInfoMap[currentQuarter].targetButirIds;
@@ -1303,6 +1390,7 @@
                     : '';
 
                 const hasLink = item.driveLink && item.driveLink.trim() !== "";
+                const currentScoreStr = (item.score === undefined || item.score === null) ? "-" : item.score.toString();
 
                 tr.innerHTML = `
                     <td class="p-2.5 border border-slate-200 text-center font-black text-indigo-950 bg-slate-50/50">${item.code}</td>
@@ -1330,10 +1418,11 @@
                     </td>
                     <td class="p-2.5 border border-slate-200 text-center">
                         <select onchange="updateItemField('${item.code}', 'score', this.value)" class="w-full p-1.5 border-2 ${getScoreColorBorder(item.score)} font-bold text-center rounded text-xs bg-white cursor-pointer">
-                            <option value="4" ${item.score === 4 ? 'selected' : ''}>4 (Sangat Baik)</option>
-                            <option value="3" ${item.score === 3 ? 'selected' : ''}>3 (Baik)</option>
-                            <option value="2" ${item.score === 2 ? 'selected' : ''}>2 (Cukup)</option>
-                            <option value="1" ${item.score === 1 ? 'selected' : ''}>1 (Kurang)</option>
+                            <option value="-" ${currentScoreStr === '-' ? 'selected' : ''}>- (Belum Diisi)</option>
+                            <option value="4" ${currentScoreStr === '4' ? 'selected' : ''}>4 (Sangat Baik)</option>
+                            <option value="3" ${currentScoreStr === '3' ? 'selected' : ''}>3 (Baik)</option>
+                            <option value="2" ${currentScoreStr === '2' ? 'selected' : ''}>2 (Cukup)</option>
+                            <option value="1" ${currentScoreStr === '1' ? 'selected' : ''}>1 (Kurang)</option>
                         </select>
                     </td>
                 `;
@@ -1344,10 +1433,11 @@
         }
 
         function getScoreColorBorder(score) {
-            if (score === 4) return 'border-emerald-500 text-emerald-800';
-            if (score === 3) return 'border-indigo-500 text-indigo-800';
-            if (score === 2) return 'border-amber-500 text-amber-800';
-            return 'border-red-500 text-red-800';
+            if (score === 4 || score === '4') return 'border-emerald-500 text-emerald-800';
+            if (score === 3 || score === '3') return 'border-indigo-500 text-indigo-800';
+            if (score === 2 || score === '2') return 'border-amber-500 text-amber-800';
+            if (score === 1 || score === '1') return 'border-red-500 text-red-800';
+            return 'border-slate-300 text-slate-500'; // Untuk default "-"
         }
 
         function updateCalculationsAndCharts() {
@@ -1356,49 +1446,63 @@
 
             const items = school.quarters[currentQuarter].items || [];
             let total = 0;
-            let count = items.length;
+            let countValid = 0;
 
-            items.forEach(i => total += (i.score || 0));
-            const avg = count > 0 ? (total / count) : 0;
+            items.forEach(i => {
+                if (i.score !== "-" && i.score !== undefined && i.score !== null) {
+                    const val = parseInt(i.score);
+                    if (!isNaN(val)) {
+                        total += val;
+                        countValid++;
+                    }
+                }
+            });
+
+            const avg = countValid > 0 ? (total / countValid) : 0;
 
             const totalScoreEl = document.getElementById('total-score');
             const scoreStatusEl = document.getElementById('score-status');
             const predikatLabelEl = document.getElementById('predikat-label');
             const currentQLabelEl = document.getElementById('current-q-label');
 
-            if (totalScoreEl) totalScoreEl.innerText = avg.toFixed(2);
+            if (totalScoreEl) {
+                totalScoreEl.innerText = countValid > 0 ? avg.toFixed(2) : "-";
+            }
             if (currentQLabelEl) currentQLabelEl.innerText = roadmapInfoMap[currentQuarter].title;
 
-            let predikat = "Kurang";
-            let statusText = "Kategori: Perlu Pembinaan Tambahan";
+            let predikat = "-";
+            let statusText = `Kategori: Belum Diisi (${countValid}/${items.length} Terisi)`;
 
-            if (avg >= 3.5) {
-                predikat = "Sangat Baik (Memenuhi / Melampaui)";
-                statusText = "Kategori: Paripurna SPMI";
-                if (scoreStatusEl) scoreStatusEl.className = "text-[10px] font-bold text-emerald-600 block mt-1";
-            } else if (avg >= 2.75) {
-                predikat = "Baik (Sesuai Ekspektasi)";
-                statusText = "Kategori: Memenuhi Standar";
-                if (scoreStatusEl) scoreStatusEl.className = "text-[10px] font-bold text-indigo-600 block mt-1";
-            } else if (avg >= 2.0) {
-                predikat = "Cukup (Butuh Perbaikan)";
-                statusText = "Kategori: Perlu Pendampingan Khusus";
-                if (scoreStatusEl) scoreStatusEl.className = "text-[10px] font-bold text-amber-600 block mt-1";
+            if (countValid > 0) {
+                if (avg >= 3.5) {
+                    predikat = "Sangat Baik (Memenuhi / Melampaui)";
+                    statusText = `Kategori: Paripurna SPMI (${countValid}/${items.length} Terisi)`;
+                    if (scoreStatusEl) scoreStatusEl.className = "text-[10px] font-bold text-emerald-600 block mt-1";
+                } else if (avg >= 2.75) {
+                    predikat = "Baik (Sesuai Ekspektasi)";
+                    statusText = `Kategori: Memenuhi Standar (${countValid}/${items.length} Terisi)`;
+                    if (scoreStatusEl) scoreStatusEl.className = "text-[10px] font-bold text-indigo-600 block mt-1";
+                } else if (avg >= 2.0) {
+                    predikat = "Cukup (Butuh Perbaikan)";
+                    statusText = `Kategori: Perlu Pendampingan Khusus (${countValid}/${items.length} Terisi)`;
+                    if (scoreStatusEl) scoreStatusEl.className = "text-[10px] font-bold text-amber-600 block mt-1";
+                } else {
+                    predikat = "Kurang";
+                    statusText = `Kategori: Kritis (${countValid}/${items.length} Terisi)`;
+                    if (scoreStatusEl) scoreStatusEl.className = "text-[10px] font-bold text-red-600 block mt-1";
+                }
             } else {
-                predikat = "Kurang";
-                statusText = "Kategori: Kritis";
-                if (scoreStatusEl) scoreStatusEl.className = "text-[10px] font-bold text-red-600 block mt-1";
+                if (scoreStatusEl) scoreStatusEl.className = "text-[10px] font-bold text-slate-500 block mt-1";
             }
 
             if (scoreStatusEl) scoreStatusEl.innerText = statusText;
             if (predikatLabelEl) predikatLabelEl.innerText = predikat;
 
             renderCharts(items);
-            if (currentQuarter === 'T4') updateFinalPkksSummary(avg);
+            if (currentQuarter === 'T4') updateFinalPkksSummary(avg, countValid);
         }
 
         function renderCharts(items) {
-            // Calculate Average per Component
             const compScores = {
                 "1. Kinerja Pendidik": { sum: 0, count: 0 },
                 "2. Kepemimpinan KS": { sum: 0, count: 0 },
@@ -1406,9 +1510,12 @@
             };
 
             items.forEach(i => {
-                if (compScores[i.comp]) {
-                    compScores[i.comp].sum += (i.score || 0);
-                    compScores[i.comp].count += 1;
+                if (i.score !== "-" && i.score !== undefined && i.score !== null && compScores[i.comp]) {
+                    const val = parseInt(i.score);
+                    if (!isNaN(val)) {
+                        compScores[i.comp].sum += val;
+                        compScores[i.comp].count += 1;
+                    }
                 }
             });
 
@@ -1450,10 +1557,18 @@
             const school = schoolsDatabase[selectedSchoolId];
             const trendData = ['T1', 'T2', 'T3', 'T4'].map(q => {
                 const qItems = school.quarters[q].items || [];
-                if (qItems.length === 0) return 0;
                 let s = 0;
-                qItems.forEach(it => s += (it.score || 0));
-                return (s / qItems.length).toFixed(2);
+                let c = 0;
+                qItems.forEach(it => {
+                    if (it.score !== "-" && it.score !== undefined && it.score !== null) {
+                        const val = parseInt(it.score);
+                        if (!isNaN(val)) {
+                            s += val;
+                            c++;
+                        }
+                    }
+                });
+                return c > 0 ? (s / c).toFixed(2) : 0;
             });
 
             const ctxTrend = document.getElementById('trendChart');
@@ -1478,7 +1593,7 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         scales: {
-                            y: { min: 1, max: 4 }
+                            y: { min: 0, max: 4 }
                         },
                         plugins: { legend: { display: false } }
                     }
@@ -1524,18 +1639,33 @@
             updateFinalPkksSummary();
         }
 
-        function updateFinalPkksSummary(currentPraktikAvg) {
+        function updateFinalPkksSummary(currentPraktikAvg, countValid) {
             if (currentPraktikAvg === undefined) {
                 const school = schoolsDatabase[selectedSchoolId];
                 const items = school.quarters['T4'].items || [];
                 let s = 0;
-                items.forEach(i => s += (i.score || 0));
-                currentPraktikAvg = items.length ? (s / items.length) : 0;
+                let c = 0;
+                items.forEach(i => {
+                    if (i.score !== "-" && i.score !== undefined && i.score !== null) {
+                        const val = parseInt(i.score);
+                        if (!isNaN(val)) {
+                            s += val;
+                            c++;
+                        }
+                    }
+                });
+                currentPraktikAvg = c > 0 ? (s / c) : 0;
+                countValid = c;
             }
 
             let praktikRating = "Sesuai Ekspektasi";
-            if (currentPraktikAvg >= 3.5) praktikRating = "Diatas Ekspektasi";
-            else if (currentPraktikAvg < 2.5) praktikRating = "Dibawah Ekspektasi";
+            if (countValid === 0) {
+                praktikRating = "Belum Diisi";
+            } else if (currentPraktikAvg >= 3.5) {
+                praktikRating = "Diatas Ekspektasi";
+            } else if (currentPraktikAvg < 2.5) {
+                praktikRating = "Dibawah Ekspektasi";
+            }
 
             // Aggregate BerAKHLAK
             let diatasCount = 0;
@@ -1555,6 +1685,8 @@
                 finalPredikat = "SANGAT BAIK";
             } else if (praktikRating === "Dibawah Ekspektasi" || perilakuRating === "Dibawah Ekspektasi") {
                 finalPredikat = "BUTUH PERBAIKAN";
+            } else if (praktikRating === "Belum Diisi") {
+                finalPredikat = "BELUM LENGKAP";
             }
 
             const pEl = document.getElementById('final-praktik-rating');
@@ -1754,7 +1886,13 @@
             loadFromLocalStorage();
             initSchoolSelector();
             loadSchoolProfileUI();
-            const currentFeedback = schoolsDatabase[selectedSchoolId].quarters[currentQuarter].feedback || '';
+
+            const school = schoolsDatabase[selectedSchoolId];
+            if (currentQuarter === 'T4' && school) {
+                accumulateDataForT4(school);
+            }
+
+            const currentFeedback = school ? (school.quarters[currentQuarter].feedback || '') : '';
             document.getElementById('feedback-qualitative').value = currentFeedback;
             document.getElementById('period-select').value = currentQuarter;
             
