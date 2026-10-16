@@ -101,6 +101,66 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
+        <!-- GLOBAL SCHOOL SELECTOR & IDENTITAS PANEL -->
+        <div id="global-identity-panel" class="hidden p-5 bg-white rounded-xl shadow-sm border border-slate-200 space-y-4">
+            <div class="bg-indigo-900 text-white p-3.5 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div class="flex items-center space-x-2">
+                    <span class="text-xl">🏫</span>
+                    <div>
+                        <h3 class="font-bold text-sm">Pilih Sekolah Binaan (Total 20 Sekolah)</h3>
+                        <p class="text-[11px] text-indigo-200">Kelola & pantau progres monev 20 sekolah binaan pengawas</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <select id="school-selector" onchange="switchSchool(this.value)" class="w-full sm:w-72 p-2 rounded text-xs font-bold bg-white text-indigo-950 border-2 border-amber-400 focus:outline-none">
+                    </select>
+                </div>
+            </div>
+
+            <!-- DATA IDENTITAS SEKOLAH & PENGAWAS -->
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
+                <div class="lg:col-span-2">
+                    <label class="block font-bold text-slate-700 mb-1">Nama Satuan Pendidikan</label>
+                    <input type="text" id="ks-school" value="" onchange="saveProfileInfo()" class="w-full p-2 border border-slate-300 rounded-md bg-white focus:ring-1 focus:ring-indigo-500 font-semibold text-slate-900">
+                </div>
+                <div class="lg:col-span-2">
+                    <label class="block font-bold text-slate-700 mb-1">Nama Kepala Sekolah</label>
+                    <input type="text" id="ks-name" value="" onchange="saveProfileInfo()" class="w-full p-2 border border-slate-300 rounded-md bg-white focus:ring-1 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">NIP Kepala Sekolah</label>
+                    <input type="text" id="ks-nip" value="" onchange="saveProfileInfo()" placeholder="NIP/NKY Kepala Sekolah" class="w-full p-2 border border-slate-300 rounded-md bg-white focus:ring-1 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Status Kepegawaian</label>
+                    <select id="ks-status" onchange="saveProfileInfo()" class="w-full p-2 border border-slate-300 rounded-md bg-white">
+                        <option value="ASN">ASN (PNS / PPPK - Negeri)</option>
+                        <option value="Non-ASN">Non-ASN (Swasta / Yayasan)</option>
+                    </select>
+                </div>
+
+                <div class="lg:col-span-2 bg-amber-50/80 p-2.5 rounded-lg border border-amber-200">
+                    <label class="block font-bold text-amber-950 mb-1 flex items-center gap-1">
+                        <span>✍️</span> Nama Penilai (Pengawas Pembina)
+                    </label>
+                    <input type="text" id="pengawas-name" value="" onchange="saveProfileInfo()" placeholder="Nama Pengawas Pembina + Gelar" class="w-full p-2 border border-amber-300 rounded-md bg-white font-semibold text-slate-900 focus:ring-1 focus:ring-amber-500">
+                </div>
+                <div class="lg:col-span-2 bg-amber-50/80 p-2.5 rounded-lg border border-amber-200">
+                    <label class="block font-bold text-amber-950 mb-1">NIP Penilai (Pengawas Pembina)</label>
+                    <input type="text" id="pengawas-nip" value="" onchange="saveProfileInfo()" placeholder="NIP Pengawas Pembina" class="w-full p-2 border border-amber-300 rounded-md bg-white focus:ring-1 focus:ring-amber-500">
+                </div>
+                <div class="lg:col-span-2 bg-indigo-50 p-2.5 rounded-lg border border-indigo-200">
+                    <label class="block font-bold text-indigo-900 mb-1">Periode Evaluasi Active</label>
+                    <select id="period-select" onchange="changeQuarter(this.value)" class="w-full p-2 border border-indigo-300 rounded-md text-xs font-bold text-indigo-900 bg-white">
+                        <option value="T1">Triwulan I (Jan-Mar: Pemetaan)</option>
+                        <option value="T2">Triwulan II (Apr-Jun: Pelaksanaan)</option>
+                        <option value="T3">Triwulan III (Jul-Sep: Evaluasi)</option>
+                        <option value="T4">Triwulan IV (Okt-Des: Final PKKS)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <section id="tab-spmi" class="space-y-6">
             <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-200 space-y-6">
                 <div class="border-b border-slate-100 pb-3">
@@ -339,72 +399,8 @@
         </section>
 
         <section id="tab-instrumen" class="hidden space-y-6">
-                <!-- PROFILE HEADER & MULTI-SCHOOL MANAGEMENT (TERMASUK IDENTITAS PENILAI / PENGAWAS) -->
-                <div class="p-5 bg-white rounded-xl shadow-sm border border-slate-200 space-y-4">
-                    <div class="bg-indigo-900 text-white p-3.5 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-xl">🏫</span>
-                            <div>
-                                <h3 class="font-bold text-sm">Pilih Sekolah Binaan (Total 20 Sekolah)</h3>
-                                <p class="text-[11px] text-indigo-200">Kelola & pantau progres monev 20 sekolah binaan pengawas</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2 w-full sm:w-auto">
-                            <select id="school-selector" onchange="switchSchool(this.value)" class="w-full sm:w-72 p-2 rounded text-xs font-bold bg-white text-indigo-950 border-2 border-amber-400 focus:outline-none">
-                                <!-- Populated dynamically by JS -->
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- DATA IDENTITAS LENGKAP SEKOLAH & PENGAWAS PEMBINA -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
-                        <div class="lg:col-span-2">
-                            <label class="block font-bold text-slate-700 mb-1">Nama Satuan Pendidikan</label>
-                            <input type="text" id="ks-school" value="" onchange="saveProfileInfo()" class="w-full p-2 border border-slate-300 rounded-md bg-white focus:ring-1 focus:ring-indigo-500 font-semibold text-slate-900">
-                        </div>
-                        <div class="lg:col-span-2">
-                            <label class="block font-bold text-slate-700 mb-1">Nama Kepala Sekolah</label>
-                            <input type="text" id="ks-name" value="" onchange="saveProfileInfo()" class="w-full p-2 border border-slate-300 rounded-md bg-white focus:ring-1 focus:ring-indigo-500">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-slate-700 mb-1">NIP Kepala Sekolah</label>
-                            <input type="text" id="ks-nip" value="" onchange="saveProfileInfo()" placeholder="NIP/NKY Kepala Sekolah" class="w-full p-2 border border-slate-300 rounded-md bg-white focus:ring-1 focus:ring-indigo-500">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-slate-700 mb-1">Status Kepegawaian</label>
-                            <select id="ks-status" onchange="saveProfileInfo()" class="w-full p-2 border border-slate-300 rounded-md bg-white">
-                                <option value="ASN">ASN (PNS / PPPK - Negeri)</option>
-                                <option value="Non-ASN">Non-ASN (Swasta / Yayasan)</option>
-                            </select>
-                        </div>
-
-                        <!-- IDENTITAS PENILAI / PENGAWAS PEMBINA SATUAN PENDIDIKAN -->
-                        <div class="lg:col-span-2 bg-amber-50/80 p-2.5 rounded-lg border border-amber-200">
-                            <label class="block font-bold text-amber-950 mb-1 flex items-center gap-1">
-                                <span>✍️</span> Nama Penilai (Pengawas Pembina)
-                            </label>
-                            <input type="text" id="pengawas-name" value="" onchange="saveProfileInfo()" placeholder="Nama Pengawas Pembina + Gelar" class="w-full p-2 border border-amber-300 rounded-md bg-white font-semibold text-slate-900 focus:ring-1 focus:ring-amber-500">
-                        </div>
-                        <div class="lg:col-span-2 bg-amber-50/80 p-2.5 rounded-lg border border-amber-200">
-                            <label class="block font-bold text-amber-950 mb-1">NIP Penilai (Pengawas Pembina)</label>
-                            <input type="text" id="pengawas-nip" value="" onchange="saveProfileInfo()" placeholder="NIP Pengawas Pembina" class="w-full p-2 border border-amber-300 rounded-md bg-white focus:ring-1 focus:ring-amber-500">
-                        </div>
-                        <div class="lg:col-span-2 bg-indigo-50 p-2.5 rounded-lg border border-indigo-200">
-                            <label class="block font-bold text-indigo-900 mb-1">Periode Evaluasi Active</label>
-                            <select id="period-select" onchange="changeQuarter(this.value)" class="w-full p-2 border border-indigo-300 rounded-md text-xs font-bold text-indigo-900 bg-white">
-                                <option value="T1">Triwulan I (Jan-Mar: Pemetaan)</option>
-                                <option value="T2">Triwulan II (Apr-Jun: Pelaksanaan)</option>
-                                <option value="T3">Triwulan III (Jul-Sep: Evaluasi)</option>
-                                <option value="T4">Triwulan IV (Okt-Des: Final PKKS)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CARDS INFORMASI ROADMAP 6M SESUAI TRIWULAN YNG DIPILIH -->
                 <div id="quarter-info-banner" class="p-4 rounded-xl border transition space-y-3"></div>
 
-                <!-- ACTION TOOLBAR FOR INSTRUMEN -->
                 <div class="flex flex-wrap items-center justify-between gap-3 no-print bg-indigo-50 p-3 rounded-lg border border-indigo-200 text-xs shadow-sm">
                     <div class="flex flex-wrap items-center gap-2">
                         <button type="button" onclick="openPresetModal()" class="px-3 py-1.5 bg-indigo-700 hover:bg-indigo-800 text-white font-bold rounded shadow-sm transition flex items-center gap-1 cursor-pointer">
@@ -433,7 +429,6 @@
                     </div>
                 </div>
 
-                <!-- FILTER & SEARCH BAR -->
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-3 no-print bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs">
                     <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                         <span class="font-semibold text-slate-600">Filter Komponen:</span>
@@ -473,7 +468,6 @@
                     </div>
                 </div>
 
-                <!-- TABLE INSTRUMEN -->
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs border-collapse border border-slate-200">
                         <thead>
@@ -591,9 +585,9 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 pb-3">
                     <div>
                         <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full">Pendampingan Dialogis</span>
-                        <h2 class="text-xl font-bold text-slate-900 mt-2">Simulator Coaching TIRTA Pengawas Sekolah</h2>
+                        <h2 class="text-xl font-bold text-slate-900 mt-2">Simulator Coaching TIRTA Pengawas Sekolah (<span id="tirta-q-label">Triwulan I</span>)</h2>
                         <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                            Simulator ini memfasilitasi dialog konstruktif berbasis alur TIRTA yang langsung merujuk pada analisis 45 sub-indikator.
+                            Simulator ini memfasilitasi dialog konstruktif berbasis alur TIRTA yang terintegrasi langsung dengan fokus Butir BAN-PDM aktif pada triwulan ini.
                         </p>
                     </div>
                     <div class="flex flex-wrap items-center gap-2 no-print">
@@ -624,8 +618,8 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 pb-3">
                     <div>
                         <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full">Perencanaan Berbasis Data</span>
-                        <h2 class="text-xl font-bold text-slate-900 mt-1">Matriks Rekapitulasi Aksi PBD & RKT/ARKAS</h2>
-                        <p class="text-xs text-slate-600">Pemetaan interaktif untuk menghubungkan rekomendasi sub-indikator ke RKT dan penganggaran ARKAS.</p>
+                        <h2 class="text-xl font-bold text-slate-900 mt-1">Matriks Rekapitulasi Aksi PBD & RKT/ARKAS (<span id="pbd-q-label">Triwulan I</span>)</h2>
+                        <p class="text-xs text-slate-600">Pemetaan interaktif untuk menghubungkan rekomendasi sub-indikator ke RKT dan penganggaran ARKAS pada triwulan ini.</p>
                     </div>
                     <div class="flex flex-wrap items-center gap-2 no-print">
                         <button type="button" onclick="addPbdRow()" class="px-3 py-1.5 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded shadow-sm transition cursor-pointer">➕ Tambah Aksi PBD</button>
@@ -646,7 +640,7 @@
         <div class="max-w-7xl mx-auto px-4 text-center space-y-1">
             <p>Aplikasi Monev SPMI & PKKS 2026 • 45 Sub-Indikator Lengkap BAN-PDM Sispena</p>
             <p class="text-indigo-400 font-medium">Sistem Penjaminan Mutu Internal Terintegrasi Permendikdasmen No. 21 Tahun 2026</p>
-            <p class="text-indigo-300 font-semibold text-[11px] pt-0.5">Pengembang Aplikasi: IFS</p>
+            <p class="text-indigo-300 font-semibold text-[11px] pt-0.5">Dikembangkan oleh: Ida Faridlah</p>
         </div>
     </footer>
 
@@ -736,27 +730,25 @@
         let currentQuarter = "T1";
         let selectedSchoolId = 1;
 
-        const STORAGE_KEY = "MONEV_SPMI_PKKS_2026_DATA_V3";
+        const STORAGE_KEY = "MONEV_SPMI_PKKS_2026_DATA_V4";
 
-        // GENERATE INITIAL 20 SCHOOLS DATA STRUCTURE WITH ASSESSOR / PENGAWAS
         const initialSchoolNames = [
-            "SMPN 3 Tarogong Kidul", "SMPN 2 Cigedug", "SMP IT Al Muttaqin Tarogong Kaler", "SMP Plus Al Huda", "SMP IT Al Muawanah",
-            "SMP IT Daarul Amiin", "SMP Plus Darul Arham", "SMPS IT Ma'arif Ma'ruful Hidayah", "SMP IT Hidayatul Mubtadiin", "SMP IT Manbaul Huda",
-            "SMPN 1 Tarogong Kidul", "SMPN 1 Cisompet", "SMPN 2 Cisompet", "SMPN 3 Cisomper", "SMPN 4 Cisompet",
-            "SMPN 5 Cisompet", "SMP 3 Pasundan", "SMP As Salam", "SMP Plus Nurul Huda Yaspinda", "SMP Al Wasi"
+            "SMP Negeri 1 Cendekia", "SMP Negeri 2 Harapan", "SMP Negeri 3 Merdeka", "SMP Negeri 4 Melati", "SMP Negeri 5 Nusantara",
+            "SMP Swasta Pelita Bangsa", "SMP Islam Al-Azhar", "SMP Bina Bersama", "SMP Tunas Mekar", "SMP PGRI 1",
+            "SMP Negeri 6 Bintang", "SMP Negeri 7 Garut", "SMP Negeri 8 Gemilang", "SMP Sejahtera", "SMP Dharma Wanita",
+            "SMP Negeri 9 Terpadu", "SMP IT Insan Mulia", "SMP Kasih Ibu", "SMP YPKP Utama", "SMP Garuda Pancasila"
         ];
 
         const initialKSNames = [
-            "Nining Sariningsih, S.Pd.", "H. Mochamad Dudung Zamiat, M.Pd.", "Aceng Mutakin, S.Pd.I", "Muhammad Rifqi Banani, S.Kom., M.Pd.", "Budi Sobur Sudrajat, SM., Gr.",
-            "Ade Mamat, S.Pd., M.M.", "Saepuloh, S.Pd.I.", "Atep Ahmad Mahali, S.Pd.I.", "Rizki Maulana, S.Pd.", "Soleh Syahrul Mubarok, S.Pd.",
+            "Dra. Hj. Siti Rahmah, M.Pd.", "Drs. Ahmad Hidayat, M.Si.", "H. Budi Santoso, S.Pd., M.M.", "Hj. Ratna Sari, S.Pd.", "Irwan Setiawan, M.Pd.",
+            "Dr. Hj. Nuraini, M.Ag.", "M. Ridwan, S.Ag., M.Pd.", "Endang Setyowati, S.Pd.", "Dede Yusuf, M.Pd.", "Siti Aminah, S.Pd.",
             "Agus Kurnia, S.Pd., M.M.", "Hj. Lina Marlina, M.Pd.", "Bambang Wijaya, S.Pd.", "Sri Wahyuni, M.Pd.", "Dedi Supriadi, S.Pd.",
             "Rina Novita, M.Pd.", "H. Abdul Malik, S.Pd.I.", "Dewi Sartika, S.Pd.", "Eko Prasetyo, M.Pd.", "H. Asep Saepullah, M.Pd."
         ];
 
-        const defaultPengawasName = "Ida Faridlah Sulaeman.";
-        const defaultPengawasNip = "19xxxxxx 19xxxx x xxx";
+        const defaultPengawasName = "Dra. Ida Faridlah, M.Pd.";
+        const defaultPengawasNip = "19720815 199702 2 001";
 
-        // MASTER 45 SUB-INDIKATOR LENGKAP
         const master45Items = [
             { code: "1.1", butirId: 1, comp: "1. Kinerja Pendidik", parentTitle: "Butir 1: Sosio-Emosional", title: "Interaksi yang setara dan saling menghargai" },
             { code: "1.2", butirId: 1, comp: "1. Kinerja Pendidik", parentTitle: "Butir 1: Sosio-Emosional", title: "Interaksi yang membangun pola pikir bertumbuh (growth mindset)" },
@@ -805,6 +797,53 @@
             { code: "14.3", butirId: 14, comp: "3. Iklim Belajar", parentTitle: "Butir 14: PHBS & Kesehatan Mental", title: "Edukasi tentang pencegahan adiksi dan kesehatan reproduksi" }
         ];
 
+        // DEFAULT TEMPLATE UNTUK COACHING TIRTA DAN MATRIKS PBD PER TRIWULAN
+        const defaultTirtaByQuarter = {
+            T1: [
+                { step: "T — Tujuan", desc: "Penetapan KOSP, Visi-Misi & PBD Target (Butir 6, 7, 9)", pengawas: "Bagaimana kesiapan penetapan KOSP (9.1) dan alokasi anggaran RKAS/ARKAS (7.2) berbasis Rapor Pendidikan tahun ini?", ks: "Kami menyelaraskan Visi-Misi (6.1) dan menyusun RKAS yang diprioritaskan pada peningkatan literasi & numerasi." },
+                { step: "I — Identifikasi", desc: "Akar Masalah Rapor PBD Awal Tahun", pengawas: "Indikator Rapor PBD mana (D.1, D.4, A.1-A.3) yang masih memerlukan pembenahan mendasar?", ks: "Capaian D.1 Kualitas Pembelajaran dan A.2 Numerasi masih butuh peningkatan strategi pengajaran guru." },
+                { step: "R — Rencana Aksi", desc: "Penyusunan RKT & Pengesahan KOSP", pengawas: "Langkah terstruktur apa yang disiapkan untuk penyusunan Kurikulum KOSP dan jadwal Kombel?", ks: "Mengadakan rapat kerja penyusunan KOSP bersama TPKM dan menjadwalkan review RKT secara berkala." },
+                { step: "TA — Tanggung Jawab", desc: "Komitmen Penetapan & Verifikasi awal", pengawas: "Bagaimana komitmen penyelesaian dokumen fisik/digital untuk siap diverifikasi pengawas?", ks: "Tim Penjaminan Mutu Sekolah (TPMS) siap merampungkan seluruh SK dan dokumen pendukung akhir bulan ini." }
+            ],
+            T2: [
+                { step: "T — Tujuan", desc: "Pembelajaran Bermakna & Kombel (Butir 1 - 5)", pengawas: "Sub-indikator mana pada Komponen Kinerja Pendidik (1.1-4.4) yang menjadi fokus utama observasi kelas triwulan ini?", ks: "Kami berfokus pada Sub-indikator 1.4 (Keterampilan Sosial Emosional) dan 3.5 (Praktik Pengajaran Penalaran Kritis)." },
+                { step: "I — Identifikasi", desc: "Hambatan Pembelajaran & Disiplin Positif", pengawas: "Kendala apa yang ditemui guru dalam penerapan disiplin positif (2.2) dan refleksi SDM (5.1)?", ks: "Beberapa guru memerlukan pendampingan pembuatan modul KSE dan asesmen formatif yang bervariasi." },
+                { step: "R — Rencana Aksi", desc: "Supervisi Akademik & Workshop Kombel", pengawas: "Bagaimana alokasi waktu Komunitas Belajar (Kombel) untuk mendampingi praktik mengajar?", ks: "Kombel mengadakan pekan berbagi praktik baik setiap hari Sabtu dan jadwal supervisi klinis." },
+                { step: "TA — Tanggung Jawab", desc: "Pengendalian & Evaluasi Pembelajaran", pengawas: "Siapa yang mengawal ketercapaian tindak lanjut hasil supervisi akademik?", ks: "Kepala Sekolah dibantu para Guru Penggerak dan Wakasek Kurikulum mengawal umpan balik supervisi." }
+            ],
+            T3: [
+                { step: "T — Tujuan", desc: "Iklim Belajar, Safety & Inklusivitas (Butir 8, 10 - 14)", pengawas: "Bagaimana target pemenuhan iklim keamanan (12.1-12.2), kebhinekaan (10.1), dan sarpras (8.1) triwulan ini?", ks: "Kami menargetkan penguatan Posko TPPK aktif, perbaikan sarpras ramah anak, dan simulasi tanggap bencana." },
+                { step: "I — Identifikasi", desc: "Kelengkapan Prosedur TPPK & Inklusivitas", pengawas: "Hambatan apa yang dihadapi dalam penanganan potensi perundungan dan kesiapan P3K/Bencana (13.2-13.3)?", ks: "Diperlukan pembaharuan SOP aduan perundungan dan pelatihan P3K bagi petugas PMR/Guru piket." },
+                { step: "R — Rencana Aksi", desc: "Program Sekolah Sehat, Inklusif & TPPK", pengawas: "Aksi nyata apa yang segera dijalankan untuk meningkatkan PHBS (14.1) dan iklim inklusif (11.1)?", ks: "Membentuk kanal aduan digital TPPK, penyediaan sarana cuci tangan, serta sosialisasi kesetaraan gender." },
+                { step: "TA — Tanggung Jawab", desc: "Komitmen Tim TPPK & Pengelolaan Sarpras", pengawas: "Bagaimana pembagian peran tim TPPK dan penanggung jawab sarana prasarana sekolah?", ks: "Tim TPPK berkoordinasi mingguan dengan Guru BK, serta Wakasek Sarpras memantau keamanan fisik lingkungan." }
+            ],
+            T4: [
+                { step: "T — Tujuan", desc: "Evaluasi Final PKKS & Audit SPMI (14 Butir Lengkap)", pengawas: "Bagaimana kesiapan sekolah menghadapi verifikasi rekapitulasi digital 45 sub-indikator untuk PKKS Final?", ks: "Seluruh bukti dukung digital pada Sispena/Drive sudah lengkap 100% dan siap diverifikasi." },
+                { step: "I — Identifikasi", desc: "Refleksi Capaian Mutu Tahunan & ARKAS", pengawas: "Hasil evaluasi mana yang telah mencapai standar Sangat Baik dan mana yang butuh perbaikan untuk tahun depan?", ks: "Komponen Kinerja Pendidik naik signifikan, namun pemeliharaan sarpras membutuhkan alokasi ARKAS lebih besar tahun depan." },
+                { step: "R — Rencana Aksi", desc: "Penyusunan Rekomendasi & Laporan Mutu", pengawas: "Langkah apa yang dilakukan untuk menindaklanjuti rekomendasi umpan balik PKKS akhir tahun?", ks: "Menyusun Laporan Kinerja PKKS dan menjadikan catatan rekomendasi pengawas sebagai masukan KOSP 2027." },
+                { step: "TA — Tanggung Jawab", desc: "Pengesahan Lembar Evaluasi & Predikat Final", pengawas: "Apakah dokumen penetapan predikat PKKS dan refleksi tahunan sudah disepakati bersama?", ks: "Kepala Sekolah dan Pengawas Pembina menandatangani lembar pengesahan akhir tahun." }
+            ]
+        };
+
+        const defaultPbdByQuarter = {
+            T1: [
+                { aspek: "Sub-Indikator 9.1 (Dokumen KOSP)", dim6m: "Menetapkan", identifikasi: "Kurikulum sekolah perlu disesuaikan dengan karakteristik dan analisis Rapor PBD terbaru.", refleksi: "Tim Kurikulum belum merinci pengorganisasian pembelajaran berbasis diferensiasi.", benahi: "Pelaksanaan Raker Penyusunan KOSP dan Analisis Contextual Rapor Pendidikan.", anggaran: "BOS Reguler (Pengembangan Kurikulum)." },
+                { aspek: "Sub-Indikator 7.2 (RKAS/ARKAS Mutu)", dim6m: "Memetakan", identifikasi: "Penganggaran ARKAS belum sepenuhnya merujuk pada indikator prioritas Benah Mutu.", refleksi: "Perencanaan anggaran tahun sebelumnya masih mengulang pola lama.", benahi: "Penyusunan RKAS berbasis hasil eksplorasi Perencanaan Berbasis Data (PBD).", anggaran: "BOS Reguler (Operational Sekolah)." }
+            ],
+            T2: [
+                { aspek: "Sub-Indikator 3.5 (Praktik Pembelajaran Contextual)", dim6m: "Merencanakan", identifikasi: "Guru belum optimal memfasilitasi murid mengutarakan gagasan & pemecahan masalah.", refleksi: "Metode pembelajaran masih didominasi ceramah satu arah.", benahi: "Pelatihan internal Kombel pembuatan Modul Ajar Berbasis Problem Based Learning (PBL).", anggaran: "BOS Reguler (Pengembangan Profesi Pendidik)." },
+                { aspek: "Sub-Indikator 5.1 (Supervisi Akademik & Refleksi)", dim6m: "Melaksanakan", identifikasi: "Refleksi kinerja guru pasca-observasi kelas belum berjalan konsisten.", refleksi: "Jadwal supervisi belum terintegrasi dengan alur diskusi Kombel.", benahi: "Pelaksanaan supervisi akademik klinis berkala & pembinaan mingguan Kombel.", anggaran: "BOS Reguler (Kegiatan Pembelajaran)." }
+            ],
+            T3: [
+                { aspek: "Sub-Indikator 12.2 (Mekanisme TPPK)", dim6m: "Melaksanakan", identifikasi: "Diperlukan pembentukan POS aduan anti-kekerasan dan perundungan yang aman.", refleksi: "Kotak aduan dan portal digital pencegahan belum terintegrasi.", benahi: "Penerbitan SK TPPK baru, penyediaan QR aduan digital, dan sosialisasi orang tua.", anggaran: "BOS Reguler (Kegiatan Kesiswaan & Karakter)." },
+                { aspek: "Sub-Indikator 14.1 (Program PHBS & Sehat Mental)", dim6m: "Mengevaluasi", identifikasi: "Fasilitas sanitasi dan program kesehatan mental murid perlu diperkuat.", refleksi: "Pemeriksaan kesehatan berkala dan kampanye sekolah sehat belum rutin.", benahi: "Penyediaan fasilitas PHBS tambahan dan workshop kesehatan mental bersama Puskesmas.", anggaran: "BOS Reguler (Pemeliharaan & Kesehatan)." }
+            ],
+            T4: [
+                { aspek: "Sub-Indikator 6.3 (Evaluasi Program Menyeluruh)", dim6m: "Mengevaluasi", identifikasi: "Diperlukan audit rekapitulasi ketercapaian RKT dan daya serap anggaran ARKAS.", refleksi: "Laporan pertanggungjawaban kegiatan belum terekap secara digital menyeluruh.", benahi: "Pelaksanaan Rapat Evaluasi Kinerja Akhir Tahun dan Penyusunan Laporan Mutu SPMI.", anggaran: "BOS Reguler (Evaluasi & Pelaporan)." },
+                { aspek: "14 Butir Akreditasi BAN-PDM (PKKS Final)", dim6m: "Mengendalikan", identifikasi: "Finalisasi kelengkapan bukti fisik digital 45 sub-indikator untuk penetapan PKKS.", refleksi: "Sebagian tautan Drive bukti dukung memerlukan rapih ulang pengarsipan.", benahi: "Audit final bukti dukung Sispena dan penandatanganan Lembar Pengesahan PKKS.", anggaran: "BOS Reguler (Administrasi Sekolah)." }
+            ]
+        };
+
         function createEmptyItems() {
             return master45Items.map(item => ({
                 ...item,
@@ -826,10 +865,10 @@
                     pengawasNip: defaultPengawasNip
                 },
                 quarters: {
-                    T1: { items: createEmptyItems(), feedback: "" },
-                    T2: { items: createEmptyItems(), feedback: "" },
-                    T3: { items: createEmptyItems(), feedback: "" },
-                    T4: { items: createEmptyItems(), feedback: "" }
+                    T1: { items: createEmptyItems(), feedback: "", tirta: JSON.parse(JSON.stringify(defaultTirtaByQuarter.T1)), pbd: JSON.parse(JSON.stringify(defaultPbdByQuarter.T1)) },
+                    T2: { items: createEmptyItems(), feedback: "", tirta: JSON.parse(JSON.stringify(defaultTirtaByQuarter.T2)), pbd: JSON.parse(JSON.stringify(defaultPbdByQuarter.T2)) },
+                    T3: { items: createEmptyItems(), feedback: "", tirta: JSON.parse(JSON.stringify(defaultTirtaByQuarter.T3)), pbd: JSON.parse(JSON.stringify(defaultPbdByQuarter.T3)) },
+                    T4: { items: createEmptyItems(), feedback: "", tirta: JSON.parse(JSON.stringify(defaultTirtaByQuarter.T4)), pbd: JSON.parse(JSON.stringify(defaultPbdByQuarter.T4)) }
                 }
             };
         }
@@ -861,25 +900,11 @@
         let berakhlakRatings = {};
         berakhlakItems.forEach(i => berakhlakRatings[i.key] = "Sesuai Ekspektasi");
 
-        let tirtaData = [
-            { step: "T — Tujuan", desc: "Fokus SPMI & Sub-Indikator Target", pengawas: "Sub-indikator mana pada Komponen Kinerja Pendidik (1.1-4.4) yang menjadi prioritas utama pembenahan triwulan ini?", ks: "Kami berfokus pada Sub-indikator 1.4 (Keterampilan Sosial Emosional) dan 3.5 (Praktik Pengajaran Penalaran Kritis)." },
-            { step: "I — Identifikasi", desc: "Akar Masalah & Hambatan Riil", pengawas: "Hambatan apa yang ditemui guru dalam memfasilitasi disiplin positif (2.2) dan pembelajaran inklusif (11.2)?", ks: "Beberapa guru memerlukan pendampingan modul KSE dan metode diferensiasi untuk murid berkebutuhan khusus." },
-            { step: "R — Rencana Aksi", desc: "Program Benah Mutu RKT & Kombel", pengawas: "Bagaimana alokasi waktu Kombel sekolah untuk mengkaji Kurikulum KOSP (9.1-9.3)?", ks: "Kombel menjadwalkan workshop mingguan penguatan rubrik asesmen formatif (3.2) dan integrasi PBD." },
-            { step: "TA — Tanggung Jawab", desc: "Komitmen Eksekusi & Pengendalian", pengawas: "Siapa yang mengawal ketercapaian TPPK (12.1-12.2) dan PHBS (14.1)?", ks: "Dikawal langsung oleh Tim TPPK, Wakasek Kesiswaan, dan diverifikasi secara bertahap oleh Pengawas Sekolah." }
-        ];
-
-        let pbdData = [
-            { aspek: "Sub-Indikator 3.5 (Praktik Pembelajaran Contextual)", dim6m: "Merencanakan", identifikasi: "Guru belum optimal memfasilitasi murid mengutarakan gagasan & pemecahan masalah.", refleksi: "Metode pembelajaran masih didominasi ceramah satu arah.", benahi: "Pelatihan internal Kombel pembuatan Modul Ajar Berbasis Problem Based Learning (PBL).", anggaran: "BOS Reguler (Pengembangan Profesi Pendidik)." },
-            { aspek: "Sub-Indikator 12.2 (Mekanisme TPPK)", dim6m: "Mengendalikan", identifikasi: "Diperlukan pembentukan POS aduan anti-kekerasan dan perundungan yang aman.", refleksi: "Kotak aduan dan portal digital pencegahan belum terintegrasi.", benahi: "Penerbitan SK TPPK baru, penyediaan QR aduan digital, dan sosialisasi orang tua.", anggaran: "BOS Reguler (Kegiatan Kesiswaan & Karakter)." }
-        ];
-
         let schoolsDatabase = getDefaultDatabase();
 
         function saveToLocalStorage() {
             const dataToSave = {
                 schoolsDatabase: schoolsDatabase,
-                tirtaData: tirtaData,
-                pbdData: pbdData,
                 berakhlakRatings: berakhlakRatings,
                 selectedSchoolId: selectedSchoolId,
                 currentQuarter: currentQuarter
@@ -896,9 +921,17 @@
                 const stored = localStorage.getItem(STORAGE_KEY);
                 if (stored) {
                     const parsed = JSON.parse(stored);
-                    if (parsed.schoolsDatabase) schoolsDatabase = parsed.schoolsDatabase;
-                    if (parsed.tirtaData) tirtaData = parsed.tirtaData;
-                    if (parsed.pbdData) pbdData = parsed.pbdData;
+                    if (parsed.schoolsDatabase) {
+                        schoolsDatabase = parsed.schoolsDatabase;
+                        // Pastikan struktur tirta dan pbd per triwulan lengkap
+                        for (let sId in schoolsDatabase) {
+                            const qData = schoolsDatabase[sId].quarters;
+                            ['T1', 'T2', 'T3', 'T4'].forEach(q => {
+                                if (!qData[q].tirta) qData[q].tirta = JSON.parse(JSON.stringify(defaultTirtaByQuarter[q]));
+                                if (!qData[q].pbd) qData[q].pbd = JSON.parse(JSON.stringify(defaultPbdByQuarter[q]));
+                            });
+                        }
+                    }
                     if (parsed.berakhlakRatings) berakhlakRatings = parsed.berakhlakRatings;
                     if (parsed.selectedSchoolId) selectedSchoolId = parsed.selectedSchoolId;
                     if (parsed.currentQuarter) currentQuarter = parsed.currentQuarter;
@@ -914,11 +947,9 @@
             saveToLocalStorage();
             const fullData = {
                 app: "Monev SPMI & PKKS 2026",
-                version: "3.0",
+                version: "4.0",
                 timestamp: new Date().toISOString(),
                 schoolsDatabase: schoolsDatabase,
-                tirtaData: tirtaData,
-                pbdData: pbdData,
                 berakhlakRatings: berakhlakRatings
             };
 
@@ -948,8 +979,6 @@
                     const imported = JSON.parse(e.target.result);
                     if (imported.schoolsDatabase) {
                         schoolsDatabase = imported.schoolsDatabase;
-                        if (imported.tirtaData) tirtaData = imported.tirtaData;
-                        if (imported.pbdData) pbdData = imported.pbdData;
                         if (imported.berakhlakRatings) berakhlakRatings = imported.berakhlakRatings;
                         
                         saveToLocalStorage();
@@ -1074,10 +1103,9 @@
             selectedSchoolId = parseInt(schoolId);
             loadSchoolProfileUI();
             const currentFeedback = schoolsDatabase[selectedSchoolId].quarters[currentQuarter].feedback || '';
-            document.getElementById('feedback-qualitative').value = currentFeedback;
-            renderQuarterBanner();
-            renderTable();
-            updateSignaturePrintView();
+            const feedbackEl = document.getElementById('feedback-qualitative');
+            if (feedbackEl) feedbackEl.value = currentFeedback;
+            renderAllActiveViews();
             saveToLocalStorage();
         }
 
@@ -1135,6 +1163,13 @@
             const activeNav = document.getElementById(`nav-${tabId}`);
             if (activeNav) activeNav.className = "px-3 py-2 rounded-md bg-indigo-700 text-white transition";
             
+            const globalPanel = document.getElementById('global-identity-panel');
+            if (['instrumen', 'tirta', 'pbd'].includes(tabId)) {
+                globalPanel.classList.remove('hidden');
+            } else {
+                globalPanel.classList.add('hidden');
+            }
+
             if (tabId === 'instrumen') {
                 setTimeout(() => {
                     renderCharts();
@@ -1181,17 +1216,32 @@
                 T3: "Triwulan III (Jul - Sep)",
                 T4: "Triwulan IV (Okt - Des)"
             };
-            document.getElementById('current-q-label').innerText = labels[newQ];
+            const labelEl = document.getElementById('current-q-label');
+            if (labelEl) labelEl.innerText = labels[newQ];
+            
+            const tirtaLabel = document.getElementById('tirta-q-label');
+            if (tirtaLabel) tirtaLabel.innerText = labels[newQ];
+
+            const pbdLabel = document.getElementById('pbd-q-label');
+            if (pbdLabel) pbdLabel.innerText = labels[newQ];
+
             const pkksSec = document.getElementById('pkks-final-section');
-            if (newQ === 'T4') {
-                pkksSec.classList.remove('hidden');
-                calculateFinalPKKS();
-            } else {
-                pkksSec.classList.add('hidden');
+            if (pkksSec) {
+                if (newQ === 'T4') {
+                    pkksSec.classList.remove('hidden');
+                    calculateFinalPKKS();
+                } else {
+                    pkksSec.classList.add('hidden');
+                }
             }
-            document.getElementById('feedback-qualitative').value = schoolsDatabase[selectedSchoolId].quarters[currentQuarter].feedback || '';
+
+            const feedbackEl = document.getElementById('feedback-qualitative');
+            if (feedbackEl) feedbackEl.value = schoolsDatabase[selectedSchoolId].quarters[currentQuarter].feedback || '';
+            
             renderQuarterBanner();
             renderTable();
+            renderTirta();
+            renderPbd();
             saveToLocalStorage();
         }
 
@@ -1221,9 +1271,14 @@
                 return;
             }
 
-            const prevItems = schoolsDatabase[selectedSchoolId].quarters[prevQ].items;
-            schoolsDatabase[selectedSchoolId].quarters[currentQuarter].items = JSON.parse(JSON.stringify(prevItems));
+            const prevQuarterData = schoolsDatabase[selectedSchoolId].quarters[prevQ];
+            schoolsDatabase[selectedSchoolId].quarters[currentQuarter].items = JSON.parse(JSON.stringify(prevQuarterData.items));
+            schoolsDatabase[selectedSchoolId].quarters[currentQuarter].tirta = JSON.parse(JSON.stringify(prevQuarterData.tirta));
+            schoolsDatabase[selectedSchoolId].quarters[currentQuarter].pbd = JSON.parse(JSON.stringify(prevQuarterData.pbd));
+
             renderTable();
+            renderTirta();
+            renderPbd();
             saveToLocalStorage();
             showToast("🔄 Data dari " + prevQ + " berhasil di-import ke " + currentQuarter + "!");
         }
@@ -1462,31 +1517,32 @@
                 avg = (sum / scoredItems.length).toFixed(2);
             }
 
-            document.getElementById('total-score').innerText = scoredItems.length > 0 ? avg : "0.00";
+            const totalScoreEl = document.getElementById('total-score');
+            if (totalScoreEl) totalScoreEl.innerText = scoredItems.length > 0 ? avg : "0.00";
             
             const scoreStatus = document.getElementById('score-status');
             const predikatLabel = document.getElementById('predikat-label');
             let ratingText = "Belum Ada Data";
 
             if (scoredItems.length === 0) {
-                scoreStatus.innerText = "Kategori: Belum Mengisi";
-                predikatLabel.innerText = "-";
+                if (scoreStatus) scoreStatus.innerText = "Kategori: Belum Mengisi";
+                if (predikatLabel) predikatLabel.innerText = "-";
             } else if (avg >= 3.5) {
-                scoreStatus.innerText = "Kategori: Sangat Baik (A)";
+                if (scoreStatus) scoreStatus.innerText = "Kategori: Sangat Baik (A)";
                 ratingText = "Di Atas Ekspektasi";
-                predikatLabel.innerText = ratingText;
+                if (predikatLabel) predikatLabel.innerText = ratingText;
             } else if (avg >= 2.8) {
-                scoreStatus.innerText = "Kategori: Baik (B)";
+                if (scoreStatus) scoreStatus.innerText = "Kategori: Baik (B)";
                 ratingText = "Sesuai Ekspektasi";
-                predikatLabel.innerText = ratingText;
+                if (predikatLabel) predikatLabel.innerText = ratingText;
             } else if (avg >= 2.0) {
-                scoreStatus.innerText = "Kategori: Cukup (C)";
+                if (scoreStatus) scoreStatus.innerText = "Kategori: Cukup (C)";
                 ratingText = "Butuh Perbaikan";
-                predikatLabel.innerText = ratingText;
+                if (predikatLabel) predikatLabel.innerText = ratingText;
             } else {
-                scoreStatus.innerText = "Kategori: Kurang (D)";
+                if (scoreStatus) scoreStatus.innerText = "Kategori: Kurang (D)";
                 ratingText = "Di Bawah Ekspektasi";
-                predikatLabel.innerText = ratingText;
+                if (predikatLabel) predikatLabel.innerText = ratingText;
             }
             
             renderCharts();
@@ -1606,7 +1662,8 @@
         }
 
         function calculateFinalPKKS() {
-            const predikatPraktikText = document.getElementById('predikat-label').innerText;
+            const predikatLabelEl = document.getElementById('predikat-label');
+            const predikatPraktikText = predikatLabelEl ? predikatLabelEl.innerText : "-";
             
             const values = Object.values(berakhlakRatings);
             const countDiAtas = values.filter(v => v === "Di Atas Ekspektasi").length;
@@ -1616,15 +1673,18 @@
             if (countDiAtas >= 4 && countButuhPerbaikan === 0) behaviorRating = "Di Atas Ekspektasi";
             else if (countButuhPerbaikan >= 3) behaviorRating = "Butuh Perbaikan";
 
-            document.getElementById('final-praktik-rating').innerText = predikatPraktikText;
-            document.getElementById('final-perilaku-rating').innerText = behaviorRating;
+            const finalPraktikEl = document.getElementById('final-praktik-rating');
+            const finalPerilakuEl = document.getElementById('final-perilaku-rating');
+            if (finalPraktikEl) finalPraktikEl.innerText = predikatPraktikText;
+            if (finalPerilakuEl) finalPerilakuEl.innerText = behaviorRating;
 
             let finalPredikat = "BAIK";
             if (predikatPraktikText === "Di Atas Ekspektasi" && behaviorRating === "Di Atas Ekspektasi") finalPredikat = "SANGAT BAIK";
             else if (predikatPraktikText === "Butuh Perbaikan" || behaviorRating === "Butuh Perbaikan") finalPredikat = "BUTUH PERBAIKAN";
             else if (predikatPraktikText === "Di Bawah Ekspektasi") finalPredikat = "SANGAT KURANG";
 
-            document.getElementById('final-predikat').innerText = finalPredikat;
+            const finalPredikatEl = document.getElementById('final-predikat');
+            if (finalPredikatEl) finalPredikatEl.innerText = finalPredikat;
         }
 
         function setCapacityLevel(level) {
@@ -1635,13 +1695,19 @@
             const activeBtn = document.getElementById(`btn-cap-${level}`);
             if (activeBtn) activeBtn.className = "p-2 rounded border border-indigo-500 bg-indigo-50 font-bold text-indigo-900 text-left text-xs";
 
+            const tirtaList = schoolsDatabase[selectedSchoolId].quarters[currentQuarter].tirta;
             if (level === 'srendah') {
-                tirtaData[0].pengawas = "[Training] Instruksi langsung penerapan indikator mutlak BAN-PDM?";
-                tirtaData[1].pengawas = "[Training] Identifikasi kendala paling mendasar pada dokumen KOSP?";
+                tirtaList[0].pengawas = "[Training] Instruksi langsung penerapan indikator target BAN-PDM triwulan ini?";
+                tirtaList[1].pengawas = "[Training] Identifikasi kendala paling mendasar pada dokumen acuan?";
             } else if (level === 'stinggi') {
-                tirtaData[0].pengawas = "[Consulting] Inovasi & diseminasi praktik baik mutakhir ke sekolah sekitar?";
+                tirtaList[0].pengawas = "[Consulting] Inovasi & diseminasi praktik baik mutakhir ke sekolah sekitar?";
             }
             renderTirta();
+            saveToLocalStorage();
+        }
+
+        function updateTirtaItem(index, field, value) {
+            schoolsDatabase[selectedSchoolId].quarters[currentQuarter].tirta[index][field] = value;
             saveToLocalStorage();
         }
 
@@ -1650,7 +1716,9 @@
             if (!container) return;
             container.innerHTML = '';
 
-            tirtaData.forEach((item, index) => {
+            const tirtaList = schoolsDatabase[selectedSchoolId].quarters[currentQuarter].tirta || defaultTirtaByQuarter[currentQuarter];
+
+            tirtaList.forEach((item, index) => {
                 const div = document.createElement('div');
                 div.className = "p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3 text-xs";
                 div.innerHTML = `
@@ -1661,11 +1729,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div class="space-y-1">
                             <label class="block font-bold text-slate-700">Pertanyaan Pemantik Pengawas Pembina:</label>
-                            <textarea oninput="tirtaData[${index}].pengawas = this.value; saveToLocalStorage();" class="w-full p-2 border border-slate-300 rounded bg-white" rows="2">${item.pengawas}</textarea>
+                            <textarea oninput="updateTirtaItem(${index}, 'pengawas', this.value)" class="w-full p-2 border border-slate-300 rounded bg-white" rows="2">${item.pengawas}</textarea>
                         </div>
                         <div class="space-y-1">
                             <label class="block font-bold text-slate-700">Respon & Refleksi Kepala Sekolah:</label>
-                            <textarea oninput="tirtaData[${index}].ks = this.value; saveToLocalStorage();" class="w-full p-2 border border-slate-300 rounded bg-white" rows="2">${item.ks}</textarea>
+                            <textarea oninput="updateTirtaItem(${index}, 'ks', this.value)" class="w-full p-2 border border-slate-300 rounded bg-white" rows="2">${item.ks}</textarea>
                         </div>
                     </div>
                 `;
@@ -1674,7 +1742,8 @@
         }
 
         function addPbdRow() {
-            pbdData.push({
+            const pbdList = schoolsDatabase[selectedSchoolId].quarters[currentQuarter].pbd;
+            pbdList.push({
                 aspek: "Sub-Indikator Baru",
                 dim6m: "Merencanakan",
                 identifikasi: "Akar masalah baru...",
@@ -1687,8 +1756,14 @@
         }
 
         function deletePbdRow(index) {
-            pbdData.splice(index, 1);
+            const pbdList = schoolsDatabase[selectedSchoolId].quarters[currentQuarter].pbd;
+            pbdList.splice(index, 1);
             renderPbd();
+            saveToLocalStorage();
+        }
+
+        function updatePbdItem(index, field, value) {
+            schoolsDatabase[selectedSchoolId].quarters[currentQuarter].pbd[index][field] = value;
             saveToLocalStorage();
         }
 
@@ -1697,7 +1772,9 @@
             if (!container) return;
             container.innerHTML = '';
 
-            pbdData.forEach((item, index) => {
+            const pbdList = schoolsDatabase[selectedSchoolId].quarters[currentQuarter].pbd || defaultPbdByQuarter[currentQuarter];
+
+            pbdList.forEach((item, index) => {
                 const div = document.createElement('div');
                 div.className = "p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3 text-xs";
                 div.innerHTML = `
@@ -1708,11 +1785,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div>
                             <label class="block font-bold text-slate-700 mb-1">Sub-Indikator Acuan:</label>
-                            <input type="text" value="${item.aspek}" oninput="pbdData[${index}].aspek = this.value; saveToLocalStorage();" class="w-full p-2 border border-slate-300 rounded bg-white">
+                            <input type="text" value="${item.aspek}" oninput="updatePbdItem(${index}, 'aspek', this.value)" class="w-full p-2 border border-slate-300 rounded bg-white">
                         </div>
                         <div>
                             <label class="block font-bold text-slate-700 mb-1">Tahapan 6M:</label>
-                            <select onchange="pbdData[${index}].dim6m = this.value; saveToLocalStorage();" class="w-full p-2 border border-slate-300 rounded bg-white">
+                            <select onchange="updatePbdItem(${index}, 'dim6m', this.value)" class="w-full p-2 border border-slate-300 rounded bg-white">
                                 <option value="Menetapkan" ${item.dim6m === 'Menetapkan' ? 'selected' : ''}>1. Menetapkan</option>
                                 <option value="Memetakan" ${item.dim6m === 'Memetakan' ? 'selected' : ''}>2. Memetakan</option>
                                 <option value="Merencanakan" ${item.dim6m === 'Merencanakan' ? 'selected' : ''}>3. Merencanakan</option>
@@ -1723,21 +1800,21 @@
                         </div>
                         <div>
                             <label class="block font-bold text-slate-700 mb-1">Sumber Anggaran ARKAS:</label>
-                            <input type="text" value="${item.anggaran}" oninput="pbdData[${index}].anggaran = this.value; saveToLocalStorage();" class="w-full p-2 border border-slate-300 rounded bg-white">
+                            <input type="text" value="${item.anggaran}" oninput="updatePbdItem(${index}, 'anggaran', this.value)" class="w-full p-2 border border-slate-300 rounded bg-white">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div>
                             <label class="block font-bold text-slate-700 mb-1">Identifikasi (Masalah):</label>
-                            <textarea oninput="pbdData[${index}].identifikasi = this.value; saveToLocalStorage();" class="w-full p-2 border border-slate-300 rounded bg-white" rows="2">${item.identifikasi}</textarea>
+                            <textarea oninput="updatePbdItem(${index}, 'identifikasi', this.value)" class="w-full p-2 border border-slate-300 rounded bg-white" rows="2">${item.identifikasi}</textarea>
                         </div>
                         <div>
                             <label class="block font-bold text-slate-700 mb-1">Refleksi (Akar Masalah):</label>
-                            <textarea oninput="pbdData[${index}].refleksi = this.value; saveToLocalStorage();" class="w-full p-2 border border-slate-300 rounded bg-white" rows="2">${item.refleksi}</textarea>
+                            <textarea oninput="updatePbdItem(${index}, 'refleksi', this.value)" class="w-full p-2 border border-slate-300 rounded bg-white" rows="2">${item.refleksi}</textarea>
                         </div>
                         <div>
                             <label class="block font-bold text-slate-700 mb-1">Benahi (Program RKT):</label>
-                            <textarea oninput="pbdData[${index}].benahi = this.value; saveToLocalStorage();" class="w-full p-2 border border-slate-300 rounded bg-white" rows="2">${item.benahi}</textarea>
+                            <textarea oninput="updatePbdItem(${index}, 'benahi', this.value)" class="w-full p-2 border border-slate-300 rounded bg-white" rows="2">${item.benahi}</textarea>
                         </div>
                     </div>
                 `;
@@ -1745,12 +1822,12 @@
             });
         }
 
-        // INITIALIZATION ON WINDOW LOAD
         window.onload = function() {
             loadFromLocalStorage();
             initSchoolSelector();
             loadSchoolProfileUI();
             renderAllActiveViews();
+            switchTab('instrumen');
         };
     </script>
 </body>
